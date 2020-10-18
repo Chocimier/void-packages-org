@@ -1,0 +1,79 @@
+# Template file for 'python3.8'
+#
+#
+pkgname=python3.8
+version=3.8.6
+revision=1
+wrksrc="Python-${version}"
+_prefix="opt/${pkgname}"
+pycompile_dirs="${_prefix}/lib/python${version%.*}"
+hostmakedepends="pkgconf"
+makedepends="libffi-devel readline-devel gdbm-devel libressl-devel
+ expat-devel sqlite-devel bzip2-devel zlib-devel liblzma-devel"
+depends="ca-certificates"
+short_desc="Python programming language (${version%.*} series)"
+maintainer=" <>"
+license="Python-2.0"
+homepage="https://www.python.org"
+distfiles="https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz"
+checksum=a9e0b79d27aa056eb9cce8d63a427b5f9bab1465dee3f942dcfdb25a82f4ab8a
+python_version=3
+
+pre_configure() {
+	# Ensure that internal copies of expat and libffi are not used
+	rm -rf Modules/expat
+	rm -rf Modules/_ctypes/{darwin,libffi}*
+}
+
+do_configure() {
+	local _args
+	unset GCC CC CXX CPP LD AR AS RANLIB
+	if [ "$CROSS_BUILD" ]; then
+		mkdir -p host-build
+		cd host-build
+		env -i PATH=$PATH XBPS_ARCH=$XBPS_ARCH CFLAGS=-Os ../configure
+		env -i PATH=$PATH XBPS_ARCH=$XBPS_ARCH make ${makejobs} python
+		mkdir -p ../hostpython
+		mv python ../hostpython
+		cd ..
+		patch -Np0 -i ${FILESDIR}/cross.patch
+		_args="--build=${XBPS_MACHINE%%-musl}"
+	fi
+	./configure ${configure_args} ${_args} \
+		--enable-shared --enable-loadable-sqlite-extensions \
+		--with-threads --with-computed-gotos --with-dbmliborder=gdbm:ndbm \
+		--with-system-expat --with-system-ffi --without-ensurepip \
+		--prefix=/${_prefix} --bindir=/${_prefix}/bin --mandir=/${_prefix}/man
+}
+do_build() {
+	export PATH="$PATH:$wrksrc/hostpython"
+	make ${makejobs}
+}
+do_install() {
+	export PATH="$PATH:$wrksrc/hostpython"
+	make DESTDIR=${DESTDIR} install maninstall
+	vlicense LICENSE
+
+	rm -f ${DESTDIR}/${_prefix}/bin/2to3
+	# Remove files that belong to python3-tkinter and idle-python3
+	rm -f ${DESTDIR}/${_prefix}/bin/idle3*
+	rm -rf ${DESTDIR}/${_prefix}/lib/python${version%.*}/idlelib
+	rm -rf ${DESTDIR}/${_prefix}/lib/python${version%.*}/tkinter
+	rm -rf ${DESTDIR}/${_prefix}/lib/python${version%.*}/turtledemo
+	rm -f ${DESTDIR}/${_prefix}/lib/python${version%.*}/turtle.py
+	# Remove test module and tests that fail to be byte-compiled.
+	rm -rf ${DESTDIR}/${_prefix}/lib/python${version%.*}/test
+	rm -rf ${DESTDIR}/${_prefix}/lib/python${version%.*}/lib2to3/tests
+	# Remove references to the install(1) wrapper.
+	sed -e "s,${XBPS_WRAPPERDIR},/${_prefix}/bin,g" -i \
+		${DESTDIR}/${_prefix}/lib/python${version%.*}/_sysconfigdata_*_*.py \
+		${DESTDIR}/${_prefix}/lib/python${version%.*}/config-${version%.*}*/Makefile
+	if [ "$CROSS_BUILD" ]; then
+		# Remove references to cross toolchain.
+		sed -i "s/$XBPS_CROSS_TRIPLET-//g" \
+			${DESTDIR}/${_prefix}/lib/python${version%.*}/_sysconfigdata_*_*.py \
+			${DESTDIR}/${_prefix}/lib/python${version%.*}/config-${version%.*}*/Makefile
+		sed -i -e "s,$XBPS_CROSS_BASE,,g" \
+			${DESTDIR}/${_prefix}/bin/python${version%.*}-config
+	fi
+}
