@@ -1,0 +1,51 @@
+--- xkeyboard-config-2.33/symbols/pl
++++ xkeyboard-config-2.33/symbols/pl
+@@ -77,6 +77,48 @@
+ };
+ 
+ partial alphanumeric_keys
++xkb_symbols "sym" {
++
++    include "pl"
++
++    name[Group1]="Polski (symbole przed cyframi)";
++
++    key <TLDE>	{ [ asciitilde,      grave,     notsign,      notsign ]	};
++    key <AE01>	{ [     exclam,         1,     notequal,   exclamdown ]	};
++    key <AE02>	{ [         at,         2,  twosuperior, questiondown ]	};
++    key <AE03>	{ [ numbersign,         3, threesuperior,   sterling ]	};
++    key <AE04>	{ [     dollar,         4,         cent,   onequarter ]	};
++    key <AE05>	{ [    percent,         5,     EuroSign,        U2030 ]	};
++    key <AE06>	{ [ asciicircum,        6,      onehalf,   logicaland ]	};
++    key <AE07>	{ [  ampersand,         7,      section,        U2248 ]	};
++    key <AE08>	{ [   asterisk,         8,periodcentered, threequarters ] };
++    key <AE09>	{ [  parenleft,         9,guillemotleft,   plusminus ]	};
++    key <AE10>	{ [ parenright,         0, guillemotright,     degree ]	};
++    key <AE11>	{ [      minus,underscore,        U2010,       emdash ]	};
++    key <AE12>	{ [      equal,       plus,    notequal,  dead_ogonek ]	};
++
++    key <AD01>	{ [         q,          Q,      zstroke,      Zstroke ]	};
++    key <AD02>  { [         w,          W ] };
++    key <AD04>	{ [         r,          R,    Greek_rho,    Greek_RHO ]	};
++    key <AD05>	{ [         t,          T,       uptack,     downtack ]	};
++    key <AD10>	{ [         p,          P,     Greek_pi,     Greek_PI ]	};
++
++    key <AC03>	{ [         d,          D,          ezh,          EZH ]	};
++    key <AC04>  { [         f,          F,    Greek_phi,     emptyset ]	};
++    key <AC07>	{ [         j,          J,        U266A,        U266B ]	};
++    key <AC08>	{ [         k,          K,       U1F4E6,  dead_stroke ]	};
++    key <AC10>	{ [ semicolon,      colon,   dead_acute,        U0301 ]	};
++    key <AC11>	{ [ apostrophe,  quotedbl, doublelowquotemark, rightdoublequotemark]	};
++
++    key <AB04>	{ [         v,          V,   squareroot,     cuberoot ]	};
++    key <AB08>	{ [     comma,       less,   dead_caron, guillemotright ]	};
++    key <AB09>	{ [    period,    greater,     ellipsis,  guillemotleft ]	};
++    key <AB10>	{ [     slash,   question,     multiply,     division ]	};
++
++    include "kpdl(commaoss)"
++};
++
++partial alphanumeric_keys
+ xkb_symbols "qwertz" {
+ 
+     include "latin(type3)"
