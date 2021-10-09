@@ -818,6 +818,15 @@ case "$XBPS_TARGET" in
         read_pkg ignore-problems
         show_pkg $XBPS_PRINT_VARIABLES
         ;;
+    show-mass)
+        while read -r pkg; do
+        (
+        XBPS_TARGET_PKG=$pkg
+        read_pkg ignore-problems
+        show_pkg $XBPS_PRINT_VARIABLES
+        ) > "${XBPS_MASS_DUMP_DIR:-dump}/$pkg"
+        done
+        ;;
     show-avail)
         read_pkg &>/dev/null
         show_avail
