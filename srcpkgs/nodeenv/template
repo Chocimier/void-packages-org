@@ -4,6 +4,7 @@ version=1.6.0
 revision=1
 wrksrc="nodeenv-${version}"
 build_style=python3-module
+hostmakedepends="python3"
 depends="make python3-setuptools"
 checkdepends="nodejs python3-coverage python3-mock python3-pytest which"
 short_desc="Node.js virtual environment builder"
