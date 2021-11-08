@@ -21,8 +21,8 @@ do_configure() {
 }
 
 pre_check() {
-	command -v python
-	file $(command -v python3.10)
+	command -v uname
+	file $(command -v uname)
 	uname -a
 }
 
