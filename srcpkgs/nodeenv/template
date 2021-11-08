@@ -21,9 +21,8 @@ do_configure() {
 }
 
 pre_check() {
-	PATH=$XBPS_WRAPPERDIR:$PATH
-	echo path $PATH
-	command -v uname
+	command -v python
+	file $(command -v python)
 	uname -a
 }
 
