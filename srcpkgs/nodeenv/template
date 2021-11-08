@@ -13,16 +13,8 @@ homepage="https://github.com/ekalinin/nodeenv"
 distfiles="https://github.com/ekalinin/nodeenv/archive/${version}.tar.gz"
 checksum=87b04b0832d38bd825e004e7c8ed82d75524efaa6b8a72e3a55088d93e4e17f7
 
-do_configure() {
-	# run do_configure hooks
-	echo path $PATH
-	uname -a
-}
-
 pre_check() {
-	echo path $PATH
-	command -v uname
-	uname -a
+	export PATH="$XBPS_WRAPPERDIR:$PATH"
 }
 
 post_install() {
