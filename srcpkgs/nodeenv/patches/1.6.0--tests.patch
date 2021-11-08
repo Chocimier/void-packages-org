@@ -1,0 +1,21 @@
+From e36d0a44d70c472939ac30981e5cc60c186e8bb3 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Piotr=20W=C3=B3jcik?= <chocimier@tlen.pl>
+Date: Mon, 8 Nov 2021 21:33:41 +0100
+Subject: [PATCH] tests
+
+
+diff --git a/nodeenv.py b/nodeenv.py
+index 1d716d2..f606f2b 100755
+--- a/nodeenv.py
++++ b/nodeenv.py
+@@ -737,6 +737,7 @@ def install_node_wrapped(env_dir, src_dir, opt):
+         node_url = get_node_bin_url(opt.node)
+     else:
+         node_url = get_node_src_url(opt.node)
++    raise Exception([node_url, sysconfig.get_config_var('HOST_GNU_TYPE'), platform.system().lower(), platform.machine()])
+ 
+     # get src if not downloaded yet
+     if not os.path.exists(node_src_dir):
+-- 
+2.33.1
+
