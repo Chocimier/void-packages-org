@@ -79,7 +79,7 @@ install_pkg_from_repos() {
 
     cmd=$XBPS_INSTALL_CMD
     [[ $cross ]] && cmd=$XBPS_INSTALL_XCMD
-    $cmd -Ay "$@" >$tmplogf 2>&1
+    $cmd -Ayd "$@" >$tmplogf
     rval=$?
 
     case "$rval" in
