@@ -105,6 +105,7 @@ jobs:
       - name: Check file conflicts
         if: matrix.config.arch == 'x86_64' # the arch indexed in xlocate
         run: |
+          file /tmp/templates
           xlocate -S &&
           common/scripts/lint-conflicts $HOME/hostdir/binpkgs
 
