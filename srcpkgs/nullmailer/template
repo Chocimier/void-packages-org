@@ -10,7 +10,7 @@ make_dirs="
 	/var/spool/nullmailer/queue	0700	_nullmail	root
 	/var/spool/nullmailer/tmp	0700	_nullmail	root"
 makedepends="gnutls-devel"
-checkdepends="daemontools ucspi-tcp6"
+checkdepends="daemontools ucspi-tcp"
 short_desc="Simple relay-only mail transport agent"
 maintainer="Deneys S. Maartens <deneys.maartens@gmail.com>"
 license="GPL-2.0-or-later"
@@ -20,6 +20,7 @@ checksum=9886fa627b7e7e775e2f09fbe789247b1ca304f152da04ff705e50079263a855
 system_accounts="_nullmail"
 provides="smtp-server-0_1"
 replaces="smtp-server>=0"
+make_check=ci-skip
 
 pre_check() {
 	# Hangs, possibly missing test data
