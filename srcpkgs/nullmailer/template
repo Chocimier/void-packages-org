@@ -10,7 +10,7 @@ make_dirs="
 	/var/spool/nullmailer/queue	0700	_nullmail	root
 	/var/spool/nullmailer/tmp	0700	_nullmail	root"
 makedepends="gnutls-devel"
-checkdepends="daemontools ucspi-tcp6"
+checkdepends="daemontools ucspi-tcp"
 short_desc="Simple relay-only mail transport agent"
 maintainer="Deneys S. Maartens <deneys.maartens@gmail.com>"
 license="GPL-2.0-or-later"
@@ -24,6 +24,11 @@ replaces="smtp-server>=0"
 pre_check() {
 	# Hangs, possibly missing test data
 	vsed  -i test/tests/smtp-auth -e '/Testing auth permanent failure with smtp/,/error/d'
+	vsed -i test/tests/protocols -e '/protocol/s,$, || cat $tmpdir/protocol-log,'
+	vsed -i test/functions -e '/..\/protocols\/$p/ i echo $opts >&2'
+	vsed -i test/functions -e '/port=/ a cat $tmpdir/service/${name}-log >&2'
+	cat test/functions
+
 }
 
 post_install() {
