@@ -18,6 +18,8 @@ alternatives="
  awk:awk.1:/usr/share/man/man1/nawk.1"
 
 do_configure() {
+	cat /etc/passwd
+	false
 	vsed -i '/maketab/{s/HOSTCC/BUILD_CC/;s/CFLAGS/BUILD_CFLAGS/}' makefile
 	vsed -i 's/-lm/$(LDFLAGS) &/' makefile
 }
