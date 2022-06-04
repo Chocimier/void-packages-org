@@ -1,15 +1,27 @@
 # This hook generates a XBPS binary package from an installed package in destdir.
 
+fetch_package() {
+	case "$arch" in
+		aarch64*)
+			repo=https://alpha.de.repo.voidlinux.org/current/aarch64/;;
+		*-musl)
+			repo=https://alpha.de.repo.voidlinux.org/current/musl/;;
+		*)
+			repo=https://alpha.de.repo.voidlinux.org/current/;;
+	esac
+	xbps-fetch $repo/$1
+}
+
 genpkg() {
 	local pkgdir="$1" arch="$2" desc="$3" pkgver="$4" binpkg="$5"
 	local _preserve _deps _shprovides _shrequires _gitrevs _provides _conflicts
 	local _replaces _reverts _mutable_files _conf_files f
 	local _pkglock="$pkgdir/${binpkg}.lock"
 
-	if [ ! -d "${PKGDESTDIR}" ]; then
-		msg_warn "$pkgver: cannot find pkg destdir... skipping!\n"
-		return 0
-	fi
+	# if [ ! -d "${PKGDESTDIR}" ]; then
+		# msg_warn "$pkgver: cannot find pkg destdir... skipping!\n"
+		# return 0
+	# fi
 
 	[ ! -d $pkgdir ] && mkdir -p $pkgdir
 
@@ -63,7 +75,7 @@ genpkg() {
 	#
 	# Create the XBPS binary package.
 	#
-	xbps-create \
+	: xbps-create \
 		${_provides:+--provides "${_provides}"} \
 		${_conflicts:+--conflicts "${_conflicts}"} \
 		${_replaces:+--replaces "${_replaces}"} \
@@ -88,6 +100,7 @@ genpkg() {
 		--pkgver "${pkgver}" \
 		--quiet \
 		${PKGDESTDIR}
+	fetch_package $binpkg
 	rval=$?
 
 	# Unlock binpkg
