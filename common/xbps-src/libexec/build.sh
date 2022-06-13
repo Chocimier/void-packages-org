@@ -94,6 +94,7 @@ cut -d: -f 1,2 ${XBPS_STATEDIR}/.${sourcepkg}_register_pkg | sort -u | \
             else
                 $XBPS_RINDEX_CMD ${additional_args} -a ${paths}
             fi
+            msg_normal "sync ${paths}\n"
         fi
         rm -v $paths
     done
