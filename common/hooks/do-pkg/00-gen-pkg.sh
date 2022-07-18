@@ -9,7 +9,7 @@ fetch_package() {
 		*)
 			repo=https://alpha.de.repo.voidlinux.org/current/;;
 	esac
-	xbps-fetch $repo/$1
+	xbps-fetch $repo/${2#$XBPS_REPOSITORY}/$1
 }
 
 genpkg() {
@@ -100,7 +100,7 @@ genpkg() {
 		--pkgver "${pkgver}" \
 		--quiet \
 		${PKGDESTDIR}
-	fetch_package $binpkg
+	fetch_package $binpkg $pkgdir
 	rval=$?
 
 	# Unlock binpkg
