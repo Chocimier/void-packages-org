@@ -1,6 +1,6 @@
 <!-- Uncomment relevant sections and delete options which are not applicable -->
 
-#### Testing the changes
+### Testing the changes
 - I tested the changes in this PR: **YES**|**briefly**|**NO**
 
 <!--

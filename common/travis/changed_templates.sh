@@ -3,6 +3,7 @@
 # changed_templates.sh
 
 tip="$(git rev-list -1 --parents HEAD)"
+origin_HEAD="$(git rev-list -1 --parents origin/HEAD)"
 case "$tip" in
 	# This is a merge commit, pick last parent
 	*" "*" "*) tip="${tip##* }" ;;
@@ -10,8 +11,10 @@ case "$tip" in
 	*)         tip="${tip%% *}" ;;
 esac
 
-base="$(git merge-base FETCH_HEAD "$tip")"
+base="$(git merge-base origin/HEAD "$tip")"
 
+echo origin/HEAD=$origin_HEAD base=$base tip=$tip HEAD=$(git rev-parse HEAD) FETCH_HEAD=$(git rev-parse FETCH_HEAD)
+git branch -av
 [ $(git rev-list --count "$tip" "^$base") -lt 200 ] || {
 	echo "::error title=Branch out of date::Your branch is too out of date. Please rebase on upstream and force-push."
 	exit 1
