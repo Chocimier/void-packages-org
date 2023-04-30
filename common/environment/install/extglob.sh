@@ -6,6 +6,7 @@ expand_destdir() {
 	(
 		set -f
 		for glob in $@; do
+			echo "${PKGDESTDIR}/$glob" >&2
 			files=$(echo "${PKGDESTDIR}/${glob}")
 			set +f
 			for file in $files; do

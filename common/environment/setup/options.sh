@@ -1,4 +1,13 @@
 # vim: set ts=4 sw=4 et:
+#
+build_option() {
+	local rv=0
+	for x; do
+        local name="build_option_$x"
+		[[ "${!name}" ]] || rv=1
+	done
+	return $rv
+}
 
 vopt_if() {
     local name="build_option_$1" t="$2" f="$3"
@@ -26,6 +35,13 @@ vopt_conflict() {
     local opt1="$1" opt2="$2" n1="build_option_$1" n2="build_option_$2"
     if [ "${!n1}" -a "${!n2}" ]; then
         msg_error "options '${opt1}' and '${opt2}' conflict\n"
+    fi
+}
+
+vopt_require() {
+    local opt1="$1" opt2="$2" n1="build_option_$1" n2="build_option_$2"
+    if [ "${!n1}" -a ! "${!n2}" ]; then
+        msg_error "options '${opt1}' requires option '${opt2}'\n"
     fi
 }
 
