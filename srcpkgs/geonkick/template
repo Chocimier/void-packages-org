@@ -14,7 +14,7 @@ changelog="https://raw.githubusercontent.com/free-sm/geonkick/main/NEWS.md"
 distfiles="https://github.com/free-sm/geonkick/archive/refs/tags/v${version}.tar.gz"
 checksum=30ee2a36a26cabb9af8f458bb12d7b0358b4d6abec67ab5f8df696390b5699b4
 
-if [ ${CROSS_BUILD} ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DGKICK_ARCHITECTURE=$XBPS_TARGET_MACHINE"
 fi
 

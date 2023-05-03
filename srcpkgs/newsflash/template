@@ -14,7 +14,7 @@ distfiles="https://gitlab.com/news-flash/news_flash_gtk/-/archive/$version/news_
 checksum=099318a6bc57e5e695352b2f3c7dd149c9b889f39cb9cbd58dc3f10f41d4948d
 
 post_patch() {
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i build-aux/cargo.sh \
 			-e 's,"$CARGO_TARGET_DIR"/,&${RUST_TARGET}/,'
 	fi

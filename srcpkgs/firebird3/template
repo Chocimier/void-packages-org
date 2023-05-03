@@ -40,7 +40,7 @@ nocross="Fails to build gpre_boot for host but builds for target"
 CFLAGS="-fno-strict-aliasing"
 CXXFLAGS="-fno-delete-null-pointer-checks -Wno-deprecated -Wno-deprecated-declarations"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --enable-binreloc"
 	configure_args+=" ac_cv_func_sem_init=no"
 	configure_args+=" ac_cv_c_alignment=$((${XBPS_TARGET_WORDSIZE}/8))"
@@ -51,7 +51,7 @@ fi
 
 pre_configure() {
 	local _arch
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# XXX: This is not yet working right and needs more work.
 		# The generated gpre_boot is built with the target C++ and can
 		# not be executed. Trying to run it with qemu-<target>-static

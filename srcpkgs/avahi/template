@@ -38,7 +38,7 @@ conf_files="
 	/etc/avahi/avahi-dnsconfd.action"
 system_accounts="avahi:23"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" automake libtool glib-devel gettext-devel"
 	pre_configure() {
 		autoreconf -if

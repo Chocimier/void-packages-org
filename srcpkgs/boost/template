@@ -56,7 +56,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) subpackages+=" libboost_math_c99l libboost_math_tr1l";;
 esac
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	subpackages+=" libboost_stacktrace_addr2line"
 fi
 

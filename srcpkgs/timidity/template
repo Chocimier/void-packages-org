@@ -21,7 +21,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*-musl) broken="uses alsa's pcm_old.h, which depends on symbol versioning to work";;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# check for va_copy runs test program; assume no for target
 	configure_args+=" lib_cv_va_copy=no lib_cv___va_copy=no lib_cv_va_val_copy=no"
 

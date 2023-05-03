@@ -16,7 +16,7 @@ if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
 	makedepends+=" musl-legacy-compat"
 fi
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DCMAKE_MODULE_PATH=${XBPS_CROSS_BASE}/usr/share/kodi/cmake"
 	configure_args+=" -DKODI_INCLUDE_DIR=${XBPS_CROSS_BASE}/usr/include/kodi"
 fi

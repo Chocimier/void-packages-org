@@ -13,7 +13,7 @@ checksum=bed6f6848e22bb2f83b5f764b2aef0ed393054e803a8e3a8711cb2a39e6b492d
 
 subpackages="libcap-ng-devel libcap-ng-progs"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	subpackages+=" libcap-ng-python libcap-ng-python3"
 	hostmakedepends="python3-devel swig"
 	configure_args+=" --without-python --with-python3"

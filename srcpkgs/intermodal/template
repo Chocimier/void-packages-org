@@ -12,7 +12,7 @@ homepage="https://github.com/casey/intermodal"
 distfiles="https://github.com/casey/intermodal/archive/v${version}.tar.gz"
 checksum=cd62894e519dc5aa0284a5f48aab86e1a45c3bc96b8a5481741adb6960d4751a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="${pkgname}"
 else
 	hostmakedepends="help2man pkg-config"
@@ -20,7 +20,7 @@ else
 fi
 
 post_build() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		IMDL="target/${RUST_TARGET}/release/imdl"
 		for target in completion-scripts man readme; do
 			cargo run --package gen -- --bin $IMDL $target
@@ -29,7 +29,7 @@ post_build() {
 }
 
 post_install() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		vdoc target/gen/README.md
 
 		vcompletion target/gen/completions/_imdl zsh

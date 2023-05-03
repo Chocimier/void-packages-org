@@ -15,7 +15,7 @@ homepage="https://invent.kde.org/pim/kpimtextedit"
 distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
 checksum=cc6819004d5e73aae9b3b8f0679b79cf49f1d3b9c9f0451e78bd1ef809319cf1
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-tools-devel"
 fi
 

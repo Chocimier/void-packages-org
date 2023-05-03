@@ -18,7 +18,7 @@ case "$XBPS_TARGET_MACHINE" in
 	;;
 esac
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" shake"
 	post_extract() {
 		sed -i -e 's;get_target_property (HELP2MAN_COMMAND ${command} LOCATION);set(HELP2MAN_COMMAND ${command});' \

@@ -17,7 +17,7 @@ pre_configure() {
 	vsed -i common-project-config.pri -e 's/ -Werror/& -Wno-error=deprecated-declarations/'
 }
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	CXXFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/qt5"
 	for i in ${XBPS_CROSS_BASE}/usr/include/qt5/*; do
 		CXXFLAGS+=" -I$i"

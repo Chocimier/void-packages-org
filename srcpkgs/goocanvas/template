@@ -25,7 +25,7 @@ goocanvas-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove usr/include
 		vmove usr/share/gtk-doc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

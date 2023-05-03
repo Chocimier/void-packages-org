@@ -11,7 +11,7 @@ homepage="https://www.gnupg.org"
 distfiles="https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${version}.tar.bz2"
 checksum=b7e11a64246bbe5ef37748de43b245abd72cfcd53c9ae5e7fc5ca59f1c81268d
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="qemu-user-static"
 fi
 

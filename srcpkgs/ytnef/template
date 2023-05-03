@@ -16,7 +16,7 @@ pre_configure() {
 }
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" --host=${XBPS_TARGET_MACHINE}"
 		export ac_cv_func_malloc_0_nonnull=yes
 	fi

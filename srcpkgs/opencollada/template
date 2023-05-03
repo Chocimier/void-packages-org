@@ -14,7 +14,7 @@ distfiles="https://github.com/KhronosGroup/OpenCOLLADA/archive/v${version}.tar.g
 checksum=d9db0c0a518aa6ac0359626f222707c6ca1b63a83cbf229d97a5999c9cde347b
 
 CXXFLAGS="-fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2"
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Needs to find build/lib/libbuffer.so when cross linking
 	LDFLAGS="-Wl,-rpath,lib"
 fi

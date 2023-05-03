@@ -90,7 +90,7 @@ make_dirs="/var/log/nginx 0750 root root
  /var/lib/nginx/tmp 0750 nginx root"
 
 do_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# fake configure run on host
 		unset CC CPP LD CFLAGS CPPFLAGS LDFLAGS
 
@@ -115,7 +115,7 @@ do_configure() {
 }
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mkdir -p ../njs-${_njs_version}/build
 		case "$XBPS_TARGET_MACHINE" in
 		arm*)

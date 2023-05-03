@@ -19,7 +19,7 @@ alternatives="
  dc:dc.1:/usr/share/man/man1/gnu-dc.1"
 disable_parallel_build=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" bc"
 	pre_build() {
 		# don’t run target built binary 'fbc';

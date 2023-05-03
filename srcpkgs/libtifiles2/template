@@ -13,7 +13,7 @@ homepage="https://www.ticalc.org"
 distfiles="${SOURCEFORGE_SITE}/tilp/tilp2-linux/tilp2-${_tilpver}/${pkgname}-${version}.tar.bz2"
 checksum=9ac63b49e97b09b30b37bbc84aeb15fa7967bceb944e56141c5cd5a528acc982
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gettext-devel"
 fi
 

@@ -23,7 +23,7 @@ post_install() {
 	vlicense LICENCE
 }
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="automake libtool"
 	pre_configure() {
 		# Mips needs a hint if an FPU is available or not

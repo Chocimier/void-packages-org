@@ -34,7 +34,7 @@ pre_configure() {
 	ac_cv_python_link="${CC} -shared ${LDFLAGS}"
 	ac_cv_python_libs="${LDFLAGS}"
 	EOF
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp -a ${XBPS_CROSS_BASE}/usr/bin/apxs ${wrksrc}
 		cp -a ${XBPS_CROSS_BASE}/usr/share/apache/webroot/build/config_vars.mk ${wrksrc}
 
@@ -71,7 +71,7 @@ pre_configure() {
 }
 
 post_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cd subversion/bindings/swig/perl/native
 		PERL_MM_USE_DEFAULT=1 CC="$CC" LD="$CC" OPTIMIZE="$CFLAGS" \
 			CFLAGS="$CFLAGS -I$XBPS_CROSS_BASE/usr/include" \

@@ -17,7 +17,7 @@ checksum=88a12c3ba71bc31acff7238c280de697d609cebc50830c3766776ec35abc6566
 build_options="gir gtk_doc"
 build_options_default="gir gtk_doc"
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qemu-user-static prelink-cross"
 fi
 
@@ -28,10 +28,10 @@ libportal-devel_package() {
 		vmove usr/include/libportal
 		vmove "usr/lib/libportal.so"
 		vmove usr/lib/pkgconfig/libportal.pc
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Xdp-1.0.gir
 			vmove "usr/share/vala/vapi/libportal.*"
 		fi
@@ -43,7 +43,7 @@ libportal-gtk3_package() {
 	short_desc+=" - GTK3"
 	pkg_install() {
 		vmove "usr/lib/libportal-gtk3.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/lib/girepository-1.0/XdpGtk3*"
 		fi
 	}
@@ -56,7 +56,7 @@ libportal-gtk3-devel_package() {
 		vmove usr/include/libportal-gtk3
 		vmove "usr/lib/libportal-gtk3.so"
 		vmove usr/lib/pkgconfig/libportal-gtk3.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/XdpGtk3*
 			vmove "usr/share/vala/vapi/libportal-gtk3*"
 		fi
@@ -68,7 +68,7 @@ libportal-gtk4_package() {
 	short_desc+=" - GTK4"
 	pkg_install() {
 		vmove "usr/lib/libportal-gtk4.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/lib/girepository-1.0/XdpGtk4*"
 		fi
 	}
@@ -81,7 +81,7 @@ libportal-gtk4-devel_package() {
 		vmove usr/include/libportal-gtk4
 		vmove "usr/lib/libportal-gtk4.so"
 		vmove usr/lib/pkgconfig/libportal-gtk4.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/XdpGtk4*
 			vmove "usr/share/vala/vapi/libportal-gtk4*"
 		fi

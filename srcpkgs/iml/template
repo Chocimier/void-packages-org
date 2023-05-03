@@ -12,7 +12,7 @@ homepage="https://cs.uwaterloo.ca/~astorjoh/iml.html"
 distfiles="https://cs.uwaterloo.ca/~astorjoh/iml-${version}.tar.bz2"
 checksum=1dad666850895a5709b00b97422e2273f293cfadea7697a9f90b90953e847c2a
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-default=$XBPS_CROSS_BASE/usr"
 fi
 

@@ -14,7 +14,7 @@ checksum=d122ee0457079aaa30a664ae582fbc6208414e8728f497dce399ed9f33f9b36e
 build_options="customico"
 desc_option_customico="Enable support for Custom Icons Themes"
 
-if [ "$build_option_customico" ]; then
+if build_option customico; then
 	depends="zenity xdg-utils ImageMagick"
 fi
 
@@ -25,7 +25,7 @@ do_install() {
 	done
 	find "${DESTDIR}" -type d -exec chmod 755 '{}' \;
 	find "${DESTDIR}" -type f -exec chmod 644 '{}' \;
-	if [ "$build_option_customico" ]; then
+	if build_option customico; then
 		vmkdir "usr/bin"
 		find "${DESTDIR}" -name awoken-icon-theme-customization\* -exec chmod 755 '{}' \;
 		ln -sf /usr/share/icons/AwOken/awoken-icon-theme-customization "${DESTDIR}/usr/bin/"

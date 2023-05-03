@@ -16,7 +16,7 @@ checksum=090696d7a4fb772d7acebbb06f91ab92e025531c7c91824046b9e4e71ecb3377
 
 build_options="rpi"
 
-if [ "$build_option_rpi" ]; then
+if build_option rpi; then
 	configure_args+=" -DRPI_INCLUDE_DIR=${XBPS_CROSS_BASE}/opt/vc/include"
 	configure_args+=" -DRPI_LIB_DIR=${XBPS_CROSS_BASE}/opt/vc/lib"
 	makedepends+=" rpi-userland-devel"

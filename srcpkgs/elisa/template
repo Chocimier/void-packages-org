@@ -16,7 +16,7 @@ homepage="https://kde.org/applications/en/multimedia/org.kde.elisa"
 distfiles="${KDE_SITE}/release-service/${version}/src/elisa-${version}.tar.xz"
 checksum=a086572cd0f721834a071a8748e7c1cc76ae01102f287a355a36507157784d63
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kpackage-devel kconfig-devel kcoreaddons-devel"
 	configure_args+=" -DKF5_HOST_TOOLING=/usr/lib/cmake"
 fi

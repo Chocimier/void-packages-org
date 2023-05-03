@@ -63,11 +63,11 @@ post_patch() {
 }
 
 do_build() {
-	if [ "$build_option_clang" ]; then
+	if build_option clang; then
 		export CC=clang
 		export CXX=clang++
 
-		if [ "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			mkdir -p wrapper
 
 			local gcc_version=$(gcc -dumpversion)

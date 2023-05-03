@@ -13,7 +13,7 @@ nocross="Mis-use of memfd_create declaration"
 
 CFLAGS="-fcommon"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	export CROSS_COMPILE=${XBPS_TARGET_TRIPLET}
 fi
 

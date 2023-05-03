@@ -17,6 +17,6 @@ distfiles="https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-
 checksum=3920a4fb353300260c9bc46ff70f1fb975c5e7efa22e9d51222588928ce19b33
 python_version=3
 
-if [ ${CROSS_BUILD} ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools"
 fi

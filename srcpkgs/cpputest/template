@@ -11,7 +11,7 @@ distfiles="https://github.com/cpputest/cpputest/releases/download/v${version}/${
 checksum=21c692105db15299b5529af81a11a7ad80397f92c122bd7bf1e4a4b0e85654f7
 
 # tests are ON uncontitionally
-if [ -z "$XBPS_CHECK_PKGS" ] || [ "$CROSS_BUILD" ]; then
+if [ -z "$XBPS_CHECK_PKGS" ] || [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DTESTS=OFF"
 fi
 

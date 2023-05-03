@@ -35,14 +35,14 @@ desc_option_neon="Enable support for ARM Neon SIMD extension"
 
 vopt_conflict glcore gles2 # gles2 disables glcore support
 
-if [ "$build_option_gles2" ]; then
+if build_option gles2; then
 	configure_args+=" --enable-opengles --enable-opengles3"
 else
 	configure_args+=" --disable-opengles --disable-opengles3"
 fi
 
-if [ "$build_option_glcore" ]; then
-	if [ -z "$build_option_glslang" ]; then
+if build_option glcore; then
+	if ! build_option glslang; then
 		msg_error "$pkgname: 'glcore' option requires 'glslang'.\n"
 	fi
 	configure_args+=" --enable-opengl_core"
@@ -50,35 +50,35 @@ else
 	configure_args+=" --disable-opengl_core"
 fi
 
-if [ "$build_option_gles2" -o "$build_option_glcore" ]; then
+if build_option gles2 || build_option glcore; then
 	configure_args+=" --enable-egl --enable-kms"
 	makedepends+=" MesaLib-devel"
 fi
 
-if [ "$build_option_qt5" ]; then
-	if [ "$CROSS_BUILD" ]; then
+if build_option qt5; then
+	if [[ -v CROSS_BUILD ]]; then
 		hostmakedepends+=" qt5-host-tools"
 	fi
 fi
 
-if [ "$build_option_vulkan" ]; then
-	if [ -z "$build_option_glslang" ]; then
+if build_option vulkan; then
+	if ! build_option glslang; then
 		msg_error "$pkgname: 'vulkan' option requires 'glslang'.\n"
 	fi
 fi
 
-if [ "$build_option_wayland" ]; then
-	if [ -z "$build_option_gles2" -a -z "$build_option_glcore" ]; then
+if build_option wayland; then
+	if ! build_option gles2 && ! build_option glcore; then
 		msg_error "$pkgname: 'wayland' option requires 'gles2' or 'glcore'.\n"
 	fi
 	makedepends+=" wayland-devel wayland-protocols libdecor-devel"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		hostmakedepends+=" wayland-devel wayland-protocols"
 	fi
 fi
 
-if [ "$build_option_x11" ]; then
-	if [ -z "$build_option_gles2" -a -z "$build_option_glcore" ]; then
+if build_option x11; then
+	if ! build_option gles2 && ! build_option glcore; then
 		msg_error "$pkgname: 'x11' option requires 'gles2' or 'glcore'.\n"
 	fi
 fi
@@ -98,7 +98,7 @@ case "$XBPS_TARGET_MACHINE" in
 
 		configure_args+=" --enable-threads $(vopt_enable neon)"
 
-		if [ "$build_option_neon" ]; then
+		if build_option neon; then
 			CFLAGS+=" -mfpu=neon"
 		fi
 		;;
@@ -107,6 +107,6 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 	esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --host=${XBPS_CROSS_TRIPLET}"
 fi

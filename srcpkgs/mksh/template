@@ -29,7 +29,7 @@ alternatives="
 build_options="static"
 
 do_build() {
-	if [ "$build_option_static" ]; then
+	if build_option static; then
 		CFLAGS+=" -static"
 		LDFLAGS+=" -static"
 	fi

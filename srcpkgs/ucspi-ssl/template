@@ -33,7 +33,7 @@ pre_build() {
 	echo "/etc/ssl/certs.pem" >../conf-cafile
 	echo "/usr" >../conf-home
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		echo "${BUILD_CC} ${BUILD_CFLAGS} -I/usr/include/fehQlibs -c "'"$@"' >compile-host
 		echo 'main="$1"; shift; '"${BUILD_CC} ${BUILD_LDFLAGS}"'-o "$main" "$main.o" "$@" -ldnsresolv -lqlibs' >load-host
 		chmod +x compile-host load-host

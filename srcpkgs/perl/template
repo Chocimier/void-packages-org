@@ -166,7 +166,7 @@ do_configure() {
 		-Dman3dir=/usr/share/man/man3
 		-Dd_sockaddr_in6=define"
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args+=" --target=$XBPS_CROSS_TRIPLET"
 	fi
 

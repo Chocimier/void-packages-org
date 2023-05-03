@@ -55,7 +55,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 _cross=
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	_cross="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 fi
 
@@ -150,7 +150,7 @@ do_install() {
 	# Remove helper binaries built for host,
 	# if generated files from the scripts/ directory need to be included,
 	# they need to be copied to ${hdrdest} before this step
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make ${makejobs} ARCH=${_arch} _mrproper_scripts
 		# remove host specific objects as well
 		find scripts -name '*.o' -delete

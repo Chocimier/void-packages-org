@@ -15,13 +15,13 @@ changelog="https://sourceforge.net/projects/libmtp/files/libmtp/${version}/READM
 distfiles="${SOURCEFORGE_SITE}/${pkgname}/${pkgname}-${version}.tar.gz"
 checksum=c4ffa5ab8c8f48c91b0047f2e253c101c418d5696a5ed65c839922a4280872a7
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# XXX needs host mtp-hotplug
 	hostmakedepends+=" libmtp"
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s,\(util/mtp-hotplug \),mtp-hotplug ,g" -i Makefile.in
 	fi
 }

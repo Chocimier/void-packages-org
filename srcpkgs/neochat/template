@@ -18,7 +18,7 @@ homepage="https://apps.kde.org/en/neochat"
 distfiles="${KDE_SITE}/plasma-mobile/${version}/neochat-${version}.tar.xz"
 checksum=4dfb8b5c931ab440491ca511d84a493ec658ca3c4aedd4358131780e39d26a5e
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kdoctools"
 fi
 

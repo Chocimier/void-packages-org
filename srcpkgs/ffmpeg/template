@@ -74,7 +74,7 @@ do_configure() {
 		sed -i configure -e "s;_cflags_speed='-O3';_cflags_speed='-O2';"
 	fi
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		case "$XBPS_TARGET_MACHINE" in
 			arm*) _arch="arm";;
 			aarch64*) _arch="aarch64";;

@@ -38,11 +38,11 @@ libhandy-devel_package() {
 		vmove "usr/lib/*.so"
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_glade" ]; then
+		if build_option glade; then
 			vmove usr/lib/glade
 			vmove usr/share/glade
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

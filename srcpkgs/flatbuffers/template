@@ -10,7 +10,7 @@ homepage="https://google.github.io/flatbuffers/"
 distfiles="https://github.com/google/${pkgname}/archive/v${version}.tar.gz"
 checksum=62f2223fb9181d1d6338451375628975775f7522185266cd5296571ac152bc45
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Disable tests to prevent executing target binaries on host
 	configure_args+=" -DFLATBUFFERS_BUILD_TESTS=OFF"
 fi

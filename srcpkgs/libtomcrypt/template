@@ -15,7 +15,7 @@ CFLAGS="-DGMP_DESC -DLTM_DESC -DUSE_LTM"
 
 do_build() {
 	sed -e "s,@@CC@@,$CC,g;s,\$(CC),$CC,g" -i makefile.shared
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp /usr/bin/libtool .
 		sed -e "s,CCLD=.*,CCLD=$CC,g;s,CC=.*,CC=$CC,g" -i libtool
 		sed -e 's,libtool,./libtool,g' -i makefile.shared

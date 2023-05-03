@@ -17,7 +17,7 @@ build_options="gir"
 build_options_default="gir"
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Make g-ir-scanner-qemuwrapper append this path
 		export GIR_EXTRA_LIBS_PATH="${wrksrc}/gnome-autoar/.libs"
 	fi
@@ -30,7 +30,7 @@ gnome-autoar-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

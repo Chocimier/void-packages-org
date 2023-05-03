@@ -28,7 +28,7 @@ desc_option_openexr="Enable support for high dynamic range images"
 desc_option_poppler="Enable support for creating PDF"
 desc_option_vnc="Enable support for VNC server"
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# cmake can't check this when cross compiling
 	configure_args+=" -DPOPPLER_HAS_CAIRO_EXITCODE=0"
 	configure_args+=" -D_OPENTHREADS_ATOMIC_USE_GCC_BUILTINS_EXITCODE=0"

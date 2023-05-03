@@ -21,7 +21,7 @@ make_dirs="/var/lib/roccat 2770 root _roccat"
 
 CFLAGS="-fcommon -I$XBPS_CROSS_BASE/usr/include/harfbuzz"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" dbus-glib-devel"
 	# Project tries to use TRY_RUN(), pass the result to be used as cache
 	configure_args+=" -DRUN_RESULT_VAR=0"

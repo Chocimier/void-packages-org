@@ -23,7 +23,7 @@ replaces="libressl>=0"
 
 build_options=asm
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends="perl"
 	build_options_default="asm"
 else
@@ -58,7 +58,7 @@ pre_check() {
 }
 
 post_install() {
-	if [ ! "$CHROOT_READY" ]; then
+	if [[ ! -v CHROOT_READY ]]; then
 		rm -f "${DESTDIR}/usr/bin/c_rehash"
 	fi
 }

@@ -25,7 +25,7 @@ case $XBPS_TARGET_MACHINE in
 	   make_install_args+=" NOOPT=true";;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" Carla-devel"
 fi
 
@@ -39,7 +39,7 @@ if [ "$XBPS_NO_ATOMIC8" ]; then
 fi
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e 's#\./carla-lv2-export#/usr/bin/carla-lv2-export#g' \
 			source/plugin/Makefile
 	fi

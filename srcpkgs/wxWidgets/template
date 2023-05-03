@@ -33,7 +33,7 @@ post_install() {
 	#   - mark this build as native build
 	#   - ignore --host option; breaks configure scripts when
 	#     cross compiling (isn’t necessary in our case anyway)
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		rename "${XBPS_CROSS_TRIPLET}-" "" \
 			${DESTDIR}/usr/lib/wx/config/* \
 			${DESTDIR}/usr/lib/wx/include/*

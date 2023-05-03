@@ -25,7 +25,7 @@ distfiles="https://github.com/gnuradio/gnuradio/archive/v${version}.tar.gz"
 checksum=85d90147f7f28450bff75eeefd2b44adc88b231d29fe8e86cc3a65437dba6d9f
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# CMake fails when cross-compiling.
 	configure_args+=" -DENABLE_TESTING=OFF"
 fi

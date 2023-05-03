@@ -29,7 +29,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) ;;
 esac
 
-if [ "$build_option_openblas" ]; then
+if build_option openblas; then
 	case "$XBPS_TARGET_MACHINE" in
 		ppc64*) ;;
 		ppc*) broken="numpy can't be built with openblas";;

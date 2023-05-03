@@ -38,17 +38,17 @@ case "${XBPS_TARGET_MACHINE}" in
 	ppcle-musl) _glibc="ld.so.1" _musl="ld-musl-powerpcle.so.1";;
 	ppc-musl) _glibc="ld.so.1" _musl="ld-musl-powerpc.so.1";;
 	*-musl) broken="Template does not yet recognize this arch, please fix";;
-	*) broken="Only for musl libc";;
+	*) broken="Only for musl libc"; _glibc=; _musl= ;;
 esac
 
 make_build_args="LINKER_PATH=/usr/lib/${_musl} LOADER_NAME=${_glibc}
- LIBGCOMPAT_PATH=/usr/lib/libgcompat.so.0 LOADER_PATH=/usr/lib/${LOADER_NAME}
+ LIBGCOMPAT_PATH=/usr/lib/libgcompat.so.0 LOADER_PATH=/usr/lib/\${LOADER_NAME}
  WITH_OBSTACK=musl-obstack"
 make_install_args="LINKER_PATH=/usr/lib/${_musl} LOADER_NAME=${_glibc}
- LIBGCOMPAT_PATH=/usr/lib/libgcompat.so.0 LOADER_PATH=/usr/lib/${LOADER_NAME}
+ LIBGCOMPAT_PATH=/usr/lib/libgcompat.so.0 LOADER_PATH=/usr/lib/\${LOADER_NAME}
  WITH_OBSTACK=musl-obstack"
 
-if [ "$build_option_libucontext" ]; then
+if build_option libucontext; then
 	makedepends+=" libucontext-devel"
 	make_build_args+=" WITH_LIBUCONTEXT=1"
 fi

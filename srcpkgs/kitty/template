@@ -24,7 +24,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		CFLAGS+=" -I${XBPS_CROSS_BASE}/${py3_inc}"
 	fi
 	python3 setup.py linux-package --prefix=${DESTDIR}/usr --update-check-interval=0 --verbose

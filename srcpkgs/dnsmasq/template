@@ -21,7 +21,7 @@ desc_option_dnssec="Enable DNSSEC support via nettle"
 do_build() {
 	echo '#define HAVE_DBUS' >> src/config.h
 	echo '#define HAVE_LIBIDN2' >> src/config.h
-	if [ "$build_option_dnssec" ]; then
+	if build_option dnssec; then
 		echo '#define HAVE_DNSSEC' >> src/config.h
 	fi
 	make CC=$CC CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" ${makejobs}

@@ -12,7 +12,7 @@ homepage="https://github.com/euroelessar/jreen"
 distfiles="${homepage}/archive/v${version}.tar.gz"
 checksum=f93c3d338c011c0945dacb14eb9da3be9541028c9eaa6f2024e688eb8a49b07e
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-devel"
 fi
 

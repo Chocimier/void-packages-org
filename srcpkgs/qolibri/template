@@ -14,7 +14,7 @@ homepage="https://github.com/ludios/qolibri"
 distfiles="${homepage}/archive/${version}.tar.gz"
 checksum=0163f19f80915879c5c276f48507aedfe5c186be3c57f965db5d68a9a7157150
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi
 

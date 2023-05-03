@@ -60,28 +60,28 @@ export CXXFLAGS="$CFLAGS"
 # but this is run under our control
 export CCACHE_SLOPPINESS=time_macros,include_file_mtime
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
 # detection + runtime
-if [ "$build_option_bubblewrap" ]; then
+if build_option bubblewrap; then
 	hostmakedepends+=" bubblewrap xdg-dbus-proxy"
 	makedepends+=" libseccomp-devel"
 	depends+=" bubblewrap xdg-dbus-proxy"
 fi
 
-if [ "$build_option_lto" -a -z "$build_option_clang" ]; then
+if build_option lto && ! build_option clang; then
 	broken="LTO needs Clang"
 fi
 
-if [ "$build_option_clang" ]; then
+if build_option clang; then
 	hostmakedepends+=" clang lld"
 	configure_args+=" -DUSE_LD_LLD=ON"
 	nocross=yes
 fi
 
-if [ "$build_option_lto" ]; then
+if build_option lto; then
 	configure_args+=" -DLTO_MODE=thin"
 fi
 
@@ -91,19 +91,19 @@ case "$XBPS_TARGET_MACHINE" in
 		build_options_default+=" jit"
 		if [ "$XBPS_TARGET_LIBC" = "glibc" ]; then
 			build_options_default+=" sampling_profiler"
-		elif [ "$build_option_sampling_profiler" ]; then
+		elif build_option sampling_profiler; then
 			broken="sampling_profiler is only supported on glibc"
 		fi
 		;;
 	i686*)
 		# JIT requires SSE2 so disabled by default
 		# it's also currently broken
-		if [ "$build_option_jit" ]; then
+		if build_option jit; then
 			broken="OffsetExtractor: No magic values found."
 		fi
 		;;
 	*)
-		if [ "$build_option_jit" ]; then
+		if build_option jit; then
 			broken="JIT is not supported on ${XBPS_TARGET_MACHINE}"
 		fi
 		;;
@@ -118,12 +118,12 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 # extra validation
-if [ "$build_option_sampling_profiler" -a -z "$build_option_jit" ]; then
+if build_option sampling_profiler && ! build_option jit; then
 	broken="sampling_profiler requires JIT"
 fi
 
 pre_configure() {
-	if [ "$build_option_clang" ]; then
+	if build_option clang; then
 		export CC=clang
 		export CXX=clang++
 	fi
@@ -181,10 +181,10 @@ webkit2gtk-devel_package() {
 	pkg_install() {
 		vmove usr/include/webkitgtk-4.0
 		vmove "usr/lib/pkgconfig/*-4.0.pc"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-1.0/*-4.0.gir"
 		fi
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove "usr/share/gtk-doc/html/*-4.0"
 		fi
 		vmove "usr/lib/*-4.0.so"
@@ -198,7 +198,7 @@ libwebkit2gtk41_package() {
 		vmove usr/bin/WebKitWebDriver
 		vmove usr/libexec/webkit2gtk-4.1
 		vmove usr/lib/webkit2gtk-4.1
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/lib/girepository-1.0/*-4.1.typelib"
 		fi
 		vmove "usr/lib/*-4.1.so.*"
@@ -217,10 +217,10 @@ libwebkit2gtk41-devel_package() {
 	pkg_install() {
 		vmove usr/include/webkitgtk-4.1
 		vmove "usr/lib/pkgconfig/*-4.1.pc"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-1.0/*-4.1.gir"
 		fi
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove "usr/share/gtk-doc/html/*-4.1"
 		fi
 		vmove "usr/lib/*-4.1.so"
@@ -233,7 +233,7 @@ libwebkitgtk60_package() {
 	pkg_install() {
 		vmove usr/libexec/webkitgtk-6.0
 		vmove usr/lib/webkitgtk-6.0
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/lib/girepository-1.0/*-6.0.typelib"
 		fi
 		vmove "usr/lib/*-6.0.so.*"
@@ -252,10 +252,10 @@ libwebkitgtk60-devel_package() {
 	pkg_install() {
 		vmove usr/include/webkitgtk-6.0
 		vmove "usr/lib/pkgconfig/*-6.0.pc"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-1.0/*-6.0.gir"
 		fi
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove "usr/share/gtk-doc/html/*-6.0"
 		fi
 		vmove "usr/lib/*-6.0.so"

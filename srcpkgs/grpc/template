@@ -18,7 +18,7 @@ homepage="https://github.com/grpc/grpc"
 distfiles="${homepage}/archive/v${version}/${pkgname}-${version}.tar.gz"
 checksum=5071b630e2a14707ad060636990f1b25b0984bd168c7ea1ab95e48a3bdc0081f
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# need host grpc_cpp_plugin
 	hostmakedepends+=" grpc"
 fi

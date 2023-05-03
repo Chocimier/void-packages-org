@@ -21,7 +21,7 @@ checksum=686844b34ec73b24931ff6cc4f6033f0072947a6db60acdc7fb3eaf157a581c8
 make_check=no # feel free to fix
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# tests try to use tracker-sandbox from the wrong path:
 		# "Program /usr/lib32/tracker-3.0/trackertestutils/tracker-sandbox found: NO"
 		vsed -e "/subdir('tests')/d" -i meson.build

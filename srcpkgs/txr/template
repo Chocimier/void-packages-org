@@ -16,12 +16,12 @@ distfiles="http://www.kylheku.com/cgit/txr/snapshot/${pkgname}-${version}.tar.bz
 checksum=5f10467610d8213be9af8a1fc9dafbd4902b7b473a82d8b2945cfa5ea6d2fee5
 nopie=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" txr"
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i Makefile -e 's#^TXR :=.*#TXR = /usr/bin/txr#'
 	fi
 }

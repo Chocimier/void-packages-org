@@ -25,7 +25,7 @@ grilo-devel_package() {
 	short_desc+=" - development files"
 	pkg_install() {
 		vmove usr/include
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

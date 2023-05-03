@@ -30,7 +30,7 @@ libsoup-devel_package() {
 	short_desc+=" - development files"
 	pkg_install() {
 		vmove usr/lib/pkgconfig/libsoup-2.4.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Soup-2.4.gir
 			vmove usr/share/vala
 		fi
@@ -45,7 +45,7 @@ libsoup-gnome-devel_package() {
 	pkg_install() {
 		vmove "usr/include/libsoup-gnome*"
 		vmove "usr/lib/pkgconfig/*gnome*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-1.0/SoupGNOME*"
 		fi
 		vmove "usr/lib/libsoup-gnome*.so"
@@ -56,7 +56,7 @@ libsoup-gnome_package() {
 	short_desc+=" - GNOME libraries"
 	pkg_install() {
 		vmove "usr/lib/libsoup-gnome*.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/lib/girepository-1.0/SoupGNOME*"
 		fi
 	}

@@ -17,6 +17,6 @@ if [ "$XBPS_TARGET_NO_ATOMIC8" ] || [ "${XBPS_TARGET_MACHINE/-musl/}" = "armv7l"
 	makedepends+=" libatomic-devel"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kiwix-lib-devel"
 fi

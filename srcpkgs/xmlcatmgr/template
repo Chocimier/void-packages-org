@@ -15,12 +15,12 @@ homepage="http://xmlcatmgr.sourceforge.net"
 distfiles="$SOURCEFORGE_SITE/xmlcatmgr/$pkgname-$version.tar.gz"
 checksum=ea1142b6aef40fbd624fc3e2130cf10cf081b5fa88e5229c92b8f515779d6fdc
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="xmlcatmgr"
 fi
 
 pre_install() {
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_xmlcatmgr="xmlcatmgr"
 	else
 		_xmlcatmgr="./xmlcatmgr"

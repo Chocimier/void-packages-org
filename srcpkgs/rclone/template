@@ -16,7 +16,7 @@ distfiles="https://downloads.rclone.org/v${version}/rclone-v${version}.tar.gz"
 checksum=340371f94604e6771cc4a2c91e37d1bf00a524deab520340440fb0968e783f63
 
 pre_build() {
-	if [ "$CROSS_BUILD" ] && [ "$XBPS_TARGET_LIBC" = musl ]; then
+	if [[ -v CROSS_BUILD ]] && [ "$XBPS_TARGET_LIBC" = musl ]; then
 		# XXX: when cross building, the binary has a textrel, which segfaults when
 		# launched on musl
 		# FIXME: linkers for the musl toolchains should reject textrels entirely

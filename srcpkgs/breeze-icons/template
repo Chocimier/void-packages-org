@@ -15,7 +15,7 @@ distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=2328b09ca0a9d4ca1efb13132995f837d3d30452b50646cbf5d91f6584d8a679
 nostrip=yes
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	configure_args="-DBINARY_ICONS_RESOURCE=ON"
 else
 	configure_args="-DBINARY_ICONS_RESOURCE=OFF"

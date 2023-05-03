@@ -16,7 +16,7 @@ distfiles="https://ratrabbit.nl/downloads/xsnow/${pkgname}-${version}.tar.gz"
 checksum=541d3d54add3c20f69069b1af4c2e974e3668a80de731ff0b89bd9093be9e657
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s:./xsnow -manpage:/usr/bin/qemu-${XBPS_TARGET_QEMU_MACHINE}-static &:" -i src/Makefile.am src/Makefile.in
 	fi
 }

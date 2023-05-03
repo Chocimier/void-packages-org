@@ -75,7 +75,7 @@ if [ "${_nopie}" = yes ]; then
 fi
 
 post_patch() {
-	if [ "${build_option_staging}" ]; then
+	if build_option staging; then
 		"../wine-staging-${_pkgver}/staging/patchinstall.py" --all
 	fi
 }

@@ -34,7 +34,7 @@ do_configure() {
 	# use gcc as assembler to avoid errors
 	unset AS
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export HOST_CC=cc
 		export TARGET_CC="${CC}"
 		export HOST_CFLAGS="-Os"

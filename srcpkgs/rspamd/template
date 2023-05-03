@@ -27,7 +27,7 @@ case "$XBPS_TARGET_MACHINE" in
 	 -DHAVE_ATOMIC_BUILTINS_EXITCODE__TRYRUN_OUTPUT=0"
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" ${makedepends}"
 
 	pre_build() {
@@ -42,7 +42,7 @@ pre_configure() {
 		*-musl)	# Remove non existing library nsl
 			vsed -i CMakeLists.txt -e "/LIST(APPEND CMAKE_REQUIRED_LIBRARIES nsl)/d"
 	esac
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" -C ${FILESDIR}/TryRunResults.cmake"
 		mkdir -p build_native
 		( cd build_native; LD= CC= CFLAGS= LDFLAGS= cmake .. )

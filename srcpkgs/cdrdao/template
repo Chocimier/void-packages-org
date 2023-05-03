@@ -15,7 +15,7 @@ checksum=d19b67c853c5dba2406afaab6cd788e77f35eebe634cac4679528477c7be01b6
 
 pre_build() {
 	local f
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# build antlr and dlg for the host
 		for f in antlr dlg; do
 			cd ${wrksrc}/pccts/$f

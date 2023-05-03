@@ -33,23 +33,23 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 	*)
 		build_options_default="llvm"
-		if [ "$build_option_mcode" ]; then
+		if build_option mcode; then
 			broken="mcode backend only available on x86"
 		fi
 esac
 
-if [ "$build_option_llvm" ]; then
+if build_option llvm; then
 	makedepends+=" llvm12"
 fi
 
 do_configure() {
-	if [ "$build_option_mcode" ]; then
+	if build_option mcode; then
 		mkdir -p build_mcode
 		cd build_mcode
 		../configure ${configure_args}
 		cd ..
 	fi
-	if [ "$build_option_llvm" ]; then
+	if build_option llvm; then
 		mkdir -p build_llvm
 		cd build_llvm
 		../configure --with-llvm-config \
@@ -59,10 +59,10 @@ do_configure() {
 }
 
 do_build() {
-	if [ "$build_option_mcode" ]; then
+	if build_option mcode; then
 		make -C build_mcode ${makejobs}
 	fi
-	if [ "$build_option_llvm" ]; then
+	if build_option llvm; then
 		make -C build_llvm ${makejobs}
 	fi
 }
@@ -71,11 +71,11 @@ do_install() {
 	# must be first; make install uses it
 	vbin ${FILESDIR}/ghdl
 	# install whatever backends we have
-	if [ "$build_option_mcode" ]; then
+	if build_option mcode; then
 		make -C build_mcode DESTDIR=${DESTDIR} install
 		rm -rf ${DESTDIR}/usr/lib/ghdl/src
 	fi
-	if [ "$build_option_llvm" ]; then
+	if build_option llvm; then
 		make -C build_llvm DESTDIR=${DESTDIR} install
 		rm -rf ${DESTDIR}/usr/lib/ghdl/src
 	fi

@@ -13,7 +13,7 @@ checksum=8ef69921dbdc06bc5bb90513622637a7b83a71f31f5ba377be9d8fd8f57912c2
 # won't work with parallel_build so just turn it off (thanks to JuanRP for the Hint)
 disable_parallel_build=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" ffcall_cv_malloc_mprotect_can_exec=yes"
 fi
 

@@ -14,7 +14,7 @@ changelog="https://raw.githubusercontent.com/xournalpp/xournalpp/master/CHANGELO
 distfiles="https://github.com/xournalpp/xournalpp/archive/refs/tags/v${version}.tar.gz"
 checksum=5021c7a8f53687edb3a759e079c54d23d5918d83f8d1f5fcd08a1da2ce81bd8b
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	hostmakedepends+=" help2man"
 fi
 

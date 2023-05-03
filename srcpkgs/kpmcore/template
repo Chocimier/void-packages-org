@@ -17,7 +17,7 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#kpmcore"
 distfiles="${KDE_SITE}/release-service/${version}/src/kpmcore-${version}.tar.xz"
 checksum=0dc8615f6b86102a4e0d4dc6b5e07499ba4fb8a58bc738a9155ad80184c4716e
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
 fi
 

@@ -62,7 +62,7 @@ case "$XBPS_TARGET_MACHINE" in
 	armv[56]*) broken="Unsupported architecture" ;;
 esac
 
-if [ -n "$_use_zero" ]; then
+if [[ -v _use_zero ]]; then
 	makedepends+=" libffi-devel"
 	configure_args+=" --with-jvm-variants=zero"
 	case "$XBPS_TARGET_MACHINE" in
@@ -75,7 +75,7 @@ case "$XBPS_TARGET_LIBC" in
 	glibc) build_options_default+=" docs";;
 esac
 
-if [ ! "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	hostmakedepends+=" openjdk16-bootstrap"
 	configure_args+=" --with-boot-jdk=/usr/lib/jvm/openjdk16"
 else
@@ -143,7 +143,7 @@ do_configure() {
 	esac
 
 	configure_args=${configure_args/--with-libtool-sysroot=$XBPS_CROSS_BASE}
-	if [ "$XBPS_CCACHE" ] && [ -z "$CROSS_BUILD" ]; then
+	if [[ -v XBPS_CCACHE ]] && [[ ! -v CROSS_BUILD ]]; then
 		configure_args+=" --enable-ccache"
 		CC="/usr/bin/cc"
 		CXX="/usr/bin/c++"
@@ -201,7 +201,7 @@ openjdk17-doc_package() {
 	noshlibprovides=yes
 	short_desc+=" - documentation"
 	pkg_install() {
-		if [ "$build_option_docs" ]; then
+		if build_option docs; then
 			local _docdir=usr/share/doc/openjdk$_java_ver
 			vmkdir $_docdir
 			cp -a $wrksrc/$build_wrksrc/build/linux-*/images/docs/* ${PKGDESTDIR}/$_docdir

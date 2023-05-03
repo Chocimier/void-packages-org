@@ -25,6 +25,6 @@ desc_option_airspy="Enable support for Airspy"
 desc_option_rtlsdr="Enable support for RTL-SDR"
 desc_option_soapysdr="Enable support for SoapySDR"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools"
 fi

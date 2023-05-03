@@ -20,7 +20,7 @@ pre_build() {
 	# libmupdf-{threads,pkcs7}.a are required by fbpdf
 	sed 's/INSTALL_LIBS :=/& $(THREAD_LIB) $(PKCS7_LIB)/' -i Makefile
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make ${makejobs} CC=cc LD=ld AR=ar CFLAGS="-fPIC" LDFLAGS='' build=release generate
 	fi
 }
@@ -31,7 +31,7 @@ do_build() {
 
 	local _crosscompile
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_crosscompile="CROSSCOMPILE=yes"
 	fi
 

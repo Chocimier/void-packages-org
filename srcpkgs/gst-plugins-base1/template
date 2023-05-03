@@ -29,7 +29,7 @@ build_options_default="cdparanoia gir wayland"
 desc_option_sndio="Enable sndio support (unsupported, known to be problematic)"
 
 # Remove sndio if not upstreamed
-if [ "$build_option_sndio" ]; then
+if build_option sndio; then
 	msg_warn "sndio is unsupported upstream"
 fi
 
@@ -61,7 +61,7 @@ gst-plugins-base1-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir*"
 		fi
 	}

@@ -35,7 +35,7 @@ libdbusmenu-glib-devel_package() {
 		vmove usr/lib/pkgconfig/dbusmenu-glib-*.pc
 		vmove usr/lib/libdbusmenu-glib.so
 		vmove usr/share/gtk-doc/html/libdbusmenu-glib
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Dbusmenu-*.gir
 			vmove usr/share/vala/vapi/Dbusmenu-*.vapi
 		fi
@@ -46,7 +46,7 @@ libdbusmenu-gtk3_package() {
 	short_desc+=" (GTK+3)"
 	pkg_install() {
 		vmove usr/lib/libdbusmenu-gtk3.so.*
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0/DbusmenuGtk3-*.typelib
 		fi
 	}
@@ -61,7 +61,7 @@ libdbusmenu-gtk3-devel_package() {
 		vmove usr/lib/pkgconfig/dbusmenu-gtk3-*.pc
 		vmove usr/lib/libdbusmenu-gtk3.so
 		vmove usr/share/gtk-doc/html/libdbusmenu-gtk
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/DbusmenuGtk3-*.gir
 			vmove usr/share/vala/vapi/DbusmenuGtk3-*.vapi
 		fi

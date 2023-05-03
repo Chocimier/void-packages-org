@@ -14,12 +14,12 @@ distfiles="${CPAN_SITE}/Text/${pkgname/perl-/}-${version}.tar.gz"
 checksum=b014586e68bdbcafb0a2cfa0401eb0a04ea5de8c4d5bc36dd0f7faeab6acf42c
 shlib_requires="libperl.so.5.36"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	export PERL5LIB=${XBPS_STATEDIR}/perlprefix-${XBPS_TARGET_MACHINE}
 fi
 
 post_configure() {
-	[ "$CROSS_BUILD" ] || return 0
+	[[ -v CROSS_BUILD ]] || return 0
 	mkdir -p $PERL5LIB
 	cp "$XBPS_CROSS_BASE/usr/lib/perl5/core_perl/Config"*.p? $PERL5LIB
 	cp "$XBPS_CROSS_BASE/usr/lib/perl5/core_perl/Errno.pm" $PERL5LIB

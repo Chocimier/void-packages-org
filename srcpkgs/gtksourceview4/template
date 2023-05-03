@@ -22,7 +22,7 @@ build_options="gir gtk_doc"
 desc_option_gtk_doc="Build API docs via gtk-doc"
 build_options_default="gir"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -39,10 +39,10 @@ gtksourceview4-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/share/glade
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

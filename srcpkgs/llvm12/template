@@ -100,7 +100,7 @@ pre_configure() {
 		mips*-musl|ppc*) configure_args+=" -DVOID_CXX_OPT_FLAGS=-Os" ;;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		msg_normal "Building host tblgen\n"
 		mkdir -p build/HOST
 		cd build/HOST
@@ -148,7 +148,7 @@ do_install() {
 	fi
 
 	# Remove llvm-config-host in cross builds.
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		rm -f ${DESTDIR}/usr/bin/llvm-config-host
 	fi
 }

@@ -13,7 +13,7 @@ distfiles="http://download.qt.io/official_releases/qt/${version%.*}/${version}/s
 checksum=13b0d43459394bed2481967a1feff02b63228a82c1136a62941c0eb83ef54e7f
 
 subpackages="qt6-scxml-tools qt6-scxml-devel"
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args="-DQT_FORCE_BUILD_TOOLS=true"
 	hostmakedepends+=" qt6-scxml-tools"
 fi

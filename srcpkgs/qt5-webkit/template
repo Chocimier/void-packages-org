@@ -28,7 +28,7 @@ checksum=9a6ed083154c7ec850081102b299afa928ca7e48bbdf2b5f3ae152425e46eb17
 CPPFLAGS="-I${XBPS_CROSS_BASE}/usr/include"
 CXXFLAGS="-fpermissive -Wno-class-memaccess -Wno-redundant-move -Wno-deprecated-copy"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-declarative-devel ruby-devel"
 	configure_args+=" -DRUBY_CONFIG_INCLUDE_DIR=${XBPS_CROSS_BASE}/usr/include/ruby-*"
 fi
@@ -69,7 +69,7 @@ pre_configure() {
 			;;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# XXX: disable failing check for private headers and assume they are available
 		sed -i Source/cmake/OptionsQt.cmake \
 			-e 's;check_cxx_source_compiles("${INCLUDE_TEST_SOURCE}" \(Qt5${_qt_component}_PRIVATE_HEADER_FOUND\));set(\1 1);'

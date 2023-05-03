@@ -13,7 +13,7 @@ checksum=9b55b9dafd5eb01562060d860e267e309a1876e8ba5ce4d3303484b94129ab3c
 
 do_configure() {
 	sed -i '/^CFLAGS/d' Makefile
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s/^CC.*/CC=${XBPS_CROSS_TRIPLET}-gcc/" Makefile
 		sed -i "s/^cc/${XBPS_CROSS_TRIPLET}-gcc/" configure
 	fi

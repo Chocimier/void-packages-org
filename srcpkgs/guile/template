@@ -19,7 +19,7 @@ if [ "$XBPS_ENDIAN" != "$XBPS_TARGET_ENDIAN" ]; then
 	broken="opposite-endian host generates broken files"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Need host guile to cross compile
 	hostmakedepends+=" guile"
 fi

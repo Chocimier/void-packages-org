@@ -43,7 +43,7 @@ vte3-devel_package() {
 		vmove usr/include/vte-2.91
 		vmove usr/lib/pkgconfig/vte-2.91.pc
 		vmove usr/lib/libvte-2.91.so
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Vte-2.91.gir
 			vmove "usr/share/vala/vapi/vte-2.91.*"
 		fi
@@ -57,7 +57,7 @@ vte3-gtk4-devel_package() {
 		vmove usr/include/vte-2.91-gtk4
 		vmove usr/lib/libvte-2.91-gtk4.so
 		vmove usr/lib/pkgconfig/vte-2.91-gtk4.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Vte-3.91.gir
 			vmove "usr/share/vala/vapi/vte-2.91-gtk4.*"
 		fi

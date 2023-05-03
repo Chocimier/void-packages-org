@@ -26,7 +26,7 @@ do_build() {
 
 	unset CFLAGS CXXFLAGS LDFLAGS
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make ARCH=arm CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-
 	else
 		make ARCH=arm

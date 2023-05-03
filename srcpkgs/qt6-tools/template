@@ -18,7 +18,7 @@ homepage="https://qt.io/"
 distfiles="http://download.qt.io/official_releases/qt/${version%.*}/${version}/submodules/qttools-everywhere-src-${version}.tar.xz"
 checksum=a31387916184e4a5ef522d3ea841e8e931cc0f88be0824a7a354a572d5826c68
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DQT_FORCE_BUILD_TOOLS=TRUE"
 	hostmakedepends+=" qt6-tools"
 fi

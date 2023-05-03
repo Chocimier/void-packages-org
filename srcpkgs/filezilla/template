@@ -17,7 +17,7 @@ changelog="https://svn.filezilla-project.org/filezilla/FileZilla3/trunk/NEWS?vie
 distfiles="https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.xz"
 checksum=813d184d54984cf0fb27a455423089070e273b2ef8a70cb613e741170edf479a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" wxWidgets-gtk3-devel xdg-utils"
 fi
 

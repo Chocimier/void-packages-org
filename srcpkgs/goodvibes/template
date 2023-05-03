@@ -15,6 +15,6 @@ changelog="https://gitlab.com/goodvibes/goodvibes/-/raw/master/NEWS"
 distfiles="https://gitlab.com/goodvibes/goodvibes/-/archive/v${version}/${pkgname}-v${version}.tar.gz"
 checksum=f88f4252ea08a68dba6fbc9483a2e6b00b6fb96df3f46202ec96da04bf8245e5
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" glib-devel"
 fi

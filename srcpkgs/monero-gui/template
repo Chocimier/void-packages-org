@@ -84,7 +84,7 @@ pre_build() {
 	cd src/zxcvbn-c
 	cmake .
 	cd ../..
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# The dictgen binary is executed during the build to generate code
 		# but is not included in the binary package. It thus needs to be
 		# built for the host

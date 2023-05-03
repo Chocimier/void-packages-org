@@ -16,7 +16,7 @@ checksum=3c3e1b58c7211a5ef4aac1b1a2f9d71891404b41963f683efccc0f43165c8313
 
 post_configure() {
 	local qmake_args
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		qmake_args="-qtconf ${wrksrc}/qt.conf"
 	fi
 	cd ${wrksrc}/notifier && qmake-qt5 ${configure_args} \

@@ -28,7 +28,7 @@ build_options_default="gir gtk_doc"
 
 pre_build() {
 	# help gi-docgen find gi files on cross
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export XDG_DATA_DIRS=/usr/$XBPS_CROSS_TRIPLET/usr/share/
 	fi
 }
@@ -37,7 +37,7 @@ libevince_package() {
 	short_desc+=" - runtime libraries"
 	pkg_install() {
 		vmove "usr/lib/*.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 	}
@@ -50,10 +50,10 @@ evince-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

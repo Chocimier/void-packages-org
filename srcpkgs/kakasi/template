@@ -11,7 +11,7 @@ homepage="http://kakasi.namazu.org/"
 distfiles="http://kakasi.namazu.org/stable/kakasi-${version}.tar.gz"
 checksum=004276fd5619c003f514822d82d14ae83cd45fb9338e0cb56a44974b44961893
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kakasi"
 	make_build_args+=" MKKANWA=/usr/bin/mkkanwa"
 fi

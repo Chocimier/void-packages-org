@@ -22,7 +22,7 @@ skip_extraction="$_lm_sc $_dict"
 CXXFLAGS="-I../../src"
 LDFLAGS="-L."
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" sunpinyin"
 fi
 

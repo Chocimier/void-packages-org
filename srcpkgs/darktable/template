@@ -28,7 +28,7 @@ checksum=603a39c6074291a601f7feb16ebb453fd0c5b02a6f5d3c7ab6db612eadc97bac
 build_options="avif gmic sdl2"
 build_options_default="avif"
 
-if [ ! "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gmic sdl2"
 fi
 

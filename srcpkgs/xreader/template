@@ -27,7 +27,7 @@ libxreader_package() {
 	short_desc+=" - shared library"
 	pkg_install() {
 		vmove "usr/lib/*.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 	}
@@ -40,7 +40,7 @@ libxreader-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

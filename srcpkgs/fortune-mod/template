@@ -14,7 +14,7 @@ checksum=fc51aee1f73c936c885f4e0f8b6b48f4f68103e3896eaddc6a45d2b71e14eace
 desc_option_offensive="Enable offensive fortunes"
 build_options="offensive"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" fortune-mod"
 	_strfile="STRFILE=/usr/bin/strfile"
 fi

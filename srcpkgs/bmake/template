@@ -13,7 +13,7 @@ python_version=3
 do_configure() {
 	vsed -i 's/op_test() {/& return 0;/' boot-strap
 	vsed -i '1s,:,#!/bin/sh,g' install-sh
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mkdir -p bmake-host
 		cd bmake-host
 		# Build a native bmake for installation
@@ -26,7 +26,7 @@ do_configure() {
 do_build() {
 	mkdir -p bmake-build
 	cd bmake-build
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="--host=${XBPS_CROSS_TRIPLET}"
 	fi
 	../boot-strap ${_args} --prefix=/usr op=build
@@ -34,7 +34,7 @@ do_build() {
 
 do_install() {
 	cd bmake-build
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i "s,^BMAKE=$,BMAKE=${wrksrc}/bmake-host/bmake," ../boot-strap
 	fi
 	../boot-strap --prefix=/usr --install-destdir=${DESTDIR} op=install

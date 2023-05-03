@@ -36,7 +36,7 @@ mutable_files="/var/games/bsdgames/atc_score
  /var/games/bsdgames/hack/record
  /var/games/bsdgames/hack/perm"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	local _file _var
 	_native_target="adventure/setup boggle/mkdict/mkdict boggle/mkindex/mkindex
 		hack/makedefs"
@@ -73,7 +73,7 @@ post_extract() {
 
 pre_configure() {
 	cp ${FILESDIR}/config.params .
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mkdir -p native
 		cp -a * native 2>/dev/null || true
 		pushd native

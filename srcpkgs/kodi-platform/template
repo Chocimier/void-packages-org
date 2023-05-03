@@ -12,7 +12,7 @@ homepage="https://github.com/xbmc/kodi-platform"
 distfiles="https://github.com/xbmc/kodi-platform/archive/kodiplatform-${version}.tar.gz"
 checksum=1d8ddbe444bd42f4b6f2babb9f78d6c1e152d828eff90b07308febf883c05b38
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DCMAKE_MODULE_PATH=${XBPS_CROSS_BASE}/usr/share/kodi/cmake"
 fi
 

@@ -18,13 +18,13 @@ distfiles="${GNOME_SITE}/libnma/${version%.*}/libnma-${version}.tar.xz"
 checksum=53a6fb2b190ad37c5986caed3e98bede7c3c602399ee4f93c8fc054303d76dab
 replaces="libnm-gtk>=0"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -Dgtk_doc=false"
 	hostmakedepends+=" libnma-devel"
 fi
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vmkdir usr/share/gtk-doc/html 0755
 		vcopy /usr/share/gtk-doc/html/libnma usr/share/gtk-doc/html
 	fi

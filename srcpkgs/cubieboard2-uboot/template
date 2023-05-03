@@ -23,7 +23,7 @@ do_build() {
 	for f in ${_boards}; do
 		mkdir bin_${f}
 		make distclean
-		if [ -n "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			make CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- ${f}_config
 			make CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- ${makejobs}
 		else

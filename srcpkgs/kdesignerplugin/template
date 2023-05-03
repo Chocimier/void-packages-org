@@ -14,7 +14,7 @@ homepage="https://invent.kde.org/frameworks/kdesignerplugin"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/portingAids/${pkgname}-${version}.tar.xz"
 checksum=e7482e698c2b2d8550ab8fb54b30f72ec363ff92e082f20a856e02b337d4aa66
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake qt5-tools kgendesignerplugin kdoctools"
 	configure_args+=" -DMEINPROC5_EXECUTABLE=/usr/bin/meinproc5"
 fi

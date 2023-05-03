@@ -15,7 +15,7 @@ distfiles="${PYPI_SITE}/r/reportlab/reportlab-${version}.tar.gz"
 checksum=04fc4420f0548815d0623e031c86a1f7f3f3003e699d9af7148742e2d72b024a
 
 do_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i -e "
 		s,'/usr/include/libart,'$XBPS_CROSS_BASE/usr/include/libart,
 		" setup.py

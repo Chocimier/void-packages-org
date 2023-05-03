@@ -14,7 +14,7 @@ patch_args="-Np1 --directory=${build_wrksrc}"
 build_options="static"
 
 do_build() {
-	if [ "$build_option_static" ]; then
+	if build_option static; then
 		LDFLAGS+=" -static"
 	fi
 	echo "$CC -D_GNU_SOURCE $CFLAGS" >src/conf-cc

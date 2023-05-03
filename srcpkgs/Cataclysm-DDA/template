@@ -31,7 +31,7 @@ case $XBPS_TARGET_MACHINE in
 esac
 
 subpackages=""
-if [ "$build_option_tiles" ]; then
+if build_option tiles; then
 	subpackages+=" Cataclysm-DDA-tiles"
 fi
 subpackages+=" Cataclysm-DDA-data"
@@ -42,7 +42,7 @@ post_extract() {
 }
 
 post_configure() {
-	if [ "$build_option_tiles" ]; then
+	if build_option tiles; then
 		local cmake_builddir=build-tiles
 		local fprefix=$wrksrc/build-tiles/build
 		CFLAGS="${CFLAGS} -ffile-prefix-map=$fprefix=."
@@ -53,14 +53,14 @@ post_configure() {
 }
 
 post_build() {
-	if [ "$build_option_tiles" ]; then
+	if build_option tiles; then
 		local cmake_builddir=build-tiles
 		do_build
 	fi
 }
 
 post_install() {
-	if [ "$build_option_tiles" ]; then
+	if build_option tiles; then
 		local cmake_builddir=build-tiles
 		do_install
 	fi

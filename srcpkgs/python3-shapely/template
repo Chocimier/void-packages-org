@@ -16,7 +16,7 @@ distfiles="https://github.com/shapely/shapely/archive/${version}.tar.gz"
 checksum=6250e79ca299222a239ce44df613d228f1216c5cc31351217bf377b03d7be4e0
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		local _wrapper="${XBPS_WRAPPERDIR}/geos-config"
 
 		sed -e 's,echo [$]{prefix}$,echo /usr,' \

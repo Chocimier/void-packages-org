@@ -19,7 +19,7 @@ vopt_conflict static libunwind # configure fails
 desc_option_static="Build static strace binary"
 desc_option_libunwind="Support printing backtraces for every syscall"
 
-if [ "$build_option_static" ]; then
+if build_option static; then
 	LDFLAGS=-static
 fi
 

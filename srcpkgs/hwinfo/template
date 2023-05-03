@@ -16,12 +16,12 @@ distfiles="https://github.com/openSUSE/hwinfo/archive/refs/tags/${version}.tar.g
 checksum=53f55f9072f0dddf36439645e70fda82431327cd2262a741390af4bd665b6713
 disable_parallel_build=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" hwinfo"
 fi
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		for p in ${FILESDIR}/*; do
 			patch -p1 < $p
 		done
@@ -29,7 +29,7 @@ post_patch() {
 }
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		CC=gcc CFLAGS= LDFLAGS= make ${make_build_args} -C src/isdn/cdb isdn_cdb.h
 		make -C src/isdn/cdb clean
 	fi

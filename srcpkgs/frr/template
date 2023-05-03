@@ -35,7 +35,7 @@ if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
 fi
 
 subpackages="libfrrospfapiclient libfrrospfapiclient-devel libfrr libfrr-devel frr-flush frr-reload"
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" frr-devel"
 	configure_args+=" --with-clippy=/usr/libexec/frr-devel/clippy"
 else
@@ -47,7 +47,7 @@ pre_configure() {
 }
 
 post_install() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		# install build tool to be used by cross builds
 		vinstall lib/clippy 0755 usr/libexec/frr-devel
 	fi

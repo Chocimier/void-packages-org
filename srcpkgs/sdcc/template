@@ -21,13 +21,13 @@ if [ "$XBPS_TARGET_ENDIAN" = "be" ]; then
 	broken="code generator internal error"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --disable-device-lib"
 	hostmakedepends+=" sdcc"
 fi
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vcopy /usr/share/sdcc usr/share
 	fi
 }

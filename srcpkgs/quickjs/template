@@ -13,7 +13,7 @@ homepage="https://bellard.org/quickjs/"
 distfiles="https://bellard.org/quickjs/quickjs-${version//./-}.tar.xz"
 checksum=a45bface4c3379538dea8533878d694e289330488ea7028b105f72572fe7fe1a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	make_build_args+=" CROSS_PREFIX=${XBPS_CROSS_TRIPLET}-"
 	make_install_args="${make_build_args}"
 fi

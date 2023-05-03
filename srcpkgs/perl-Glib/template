@@ -13,7 +13,7 @@ homepage="http://gtk2-perl.sourceforge.net/"
 distfiles="${SOURCEFORGE_SITE}/gtk2-perl/Glib-${version}.tar.gz"
 checksum=7316a0c1e7cc5cb3db7211214f45d7bdc2354365a680ac4bd3ac8bf06d1cb500
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" perl-Glib"
 	export REALFULLPERLRUN="/usr/bin/perl -I/usr/lib/perl5/vendor_perl"
 	make_build_args='FULLPERLRUN=$(REALFULLPERLRUN)'

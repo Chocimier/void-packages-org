@@ -14,7 +14,7 @@ checksum=c9fe4eb7e80c8cef5202f9065c4c0682f5616647c0455e916a5700f98e3dbb2e
 CFLAGS="-fcommon"
 
 post_patch() {
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e "s|^cc|$CC|" -e "s|-c|${CFLAGS} -c|" conf-cc
 		vsed -i -e "s|^cc|$CC|" -e "s|-s|${LDFLAGS} -s|" conf-ld
 	fi

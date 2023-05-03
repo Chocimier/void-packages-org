@@ -20,14 +20,14 @@ disable_parallel_check=yes
 
 post_extract() {
 	vsed -e 's/-march=native//' -i src/include/defaults.mk
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# we build makeguids manually, make sure its not rebuild
 		vsed -e '/$(MAKEGUIDS_OUTPUT) : makeguids/d' -i src/Makefile
 	fi
 }
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# work around broken cross build support by building makeguids
 		# and then cleaning up shared objects.
 		make ${makejobs} -C src makeguids HOSTCC=gcc HOSTCCLD=gcc \

@@ -194,7 +194,7 @@ qt5-webengine-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove usr/lib/qt5/mkspecs
 		#TODO: FIX!!!
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove usr/lib/qt5/plugins/designer
 		fi
 		vmove "usr/lib/*.so"

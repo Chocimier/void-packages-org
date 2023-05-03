@@ -15,7 +15,7 @@ archs="armv7l*"
 do_build() {
 	unset CFLAGS CXXFLAGS LDFLAGS
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- am335x_evm_config
 		make CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- ${makejobs}
 	else

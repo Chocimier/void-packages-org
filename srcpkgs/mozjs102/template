@@ -38,7 +38,7 @@ if [ "$XBPS_TARGET_MACHINE" = i686 ]; then
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" --host=${XBPS_TRIPLET} --target=${XBPS_CROSS_TRIPLET} --enable-linker=bfd"
 	fi
 	export M4=m4

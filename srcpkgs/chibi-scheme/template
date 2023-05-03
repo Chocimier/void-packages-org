@@ -17,7 +17,7 @@ alternatives="
 disable_parallel_build=yes
 
 pre_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s/CHIBI_MODULE_PATH=lib \.\/chibi-scheme/CHIBI_MODULE_PATH=lib qemu-${XBPS_TARGET_QEMU_MACHINE}-static .\/chibi-scheme/" -i Makefile
 	fi
 }

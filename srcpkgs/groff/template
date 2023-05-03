@@ -15,7 +15,7 @@ checksum=e78e7b4cb7dec310849004fa88847c44701e8d133b5d4c13057d876c1bad0293
 
 subpackages="libgroff"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" groff"
 	configure_args+=" --with-doc=no"
 else

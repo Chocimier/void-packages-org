@@ -18,13 +18,13 @@ homepage="https://github.com/kubernetes-sigs/cri-o"
 distfiles="https://github.com/kubernetes-sigs/cri-o/archive/v${version}.tar.gz"
 checksum=69c89094c5c03fa1cb58c11ccd7bdae7ba0da644d5f0124e0a9a508c548d1ba2
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" cri-o-devel"
 fi
 
 post_build() {
 	cd conmon
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		crio-config
 	else
 		"${GOPATH}"/bin/crio-config
@@ -32,7 +32,7 @@ post_build() {
 	cd ..
 	CFLAGS+=' -fPIC' make -C conmon
 	make -C pause
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		crio --config="" config --default > crio.conf
 	else
 		"${GOPATH}"/bin/crio --config="" config --default > crio.conf

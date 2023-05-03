@@ -32,6 +32,6 @@ desc_option_mp4="Enable MP4 support"
 desc_option_taglib="Enable taglib support"
 desc_option_vorbis="Enable Vorbis support"
 
-if [ $CROSS_BUILD ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools"
 fi

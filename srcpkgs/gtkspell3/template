@@ -26,10 +26,10 @@ gtkspell3-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.a"
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
 	}

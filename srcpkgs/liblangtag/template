@@ -18,7 +18,7 @@ checksum=5701062c17d3e73ddaa49956cbfa5d47d2f8221988dec561c0af2118c1c8a564
 build_options="gir"
 build_options_default="gir"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Avoid non-working tests for va_copy
 	configure_args+=" ac_cv_va_copy=C99"
 fi
@@ -30,7 +30,7 @@ liblangtag-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

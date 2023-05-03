@@ -15,7 +15,7 @@ homepage="https://www.wxpython.org/"
 distfiles="${SOURCEFORGE_SITE}/wxpython/${pkgname}-src-${version}.tar.bz2"
 checksum=d54129e5fbea4fb8091c87b2980760b72c22a386cb3b9dd2eebc928ef5e8df61
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" python"
 	CFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/python${py2_ver}"
 fi

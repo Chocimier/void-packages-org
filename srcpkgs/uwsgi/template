@@ -24,7 +24,7 @@ do_build() {
 
 	python3 uwsgiconfig.py --build core
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_cflags="$CFLAGS -I${XBPS_CROSS_BASE}/${py3_inc}
 			-I${XBPS_CROSS_BASE}/usr/include"
 		_ldflags="$LDFLAGS -L${XBPS_CROSS_BASE}/${py3_lib}

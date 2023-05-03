@@ -21,7 +21,7 @@ disable_parallel_check=yes
 
 subpackages=" "
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --disable-pump-mode"
 else
 	makedepends+=" python3-devel"

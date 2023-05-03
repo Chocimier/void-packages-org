@@ -31,7 +31,7 @@ desc_option_kde="Enable support for KDE"
 desc_option_xmpp="Enable support for XMPP"
 build_options_default="xmpp upower"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi
 

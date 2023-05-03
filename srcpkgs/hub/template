@@ -13,12 +13,12 @@ changelog="https://github.com/github/hub/releases"
 distfiles="https://github.com/github/hub/archive/v${version}.tar.gz"
 checksum=e19e0fdfd1c69c401e1c24dd2d4ecf3fd9044aa4bd3f8d6fd942ed1b2b2ad21a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" hub"
 fi
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e 's|bin/hub|hub|g' -i Makefile
 
 		(

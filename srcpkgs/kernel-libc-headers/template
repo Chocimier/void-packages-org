@@ -10,7 +10,7 @@ homepage="http://www.kernel.org"
 distfiles="$KERNEL_SITE/kernel/v${version%%.*}.x/linux-${version}.tar.xz"
 checksum=904e396c26e9992a16cd1cc989460171536bed7739bf36049f6eb020ee5d56ec
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends="perl"
 fi
 

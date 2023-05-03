@@ -20,7 +20,7 @@ CFLAGS="-Wno-cpp -Wno-deprecated-declarations"
 build_options="gir gtk_doc"
 build_options_default="gir"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -36,10 +36,10 @@ bamf-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

@@ -22,6 +22,6 @@ homepage="https://www.singular.uni-kl.de"
 distfiles="https://www.singular.uni-kl.de/ftp/pub/Math/Singular/SOURCES/${_majver//./-}/singular-${version}.tar.gz"
 checksum=66cfaeee7ab909272fd81050a09cae3ec115652a01adde014a5128a54b97397a
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	makedepends+=" ntl-devel"
 fi

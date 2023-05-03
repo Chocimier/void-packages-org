@@ -15,7 +15,7 @@ homepage="https://invent.kde.org/frameworks/syntax-highlighting"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=f558b8203359911fef33701e9bebbfaa7eb7cddcd34440d4d886fb5709d0114c
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" syntax-highlighting"
 fi
 
@@ -24,7 +24,7 @@ if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
 fi
 
 post_install() {
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# internal tool needed for cross-building
 	vinstall build/bin/katehighlightingindexer 0755 usr/libexec/${pkgname}
 fi

@@ -24,7 +24,7 @@ desc_option_asm="Use platform assembly for faster crypto"
 
 build_options_default=""
 
-if [ "$build_option_asm" ]; then
+if build_option asm; then
 	distfiles+=" https://github.com/q66/libressl-portable-asm/archive/v${_lssl_asm_ver}.tar.gz"
 	checksum+=" e1c76178c4deb1cd20a0cd7ba553d6607f8131acb2e0844223f797e42f0d6f60"
 fi
@@ -37,12 +37,12 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 post_extract() {
-	[ -z "$build_option_asm" ] && return 0
+	! build_option asm && return 0
 	mv libressl-portable-asm-${_lssl_asm_ver} ${build_wrksrc}
 }
 
 pre_configure() {
-	if [ "$build_option_asm" ]; then
+	if build_option asm; then
 		./libressl-portable-asm-${_lssl_asm_ver}/patch_libressl.sh .
 	fi
 	autoreconf -if
@@ -51,7 +51,7 @@ pre_configure() {
 do_install() {
 	make -C tls install DESTDIR="$DESTDIR"
 	vlicense COPYING
-	if [ "$build_option_asm" ]; then
+	if build_option asm; then
 		vlicense libressl-portable-asm-${_lssl_asm_ver}/LICENSE.cryptogams
 		vlicense libressl-portable-asm-${_lssl_asm_ver}/LICENSE.openssl
 	fi

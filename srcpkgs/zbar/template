@@ -34,7 +34,7 @@ CFLAGS="-DNDEBUG"
 
 subpackages="libzbar libzbar-devel"
 
-if [ "$build_option_qt" ]; then
+if build_option qt; then
 	subpackages+=" zbar-qt libzbar-qt"
 fi
 

@@ -24,7 +24,7 @@ case "$XBPS_TARGET_MACHINE" in
 		makedepends+=" musl-fts-devel" ;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools qt5-tools"
 fi
 

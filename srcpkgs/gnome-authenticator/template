@@ -19,7 +19,7 @@ make_check=ci-skip # Test timeout while compiling tests
 export BINDGEN_EXTRA_CLANG_ARGS="${BINDGEN_EXTRA_CLANG_ARGS} -DPW_ENABLE_DEPRECATED"
 
 post_patch() {
-	[ -z "$CROSS_BUILD" ] && return 0
+	[[ ! -v CROSS_BUILD ]] && return 0
 	vsed -i src/meson.build \
 		 -e "s%rust_target /%'${RUST_TARGET}' / rust_target /%"
 }

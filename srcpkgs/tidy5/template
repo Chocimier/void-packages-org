@@ -19,7 +19,7 @@ replaces="tidy>0"
 pre_configure() {
 	# the $(man) target requires tidy5 to run on the host
 	ln -s ${cmake_builddir}/tidy
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		rm -f tidy
 		cd ${cmake_builddir}
 

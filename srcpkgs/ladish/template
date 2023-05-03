@@ -20,7 +20,7 @@ python_version=2
 CXXFLAGS=-std=c++11
 
 do_configure() {
-	if [ "$CROSS_BUILD" ];then
+	if [[ -v CROSS_BUILD ]];then
 		python2 waf configure --prefix=/usr --enable-liblash
 	else
 		python2 waf configure --prefix=/usr --enable-liblash --enable-pylash

@@ -13,7 +13,7 @@ distfiles="${GNU_SITE}/binutils/binutils-${version}.tar.xz"
 checksum=645c25f563b8adc0a81dbd6a41cffbf4d37083a382e02d5d3df4f65c09516d00
 
 subpackages="binutils-doc"
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends+=" flex perl texinfo"
 	makedepends+=" elfutils-devel"
 	checkdepends="bc"
@@ -35,12 +35,12 @@ _get_triplet() {
 do_configure() {
 	local conf
 
-	if [ "$CHROOT_READY" ]; then
+	if [[ -v CHROOT_READY ]]; then
 		conf+=" --with-debuginfod --enable-shared --enable-install-libiberty"
 	else
 		conf+=" --without-debuginfod --disable-shared --disable-install-libbfd"
 	fi
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# we don't want --with-sysroot=${XBPS_CROSS_BASE} like gnu-configure
 		conf+=" --host=${XBPS_CROSS_TRIPLET} --with-build-sysroot=${XBPS_CROSS_BASE}"
 	fi
@@ -108,7 +108,7 @@ do_build() {
 # also there are other tests that fail on different targets for fairly
 # harmless reasons and it's just too much effort to fix it all
 do_check() {
-	[ "$CHROOT_READY" ] || return 0
+	[[ -v CHROOT_READY ]] || return 0
 	: # cba for now
 }
 
@@ -124,7 +124,7 @@ do_install() {
 	rm -f ${DESTDIR}/usr/bin/ld
 	ln -sfr ${DESTDIR}/usr/bin/ld.bfd ${DESTDIR}/usr/bin/ld
 
-	if [ "$CHROOT_READY" ]; then
+	if [[ -v CHROOT_READY ]]; then
 		# Remove these symlinks, they are not ABI stable.
 		# Programs should compile static to the .a file.
 		rm -f ${DESTDIR}/usr/lib/lib{bfd,opcodes}.so

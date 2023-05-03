@@ -20,7 +20,7 @@ distfiles="${GNOME_SITE}/tracker/${version%.*}/tracker-${version}.tar.xz"
 checksum=13294275dbbbad9634b3a8390c08e6f12bebfe84f6ccafb72b27b0c23ba8da2f
 make_check_pre="dbus-run-session"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" dbus"
 fi
 
@@ -29,7 +29,7 @@ if [ "${XBPS_TARGET_WORDSIZE}" = "32" ]; then
 fi
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Tell the build system that we have internal fts5 in sqlite3
 		vsed -i "/\[properties\]/a sqlite3_has_fts5 = 'true'" xbps_meson.cross
 	fi

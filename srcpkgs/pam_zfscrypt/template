@@ -17,7 +17,7 @@ disable_parallel_build=yes
 CFLAGS="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -fPIC -Iinclude"
 
 post_patch() {
-	if [ "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i Makefile \
 			-e "/ZFSINC :=/s,-isystem/usr/,-I${XBPS_CROSS_BASE}/usr/,g"
 	fi

@@ -43,7 +43,7 @@ if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s|	\$(builddir)/judyltablesgen\$(EXEEXT)|	qemu-${XBPS_TARGET_QEMU_MACHINE}-static \$(builddir)/judyltablesgen\$(EXEEXT)|g" Makefile.am
 	fi
 

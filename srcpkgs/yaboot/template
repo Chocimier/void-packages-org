@@ -26,7 +26,7 @@ case "$XBPS_TARGET_MACHINE" in
 	ppc64*) _need_cross=powerpc-linux-musl ;;
 esac
 
-if [ -n "$_need_cross" ]; then
+if [[ -v _need_cross ]]; then
 	hostmakedepends+=" cross-${_need_cross}"
 fi
 
@@ -87,12 +87,12 @@ _build_e2fsprogs() {
 pre_build() {
 	# Add toolchain prefix when cross-compiling; for userland tools
 	# always, for yaboot itself when cross-compiling to ppc32
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s/^CROSS =/CROSS = ${XBPS_CROSS_TRIPLET}-/" Makefile
 	fi
 
 	# When using a separate cross-compiler (ppc64 target), override YBCC
-	if [ -n "$_need_cross" ]; then
+	if [[ -v _need_cross ]]; then
 		sed -i "s/^YBCC =.*/YBCC = ${_need_cross}-gcc/" Makefile
 	fi
 
@@ -102,7 +102,7 @@ pre_build() {
 
 post_install() {
 	# Yaboot is nostrip_files so do it manually (and ignore -dbg)
-	if [ -n "$_need_cross" ]; then
+	if [[ -v _need_cross ]]; then
 		${_need_cross}-strip --remove-section=.comment \
 			${DESTDIR}/usr/lib/yaboot/yaboot
 	else

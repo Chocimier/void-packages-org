@@ -20,7 +20,7 @@ build_options="doc gir"
 desc_option_doc="Build documentation"  # fails :(
 build_options_default="gir"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" doc"
 fi
 
@@ -31,10 +31,10 @@ playerctl-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_doc" ]; then
+		if build_option doc; then
 			vmove usr/share/gtk-doc
 		fi
 	}

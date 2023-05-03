@@ -17,7 +17,7 @@ checksum=3f372b18cc518e04788ca553fb05989f77f393d041688a44f69b7b5b56d71048
 # Tests require a locally running server
 make_check=no
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" rust-std"
 fi
 

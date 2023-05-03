@@ -17,7 +17,7 @@ checksum=d50115b85c872aac296934b5ee726a3fa156c6f5ad96d27e0edd0aa5ad173228
 build_options="gir gtk_doc"
 build_options_default="gir"
 
-if ! [ "$CROSS_BUILD" ]; then
+if ! [[ -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -27,10 +27,10 @@ amtk-devel_package() {
 	pkg_install() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 		vmove "usr/lib/*.so"

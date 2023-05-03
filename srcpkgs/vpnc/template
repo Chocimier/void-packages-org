@@ -20,7 +20,7 @@ conf_files="
  /etc/vpnc/default.conf
  /etc/vpnc/vpnc-script"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" vpnc"
 fi
 
@@ -28,7 +28,7 @@ post_patch() {
 	vsed -e 's/^#OPENSSL/OPENSSL/' -i Makefile
 	vsed -e 's/^install:.*/install: install-common/' -i Makefile
 	vsed -e 's#^SBINDIR=.*#SBINDIR=/$(PREFIX)/bin#' -i Makefile
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e 's%^my \$vpnc = .*;%my \$vpnc = "/usr/bin/vpnc";%' -i src/makeman.pl
 	fi
 }

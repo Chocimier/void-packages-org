@@ -23,7 +23,7 @@ build_options="openblas opencl"
 build_options_default="openblas"
 vopt_conflict openblas opencl
 
-if [ "$CROSS_BUILD" ] && [ "$build_option_openblas" ]; then
+if [[ -v CROSS_BUILD ]] && build_option openblas; then
 	configure_args+=" -Dopenblas_include=${XBPS_CROSS_BASE}/usr/include/openblas/"
 fi
 

@@ -22,7 +22,7 @@ checksum=d5c59087564a5cd6f08a52ba80e7d6509b91c585e44385dcc0fa39265d181509
 python_version=3
 make_check=ci-skip # ci sometimes fails, but all checks pass locally
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" libfl-devel"
 fi
 

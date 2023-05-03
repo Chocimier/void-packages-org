@@ -13,7 +13,7 @@ changelog="https://github.com/BRiAl/BRiAl/releases"
 distfiles="https://github.com/BRiAl/BRiAl/releases/download/$version/brial-$version.tar.bz2"
 checksum=ca009e3722dd3f0a60d15501caed1413146c80abced57423e32ae0116f407494
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-boost-unit-test-framework=no"
 fi
 

@@ -12,7 +12,7 @@ homepage="https://www.kdab.com/development-resources/qt-tools/kd-soap/"
 distfiles="https://github.com/KDAB/KDSoap/releases/download/kdsoap-${version}/kdsoap-${version}.tar.gz"
 checksum=d18963104fa6f7d02b044631cddbe78f18f70e06c607af680c7ace04d6cf04ee
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" KDSoap-devel"
 fi
 

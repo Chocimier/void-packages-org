@@ -15,7 +15,7 @@ homepage="https://www.modsecurity.org"
 distfiles="https://github.com/SpiderLabs/ModSecurity/releases/download/v${version}/modsecurity-v${version}.tar.gz"
 checksum=b4231177dd80b4e076b228e57d498670113b69d445bab86db25f65346c24db22
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" $makedepends"
 fi
 

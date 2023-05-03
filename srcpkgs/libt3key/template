@@ -16,7 +16,7 @@ checksum=b3f63c8a5bdf4efc10a293e5124a4a1095af6149af96b0a10b3ce7da7400f8c1
 
 export LIBTOOL=${XBPS_CROSS_BASE}/usr/bin/libtool
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	export QEMU_USER_STATIC=qemu-${XBPS_TARGET_QEMU_MACHINE}-static
 fi
 

@@ -17,7 +17,7 @@ checksum=f1fa585f7c7d32adfa81ab389388100ac9df83444eb64db1fb92737141ef9f61
 build_options="cups"
 build_options_default="cups"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" ${makedepends}"
 fi
 
@@ -37,7 +37,7 @@ pre_configure() {
 do_configure() {
 	cd ${wrksrc}
 	# configure ghostscript
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CCAUX=cc CFLAGSAUX=${XBPS_CFLAGS}
 		export CUPSCONFIG=/usr/bin/cups-config
 	fi

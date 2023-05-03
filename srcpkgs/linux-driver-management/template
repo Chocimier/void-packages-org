@@ -18,7 +18,7 @@ homepage="https://github.com/solus-project/linux-driver-management"
 distfiles="https://github.com/solus-project/${pkgname}/releases/download/v${version}/${pkgname}-${version}.tar.xz"
 checksum=968ef61fbb7e26b89ef9456f03cf31c616bdc8fc69531fcfd9f90ae0f4ff147b
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# host needs glib-mkenums
 	hostmakedepends+=" glib-devel"
 fi

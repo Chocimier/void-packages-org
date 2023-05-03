@@ -15,7 +15,7 @@ changelog="https://gitlab.xfce.org/panel-plugins/xfce4-sensors-plugin/-/raw/mast
 distfiles="https://archive.xfce.org/src/panel-plugins/${pkgname}/${version%.*}/${pkgname}-${version}.tar.bz2"
 checksum=6c1605a738e5df40e084d08ac93f962cd445093396de1e9bfadc7ab4588c36b6
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Cannot detect these when cross compiling
 	configure_args+=" --disable-procacpi --disable-sysfsacpi --disable-xnvctrl"
 fi

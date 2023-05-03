@@ -22,6 +22,6 @@ build_options="dvb"
 build_options_default="dvb"
 desc_option_dvb="Enable DVB Support"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kdoctools qt5-host-tools qt5-qmake"
 fi

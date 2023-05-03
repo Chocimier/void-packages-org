@@ -59,7 +59,7 @@ case "$XBPS_TARGET_MACHINE" in
 	armv[56]*) broken="Unsupported architecture" ;;
 esac
 
-if [ -n "$_use_zero" ]; then
+if [[ -v _use_zero ]]; then
 	makedepends+=" libffi-devel"
 	configure_args+=" --with-jvm-variants=zero"
 	case "$XBPS_TARGET_MACHINE" in
@@ -101,7 +101,7 @@ do_configure() {
 	esac
 
 	configure_args=${configure_args/--with-libtool-sysroot=\/usr\/[a-z0-9]*-linux-[a-z]*/}
-	if [ "$XBPS_CCACHE" ]; then
+	if [[ -v XBPS_CCACHE ]]; then
 		configure_args+=" --enable-ccache"
 	fi
 	CC="/usr/bin/cc"

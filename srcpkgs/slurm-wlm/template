@@ -29,7 +29,7 @@ if [ "$XBPS_TARGET_WORDSIZE" = "32" ]; then
 	broken="32-bit support is deprecated by upstream"
 fi
 
-if [ -z "${CROSS_BUILD}" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# The below at time of writing can not be cross compiled
 	makedepends+=" rrdtool-devel hdf5-devel libnuma-devel"
 fi

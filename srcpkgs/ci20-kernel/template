@@ -35,7 +35,7 @@ mutable_files="
 	/usr/lib/modules/${_kernver}/modules.devname"
 
 do_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
 
@@ -47,7 +47,7 @@ do_configure() {
 }
 do_build() {
 	unset LDFLAGS
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
 	make ${makejobs} ${_args} ARCH=mips prepare

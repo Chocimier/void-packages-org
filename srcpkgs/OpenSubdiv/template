@@ -15,7 +15,7 @@ homepage="http://graphics.pixar.com/opensubdiv/docs/intro.html"
 distfiles="https://github.com/PixarAnimationStudios/OpenSubdiv/archive/v${version//./_}.tar.gz"
 checksum=7b22eb27d636ab0c1e03722c7a5a5bd4f11664ee65c9b48f341a6d0ce7f36745
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" OpenSubdiv"
 	configure_args+=" -DSTRINGIFY_LOCATION=/usr/bin/stringify"
 fi

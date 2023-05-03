@@ -40,7 +40,7 @@ pre_configure() {
 	git apply ${wrksrc}/patch-${version}-${_bonever}.diff
 }
 do_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
 
@@ -57,7 +57,7 @@ do_configure() {
 	sed -i -e "s|^\(CONFIG_LOCALVERSION=\).*|\1\"_${revision}\"|" .config
 }
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
 	unset LDFLAGS

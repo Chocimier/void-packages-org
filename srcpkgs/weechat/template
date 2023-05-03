@@ -23,7 +23,7 @@ lib32disabled=yes
 
 subpackages="weechat-aspell weechat-devel weechat-ruby weechat-python weechat-tcl weechat-lua weechat-perl"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	_perlpath="${XBPS_CROSS_BASE}/usr/lib/perl5/core_perl/CORE"
 	configure_args+=" -DPERL_FOUND=1
 	 -DPERL_EXECUTABLE=0

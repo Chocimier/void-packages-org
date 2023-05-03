@@ -22,7 +22,7 @@ distfiles="${homepage}/releases/2.3/${pkgname}-${version}.tar.gz"
 checksum=caa832eb968148abdf35ee9d0f534b779fa732c0ce4a913d9ab8c3469b218552
 keep_libtool_archives=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	_tsize=${XBPS_TARGET_WORDSIZE}
 	# FIXME: remove for time64 rebuild
 	#[ "$XBPS_TARGET_LIBC" = "musl" ] && _tsize=64

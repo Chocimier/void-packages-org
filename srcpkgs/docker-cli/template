@@ -24,7 +24,7 @@ pre_build() {
 }
 
 post_build() {
-	if ! [ -n "$CROSS_BUILD" ]; then
+	if ! [[ -v CROSS_BUILD ]]; then
 		make manpages
 	fi
 }
@@ -34,7 +34,7 @@ post_install() {
 	vcompletion contrib/completion/zsh/_docker zsh docker
 	vcompletion contrib/completion/bash/docker bash docker
 
-	if ! [ -n "$CROSS_BUILD" ]; then
+	if ! [[ -v CROSS_BUILD ]]; then
 		vman man/man1/docker-run.1
 		vman man/man1/docker.1
 		vman man/man1/docker-build.1

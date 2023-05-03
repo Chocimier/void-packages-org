@@ -24,6 +24,6 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	fi
 fi
 
-if [ "$build_option_nextcloud" ]; then
+if build_option nextcloud; then
 	makedepends+=" qt5-webchannel-devel qt5-webengine-devel"
 fi

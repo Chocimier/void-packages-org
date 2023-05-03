@@ -11,7 +11,7 @@ homepage="http://www.gnu.org.ua/software/gdbm/"
 distfiles="${GNU_SITE}/${pkgname}/${pkgname}-${version}.tar.gz"
 checksum=74b1081d21fff13ae4bd7c16e5d6e504a4c26f7cde1dca0d963a484174bbcacd
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="libtool automake gettext-devel"
 	pre_configure() {
 		autoreconf -fi

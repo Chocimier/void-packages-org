@@ -24,7 +24,7 @@ distfiles="https://download.osgeo.org/gdal/${version}/gdal-${version}.tar.xz"
 checksum=d32223ddf145aafbbaec5ccfa5dbc164147fb3348a3413057f9b1600bb5b3890
 python_version=3
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	makedepends+=" hdf5-devel"
 	case "$XBPS_TARGET_MACHINE" in
 		ppc|ppc-musl) ;;

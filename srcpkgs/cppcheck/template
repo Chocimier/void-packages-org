@@ -28,7 +28,7 @@ if [ -n "$XBPS_CHECK_PKGS" ]; then
 fi
 
 post_extract() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e '/run-dmake/d' -i test/CMakeLists.txt -i cli/CMakeLists.txt
 	fi
 }

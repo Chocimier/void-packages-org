@@ -18,6 +18,6 @@ changelog="https://raw.githubusercontent.com/owncloud/client/master/CHANGELOG.md
 distfiles="https://github.com/owncloud/client/archive/v${version/.rc/-rc}.tar.gz"
 checksum=54f7b270940f834dfc4c24b61b0b9278a43d2a08dc9195f4896ebac2fc6446d9
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-tools-devel"
 fi

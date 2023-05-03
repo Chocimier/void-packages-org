@@ -12,7 +12,7 @@ checksum=4dc0017e36d15e81dc85953afb2a643ba2571574748db0d8ede002cefbba053b
 lib32disabled=yes
 
 do_configure() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		# Native build
 		cat <<-EOF > xbps_config.rb
 		MRuby::Build.new do |conf|
@@ -83,7 +83,7 @@ do_configure() {
 }
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		LDFLAGS_host=""
 		echo "CFLAGS_host   : $CFLAGS_host"
 		echo "LDFLAGS_host  : $LDFLAGS_host"
@@ -109,7 +109,7 @@ do_check() {
 
 do_install() {
 	local _build
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_build="build/${XBPS_CROSS_TRIPLET}"
 	else
 		_build="build/host"

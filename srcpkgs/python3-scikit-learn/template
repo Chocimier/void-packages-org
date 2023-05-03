@@ -15,7 +15,7 @@ checksum=642fb016bfe4bb7539ba6bf4e6dd5a95d2d25638387040b0f5eefdb84a840297
 
 export SKLEARN_BUILD_PARALLEL="${XBPS_MAKEJOBS}"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Without this, setup.py tries to run a target executable
 	export PYTHON_CROSSENV=1
 fi

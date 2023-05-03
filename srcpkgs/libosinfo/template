@@ -24,7 +24,7 @@ build_options="gtk_doc gir vala"
 desc_option_gtk_doc="Build GTK API docs"
 build_options_default="gir vala"
 
-if [ -z "$CROSS_BUILD" ] ; then
+if [[ ! -v CROSS_BUILD ]] ; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -35,13 +35,13 @@ libosinfo-devel_package() {
 		vmove "usr/lib/*.so"
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
 	}

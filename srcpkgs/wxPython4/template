@@ -16,7 +16,7 @@ homepage="http://www.wxpython.org/"
 distfiles="${PYPI_SITE}/w/wxPython/wxPython-${version}.tar.gz"
 checksum=3be608bfdede3063678cc703453850ab0a018b82bafd5ee057302250b18f0233
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	CFLAGS="-I${XBPS_CROSS_BASE}/${py3_inc} -I${XBPS_CROSS_BASE}/usr/include"
 fi
 
@@ -31,7 +31,7 @@ pre_patch() {
 pre_build() {
 	chmod -R go+rX $wrksrc
 	PYTHONPATH="${PYTHONPATH:+${PYTHONPATH}:}$wrksrc"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		PYPREFIX="$XBPS_CROSS_BASE"
 		LDFLAGS+=" -L${XBPS_CROSS_BASE}/${py3_lib} -L${XBPS_CROSS_BASE}/usr/lib"
 		CC="${XBPS_CROSS_TRIPLET}-gcc -pthread $CFLAGS $LDFLAGS"

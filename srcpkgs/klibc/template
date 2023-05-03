@@ -86,7 +86,7 @@ _gen_cross_klcc() {
 do_build() {
 	_make all
 	! grep ccache klcc/klcc
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_gen_native_klcc
 	else
 		_gen_cross_klcc
@@ -100,7 +100,7 @@ do_install() {
 		rm -rf "$DESTDIR/usr/lib/klibc/include/$_f"
 		ln -s "/usr/include/$_f" "$DESTDIR/usr/lib/klibc/include/"
 	done
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vbin klcc/${XBPS_CROSS_TRIPLET}-klcc
 	else
 		vbin klcc/${XBPS_TRIPLET/unknown-/}-klcc

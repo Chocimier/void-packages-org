@@ -20,7 +20,7 @@ post_patch() {
 
 do_build() {
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-
 	fi
 	make ${makejobs} PLAT=rk3399 bl31

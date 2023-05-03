@@ -37,7 +37,7 @@ post_patch() {
 	find . \( \
 		-name '*.py' -o -name SConscript -o -name SConstruct \
 		\) -exec 2to3 -w {} +
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e "s,/usr/include,$XBPS_CROSS_BASE&," \
 			BuildTools/SCons/SConstruct
 	fi

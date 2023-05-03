@@ -12,6 +12,6 @@ homepage="https://github.com/tibirna/qgit"
 distfiles="${homepage}/archive/${pkgname}-${version}.tar.gz"
 checksum=1fc74fbd25c8ccbee9f7d4a8817b0a82ffa5a3a281b324febe4e90ea7c721153
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi

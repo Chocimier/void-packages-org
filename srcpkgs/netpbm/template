@@ -38,7 +38,7 @@ do_configure() {
 	sed -i 's|/link|/lib|' lib/Makefile
 	sed -i 's|/sharedlink|/lib|' lib/Makefile
 	sed -i 's|install.manwebmain install.manweb install.man|install.man|' GNUmakefile
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Patch buildutils/endiangen.c to return the endianess
 		# and word size for the target architecture
 		# XXX: perhaps add XBPS_ENDIAN to common/cross-profiles/*.sh

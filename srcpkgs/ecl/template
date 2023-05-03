@@ -15,7 +15,7 @@ homepage="https://common-lisp.net/project/ecl/"
 distfiles="https://common-lisp.net/project/ecl/static/files/release/ecl-${version}.tgz"
 checksum=b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Depend on system ecl
 	hostmakedepends+=" ecl"
 	configure_args+=" --with-cross-config=${XBPS_SRCPKGDIR}/ecl/files/cross_config"

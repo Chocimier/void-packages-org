@@ -14,7 +14,7 @@ homepage="https://github.com/Zygo/bees"
 distfiles="https://github.com/Zygo/bees/archive/refs/tags/v${version}.tar.gz"
 checksum=3efb1a7290b014b8dd0cb64ce98382c2bde1f9ccf649e1b4fc86f27ffa42edea
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 # Tests don't work properly with cross compilation, because it doesn't
 # differentiate between host and target compilers correctly.
 #

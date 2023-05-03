@@ -14,7 +14,7 @@ distfiles="http://tecnocode.co.uk/downloads/uhttpmock/$pkgname-$version.tar.xz"
 checksum=90843223c3a30bdb7f1eb3442373a03fee425af85a9df289cd687698ccff112f
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Make g-ir-scanner-qemuwrapper append this path
 		export GIR_EXTRA_LIBS_PATH="${wrksrc}/libuhttpmock/.libs"
 	fi

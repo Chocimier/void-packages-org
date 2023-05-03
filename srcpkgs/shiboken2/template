@@ -19,7 +19,7 @@ checksum=f61210ae24e6882d5d0ca0059229e5dc4f35e2bca92dd6caf96c0f41943a8294
 python_version=3
 export CLANG_INSTALL_DIR=${XBPS_CROSS_BASE}/usr
 
-if [ ${CROSS_BUILD} ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools shiboken2"
 fi
 

@@ -13,6 +13,6 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#kcharselect
 distfiles="${KDE_SITE}/release-service/${version}/src/kcharselect-${version}.tar.xz"
 checksum=9e3895d5fd5fbe4614c4d8249ece1319129743b046d1c114534bcb8d3cd7b030
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kdoctools python3 qt5-host-tools qt5-qmake"
 fi

@@ -28,7 +28,7 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	fi
 fi
 
-if [ "$build_option_webengine" ]; then
+if build_option webengine; then
 	depends+=" python3-PyQt5-webengine"
 else
 	depends+=" python3-PyQt5-webkit"

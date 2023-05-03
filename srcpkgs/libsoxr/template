@@ -14,7 +14,7 @@ homepage="http://sourceforge.net/p/soxr/wiki/Home/"
 distfiles="${SOURCEFORGE_SITE}/soxr/soxr-${version}-Source.tar.xz"
 checksum=b111c15fdc8c029989330ff559184198c161100a59312f5dc19ddeb9b5a15889
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DBUILD_TESTS=OFF -DHAVE_WORDS_BIGENDIAN_EXITCODE=0"
 fi
 case "$XBPS_TARGET_MACHINE" in

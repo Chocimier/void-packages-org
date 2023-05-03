@@ -14,7 +14,7 @@ changelog="https://raw.githubusercontent.com/acoustid/chromaprint/master/NEWS.tx
 distfiles="https://github.com/acoustid/chromaprint/releases/download/v${version}/chromaprint-${version}.tar.gz"
 checksum=a1aad8fa3b8b18b78d3755b3767faff9abb67242e01b478ec9a64e190f335e1c
 
-if [ -z "$XBPS_CHECK_PKGS" ] || [ "$CROSS_BUILD" ]; then
+if [ -z "$XBPS_CHECK_PKGS" ] || [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DBUILD_TESTS=OFF"
 fi
 

@@ -75,10 +75,10 @@ do_install() {
 	vmkdir usr/share/ppsspp
 	vcopy build/assets usr/share/ppsspp/
 
-	if [ $build_option_sdl2 ]; then
+	if build_option sdl2; then
 		vbin build/PPSSPPSDL ppsspp-sdl
 		sed -e 's,^Exec=.*,Exec=/usr/bin/ppsspp-sdl,' -i $DESTDIR/usr/share/applications/PPSSPP.desktop
-	elif [ $build_option_qt ] ;then
+	elif build_option qt ;then
 		vbin build/PPSSPPQt ppsspp-qt
 		sed -e 's,^Exec=.*,Exec=/usr/bin/ppsspp-qt,' -i $DESTDIR/usr/share/applications/PPSSPP.desktop
 	fi

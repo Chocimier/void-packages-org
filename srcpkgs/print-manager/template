@@ -15,6 +15,6 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#print-manag
 distfiles="${KDE_SITE}/release-service/${version}/src/print-manager-${version}.tar.xz"
 checksum=2b28b8cea34a8eb00093d0ec706af5df5e97bba32aad04bb59bab3e0a2e9c127
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DKF5_HOST_TOOLING=/usr/lib/cmake"
 fi

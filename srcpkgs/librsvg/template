@@ -23,7 +23,7 @@ make_check=no
 
 pre_configure() {
 	# otherwise the final linking step uses "cc" instead of $CC
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cat >> .cargo/config <<- EOF
 
 		[target.${RUST_TARGET}]

@@ -10,7 +10,7 @@ distfiles="${GNU_SITE}/gcc/gcc-${version}/gcc-${version}.tar.xz"
 checksum=71e197867611f6054aa1119b13a0c0abac12834765fe2d81f35ac57f84f742d1
 
 hostmakedepends="flex avr-binutils tar"
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Need a direct cross-compiler for libgcc.
 	hostmakedepends+=" avr-gcc"
 fi

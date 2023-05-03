@@ -79,7 +79,7 @@ poppler-glib-devel_package() {
 	pkg_install() {
 		vmove usr/include/poppler/glib
 		vmove usr/lib/libpoppler-glib.so
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 		vmove usr/lib/pkgconfig/poppler-glib.pc
@@ -90,7 +90,7 @@ poppler-glib_package() {
 	short_desc+=" - GLib bindings"
 	pkg_install() {
 		vmove "usr/lib/libpoppler-glib.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 	}

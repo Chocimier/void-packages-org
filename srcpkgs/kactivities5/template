@@ -15,7 +15,7 @@ homepage="https://invent.kde.org/frameworks/kactivities"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname%5}-${version}.tar.xz"
 checksum=8fd4033c288fd03953a39f43d7d3967024252d29265bc6803adfa9ac166cf0b2
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools"
 fi
 

@@ -14,7 +14,7 @@ build_options="fuzzymatch"
 desc_option_fuzzymatch="Enable Fuzzymatch support"
 
 post_patch() {
-	if [ "$build_option_fuzzymatch" ]; then
+	if build_option fuzzymatch; then
 		msg_normal "Applying fuzzymatch patches"
 		patch -slNp1 < "${FILESDIR}/fuzzymatch.patch"
 	fi

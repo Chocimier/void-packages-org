@@ -14,7 +14,7 @@ distfiles="${SOURCEFORGE_SITE}/gnuplot/gnuplot/${version}/gnuplot-${version}.tar
 checksum=66f679115dd30559e110498fc94d926949d4d370b4999a042e724b8e910ee478
 
 subpackages="gnuplot-common"
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	makedepends+=" cairo-devel pango-devel wxWidgets-gtk3-devel qt5-tools-devel qt5-svg-devel"
 	subpackages+=" gnuplot-wx gnuplot-qt"
 fi
@@ -29,20 +29,20 @@ pre_configure() {
 		-e 's|$(X11ROOT)/X11R6/lib/X11/fonts/Type1|$(X11ROOT)/usr/share/fonts/Type1|' \
 		src/variable.c
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i 's|^\(SUBDIRS =.*\)demo |\1|' Makefile.in
 		sed -i 's|^\(SUBDIRS =.*\)docs |\1|' Makefile.in
 	fi
 
 	mkdir -p x11
 	mv * x11 || true
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		cp -a x11 wx
 		cp -a x11 qt
 	fi
 }
 do_configure() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		cd ${wrksrc}/x11
 		./configure ${configure_args} --disable-wxwidgets --without-qt
 		cd ${wrksrc}/wx
@@ -55,7 +55,7 @@ do_configure() {
 	fi
 }
 do_build() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		make -C wx ${makejobs}
 		make -C qt ${makejobs}
 	fi
@@ -65,7 +65,7 @@ do_install() {
 	# install x11 and rename binary
 	make -C x11 DESTDIR=${DESTDIR} install
 	mv ${DESTDIR}/usr/bin/gnuplot{,-x11}
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		# install qt and rename binary
 		make -C qt DESTDIR=${DESTDIR} install
 		mv ${DESTDIR}/usr/bin/gnuplot{,-qt}

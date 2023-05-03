@@ -35,7 +35,7 @@ distfiles="https://download.qt.io/official_releases/qt/${version%.*}/${version}/
 checksum=a88bc6cedbb34878a49a622baa79cace78cfbad4f95fdbd3656ddb21c705525d
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt6-base"
 	# QtSetup fails native builds if this is set
 	configure_args+=" -DQT_FORCE_BUILD_TOOLS=true"

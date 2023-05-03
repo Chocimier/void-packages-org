@@ -14,7 +14,7 @@ distfiles="https://archive.xfce.org/src/xfce/${pkgname}/${version%.*}/${pkgname}
 checksum=eedb4fc955f0e3459c46864ff98579295db2b900743e0ff69cad5970ba76be37
 
 post_patch() {
-	[ "$CROSS_BUILD" ] || return 0
+	[[ -v CROSS_BUILD ]] || return 0
 	# For testing, which can't be run on cross build
 	vsed -i -e '/^\ttest-xdt-csource\t/d' tests/Makefile.am
 	vsed -i -e 's/^TESTS =.*/TESTS =/' \

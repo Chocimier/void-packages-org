@@ -33,7 +33,7 @@ notcurses-devel_package() {
 		vmove "usr/lib/*.a"
 		vmove "usr/lib/*.so"
 		vmove usr/share/doc
-		if [ "$build_option_man" ]; then
+		if build_option man; then
 			vmove usr/share/man/man3
 		fi
 	}
@@ -45,7 +45,7 @@ notcurses-progs_package() {
 	pkg_install() {
 		vmove usr/bin
 		vmove usr/share/notcurses
-		if [ "$build_option_man" ]; then
+		if build_option man; then
 			vmove usr/share/man/man1
 		fi
 	}

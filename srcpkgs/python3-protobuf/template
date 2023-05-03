@@ -16,7 +16,7 @@ build_options="cppext"
 build_options_default="cppext"
 desc_option_cppext="Build C++ extension to improve performance"
 
-if [ "$build_option_cppext" ]; then
+if build_option cppext; then
 	make_build_args="--cpp_implementation"
 	make_install_args="--cpp_implementation"
 	makedepends+=" python3-devel protobuf-devel"

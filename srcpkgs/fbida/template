@@ -25,7 +25,7 @@ desc_option_ida="Build ida motif application (needs motif-devel)"
 #build_options_default="ida"
 
 subpackages="fbida-fbi fbida-fbpdf fbida-exiftran"
-if [ "$build_option_ida" ]; then
+if build_option ida; then
 	subpackages+=" fbida-ida"
 fi
 

@@ -29,7 +29,7 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	fi
 fi
 
-if [ "$build_option_webengine" ]; then
+if build_option webengine; then
 	makedepends+=" qt5-webengine-devel"
 else
 	configure_args+=" -DSC_USE_QTWEBENGINE=OFF"

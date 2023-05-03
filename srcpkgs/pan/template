@@ -16,7 +16,7 @@ changelog="https://gitlab.gnome.org/GNOME/pan/-/raw/master/NEWS"
 distfiles="https://gitlab.gnome.org/GNOME/pan/-/archive/v${version}/pan-v${version}.tar.bz2"
 checksum=87721838dfa59f05f5c2c2fec8742606dad13d920f9fa8884497c4513a8d72b9
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 		hostmakedepends+=" gdk-pixbuf-devel"
 fi
 

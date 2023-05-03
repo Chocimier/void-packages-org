@@ -23,7 +23,7 @@ conf_files="/etc/php${_php_version}/php.ini"
 
 lib32disabled=yes
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# phar and pear need php to build
 	hostmakedepends+=" php${_php_version}"
 	CFLAGS+=" -DHAVE_LIBDL
@@ -115,7 +115,7 @@ do_build() {
 		--with-zlib \
 		${configure_args} \
 		"
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		local _make_env="PHAR_PHP=/usr/bin/php${_php_version} PHAR_PHP_MODULES=/usr/lib/php${_php_version}/modules"
 	fi
 
@@ -154,7 +154,7 @@ do_build() {
 do_install() {
 	cd ${wrksrc}/build
 	local _env="INSTALL_ROOT=${DESTDIR}"
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_env+=" PHAR_PHP=/usr/bin/php${_php_version}"
 	fi
 	make ${_env} install-{modules,cli,build,headers,programs,pharcmd}
@@ -236,7 +236,7 @@ php8.1-pear_package() {
 	pkg_install() {
 		cd ${wrksrc}/build
 		local _env="INSTALL_ROOT=${PKGDESTDIR} PHP_PEAR_PHP_BIN=php${_php_version}"
-		if [ -n "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			_env+=" PEAR_PHP=/usr/bin/php${_php_version}"
 		fi
 		make install-pear ${_env}

@@ -24,7 +24,7 @@ case "$XBPS_MACHINE" in
 	x86_64*|i686|ppc64le*|ppc64) build_options_default+=" man" ;;
 esac
 
-if [ $build_option_man ]; then
+if build_option man; then
 	configure_args=" -Dmanpages=true"
 	hostmakedepends+=" pandoc"
 fi
@@ -36,7 +36,7 @@ gssdp-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

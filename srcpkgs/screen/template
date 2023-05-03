@@ -27,7 +27,7 @@ post_install() {
 	vinstall etc/screenrc 0644 etc/skel .screenrc
 	vinstall ${FILESDIR}/screen 0644 etc/pam.d
 
-	if [ "$build_option_multiuser" ]; then
+	if build_option multiuser; then
 		chmod 4755 ${DESTDIR}/usr/bin/screen-${version}
 	fi
 

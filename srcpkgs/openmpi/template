@@ -19,7 +19,7 @@ distfiles="${homepage}/software/ompi/v${version%.*}/downloads/${pkgname}-${versi
 checksum=a640986bc257389dd379886fdae6264c8cfa56bc98b71ce3ae3dfbd8ce61dbe3
 lib32disabled=yes
 
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# configure can't figure out cross-fortran
 	configure_args+=" --enable-mpi-fortran=none --enable-oshmem-fortran=none"
 else

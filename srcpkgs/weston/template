@@ -42,7 +42,7 @@ pre_configure() {
 
 post_install() {
 	# weston-launch must be setuid
-	if [ -z "$build_option_elogind" ]; then
+	if ! build_option elogind; then
 		chmod u+s ${DESTDIR}/usr/bin/weston-launch
 	fi
 	vlicense COPYING LICENSE

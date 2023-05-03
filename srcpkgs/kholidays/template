@@ -13,7 +13,7 @@ homepage="https://invent.kde.org/frameworks/kholidays"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=5ba80c218e3db9432a6625e9ae376ce4b4605a73e6081fd23211f07b47a28c0a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi
 

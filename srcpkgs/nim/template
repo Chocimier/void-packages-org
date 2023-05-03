@@ -66,7 +66,7 @@ do_build() {
 do_install() {
 	./koch install ${DESTDIR}/usr/lib
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mv compiler/nim ${DESTDIR}/usr/lib/nim/bin/nim
 	fi
 

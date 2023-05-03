@@ -14,7 +14,7 @@ homepage="https://www.denx.de/wiki/U-Boot/"
 distfiles="ftp://ftp.denx.de/pub/u-boot/u-boot-${version}.tar.bz2"
 checksum=e31cac91545ff41b71cec5d8c22afd695645cd6e2a442ccdacacd60534069341
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	make_build_args+=" CROSS_BUILD_TOOLS=y CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	hostmakedepends+=" u-boot-tools"
 fi

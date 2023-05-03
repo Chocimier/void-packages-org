@@ -33,7 +33,7 @@ post_patch() {
 }
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mkdir -p native
 		cd native
 		CC=$CC_FOR_BUILD CFLAGS="$CFLAGS_FOR_BUILD" \

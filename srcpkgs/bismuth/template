@@ -16,7 +16,7 @@ homepage="https://bismuth-forge.github.io/bismuth/"
 distfiles="https://github.com/Bismuth-Forge/bismuth/archive/refs/tags/v${version}.tar.gz"
 checksum=216d8f5a6c649e4950989b2d7e100fe23832311328b970b8e32985c1ef25b0b5
 
-if [ "$XBPS_CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools kcoreaddons kpackage kconfig"
 	configure_args+=" -DBUILD_TESTING=OFF"
 fi

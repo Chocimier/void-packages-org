@@ -26,7 +26,7 @@ python_version=3
 build_options="qbs"
 desc_option_qbs="Build vendored Qbs"
 
-if [ -z "$XBPS_CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt6-tools-devel"
 	build_options_default="qbs"
 fi

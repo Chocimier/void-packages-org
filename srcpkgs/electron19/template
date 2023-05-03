@@ -46,7 +46,7 @@ nopie=yes  # contains tools that are not PIE, enables PIE itself
 build_options="pulseaudio sndio clang pipewire"
 build_options_default="pulseaudio clang pipewire"
 
-#if [ "$build_option_clang" ]; then
+#if build_option clang; then
 nocross="Yes"
 #elif [ "${XBPS_TARGET_MACHINE%%-musl}" = "aarch64" ]; then
 #	broken="Falls apart at runtime when compiled with gcc"
@@ -173,7 +173,7 @@ post_patch() {
 		esac
 	done
 	fi
-	if [ "$build_option_sndio" ]; then
+	if build_option sndio; then
 		mkdir -p ${wrksrc}/${build_wrksrc}/media/audio/{sndio,openbsd}
 		cp ${FILESDIR}/sndio-files/sndio_*put.* \
 			${wrksrc}/${build_wrksrc}/media/audio/sndio
@@ -277,7 +277,7 @@ do_configure() {
 	export CXXFLAGS=${CXXFLAGS/-g/}
 	local conf=()
 	cd third_party/electron_node
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		conf_args=" --dest-cpu=${target_arch} --cross-compiling"
 	fi
 	./configure --prefix=/usr \
@@ -295,7 +295,7 @@ do_configure() {
 	yarn install --frozen-lockfile
 	cd "$wrksrc/$build_wrksrc"
 
-	if [ "$build_option_clang" ]; then
+	if build_option clang; then
 		export CC=clang
 		export CXX=clang++
 		export HOST_CC=clang
@@ -313,7 +313,7 @@ do_configure() {
 		'clang_use_chrome_plugins=false'
 		'custom_toolchain="//build/toolchain/linux/unbundle:default"'
 	)
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		conf+=(
 			'host_toolchain="//build/toolchain/linux/unbundle:host"'
 			'v8_snapshot_toolchain="//build/toolchain/linux/unbundle:host"'
@@ -326,7 +326,7 @@ do_configure() {
 			'v8_snapshot_toolchain="//build/toolchain/linux/unbundle:default"'
 		)
 	fi
-	if [ "$build_option_sndio" ]; then
+	if build_option sndio; then
 		conf+=(
 			'use_sndio=true'
 		)
@@ -388,7 +388,7 @@ do_build() {
 	export CFLAGS=$( shopt -s extglob; echo ${CFLAGS/-march=*([^ ])} )
 	export CFLAGS=${CFLAGS/-g/}
 	export CXXFLAGS=${CXXFLAGS/-g/}
-	if [ "$build_option_clang" ]; then
+	if build_option clang; then
 		export CC=clang
 		export CXX=clang++
 		export HOST_CC=clang

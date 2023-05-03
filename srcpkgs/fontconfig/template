@@ -16,7 +16,7 @@ distfiles="${FREEDESKTOP_SITE}/fontconfig/release/fontconfig-${version}.tar.xz"
 checksum=dba695b57bce15023d2ceedef82062c2b925e51f5d4cc4aef736cf13f60a468b
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i 's,\(Cflags: -I${includedir}\).*,\1,g' ${DESTDIR}/usr/lib/pkgconfig/fontconfig.pc
 	fi
 	vlicense COPYING

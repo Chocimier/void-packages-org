@@ -17,7 +17,7 @@ alternatives="
  scheme:scheme.1:/usr/share/man/man1/gosh.1
 "
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Gauche needs itself to bootstrap for cross compilation.
 	hostmakedepends+=" Gauche"
 fi

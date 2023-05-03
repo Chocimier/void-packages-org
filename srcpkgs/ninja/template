@@ -17,7 +17,7 @@ do_configure() {
 }
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		HOST_CXXFLAGS="${BUILD_CFLAGS}"
 	else
 		HOST_CXXFLAGS="${CXXFLAGS}"

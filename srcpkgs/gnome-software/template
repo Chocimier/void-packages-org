@@ -22,7 +22,7 @@ make_check=no # FIXME
 
 build_options="gtk_doc"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -39,7 +39,7 @@ gnome-software-devel_package() {
 	pkg_install() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
 	}

@@ -68,7 +68,7 @@ do_build() {
 	cd ${pkgname/desktop/web}
 	yarn build
 	cd ../${pkgname}
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		yarn run build:native --target ${XBPS_CROSS_RUST_TARGET}
 	else
 		yarn run build:native

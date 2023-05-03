@@ -21,7 +21,7 @@ checksum=42206be7696014920dbe0ce309c602283ba71275eff51062e5456370fbacb863
 
 pre_build() {
 # configure script does not like /usr when cross-building
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		LOCALSTATEDIR=/var ./configure --prefix=/tmp --confdir=/etc
 		sed -i 's:\${MANPREFIX}:/tmp/share:' Makefile
 	fi
@@ -30,7 +30,7 @@ pre_build() {
 system_accounts="_coturn"
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vmkdir usr
 		mv -v ${DESTDIR}/tmp/* ${DESTDIR}/usr
 	fi

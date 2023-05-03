@@ -53,7 +53,7 @@ post_patch() {
 
 pre_configure() {
 	export LD="$CC"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export RUNTEST="/usr/bin/qemu-$XBPS_TARGET_QEMU_MACHINE-static"
 	fi
 }

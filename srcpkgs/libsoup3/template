@@ -31,7 +31,7 @@ libsoup3-devel_package() {
 	short_desc+=" - development files"
 	pkg_install() {
 		vmove usr/lib/pkgconfig/libsoup-3.0.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Soup-3.0.gir
 			vmove usr/share/vala
 		fi

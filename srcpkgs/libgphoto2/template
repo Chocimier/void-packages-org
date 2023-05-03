@@ -16,7 +16,7 @@ changelog="https://raw.githubusercontent.com/gphoto/libgphoto2/master/NEWS"
 distfiles="https://github.com/gphoto/libgphoto2/releases/download/v${version}/libgphoto2-${version}.tar.bz2"
 checksum=ee61a1dac6ad5cf711d114e06b90a6d431961a6e7ec59f4b757a7cd77b1c0fb4
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" libgphoto2"
 fi
 
@@ -33,7 +33,7 @@ post_install() {
 
 	vmkdir usr/lib/udev/hwdb.d
 	vmkdir usr/lib/udev/rules.d
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		LD_LIBRARY_PATH="${DESTDIR}/usr/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH" \
 			CAMLIBS="${DESTDIR}/usr/lib/libgphoto2/${version}" \
 			${DESTDIR}/usr/lib/libgphoto2/print-camera-list udev-rules version 201 > \

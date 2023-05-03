@@ -19,7 +19,7 @@ pre_configure() {
 }
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s,${XBPS_CROSS_BASE},,g" -i \
 			$DESTDIR/usr/bin/xmlsec1-config \
 			$DESTDIR/usr/lib/pkgconfig/xmlsec1-gnutls.pc \

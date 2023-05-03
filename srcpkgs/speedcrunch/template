@@ -14,6 +14,6 @@ homepage="https://speedcrunch.org/"
 distfiles="https://bitbucket.org/heldercorreia/${pkgname}/get/release-${version}.tar.bz2"
 checksum=59bfc6747060dd15c43c1e9afffdb708c15e3c2a7c36855b83952f33ba451d85
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="qt5-tools-devel"
 fi

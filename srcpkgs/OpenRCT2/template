@@ -60,7 +60,7 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" OpenRCT2"
 	# for icu mass-rebuild
 	hostmakedepends+=" enchant2 libxml2 webkit2gtk libharfbuzz"
@@ -98,7 +98,7 @@ post_extract() {
 }
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i -e 's#COMMAND ./openrct2#COMMAND openrct2#g' CMakeLists.txt
 	fi
 }

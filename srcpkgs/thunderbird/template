@@ -115,7 +115,7 @@ do_build() {
 		export LDFLAGS+=" -latomic"
 	fi
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		BINDGEN_INCLUDE_FLAGS=$( $CPP -x c++ -v /dev/null -o /dev/null 2>&1 | \
 			sed -n '/#include <...> search starts here:/,/End of search list./p' | \
 			sed '1,1d;$d' | sed  's/^ /-I/' | paste -s )

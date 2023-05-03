@@ -18,13 +18,13 @@ build_options="hdf5"
 desc_option_hdf5="HDF5 support"
 
 # hdf5 is nocross
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default="hdf5"
 fi
 
 post_install() {
 	# Strip cross prefix from default header paths in config.hpp
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s@${XBPS_CROSS_BASE}/@/@" \
 			-i "${DESTDIR}/usr/include/armadillo_bits/config.hpp"
 	fi

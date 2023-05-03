@@ -17,7 +17,7 @@ homepage="https://github.com/antonio-malcolm/gloobus-preview"
 distfiles="${homepage}/archive/v${version}.tar.gz"
 checksum=c43f1ed00ccc3603042abb78b871665ff6c6a89987d7f854b9b4254b7cf9d86c
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# unoconv depends in libreoffice, which is nocross
 	depends+=" unoconv"
 fi

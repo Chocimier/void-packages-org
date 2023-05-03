@@ -19,7 +19,7 @@ checksum=ef473b070dc7b2c529ab9c4c95640445d9e31e30c94fa565f3a342e57fa659ea
 pre_configure() {
 	NOCONFIGURE=1 ./autogen.sh
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s,PYTHON_INCLUDES=.*,PYTHON_INCLUDES=-I${XBPS_CROSS_BASE}/${py3_inc},g" configure
 	fi
 }

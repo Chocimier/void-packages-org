@@ -21,7 +21,7 @@ checksum="d0e9d089b57048b1555efa7cd5a63a7ed042482045f6f33402b1df425bf9613b
 conflicts="litecoin>=0" # Both provide libbitcoinconsensus.so.0
 skip_extraction="bitcoin-qt.desktop bitcoin128.png"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools"
 fi
 

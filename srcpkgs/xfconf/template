@@ -29,7 +29,7 @@ xfconf-devel_package() {
 		vmove usr/lib/*.so
 		vmove usr/lib/pkgconfig
 		vmove usr/share/gtk-doc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/vala
 			vmove usr/share/gir-1.0
 		fi

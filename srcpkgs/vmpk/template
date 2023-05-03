@@ -12,7 +12,7 @@ homepage="http://vmpk.sourceforge.net"
 distfiles="${SOURCEFORGE_SITE}/vmpk/${version}/vmpk-${version}.tar.bz2"
 checksum=e682eb8d0003839f4cc696f408d2d0004e7be0839260b0cb24d690ffdab670c4
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools"
 fi
 

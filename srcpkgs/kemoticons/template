@@ -12,7 +12,7 @@ homepage="https://invent.kde.org/frameworks/kemoticons"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=c028b73b2970cfaeef1c9fff2826eed92cd8dac1870f70d96e541f36dac54644
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi
 

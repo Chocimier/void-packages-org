@@ -14,6 +14,6 @@ homepage="https://github.com/choehwanjin/ibus-hangul"
 distfiles="${homepage}/releases/download/${version}/${pkgname}-${version}.tar.gz"
 checksum=5e661cd77a327b1eafacd537f7d839a61a374e951bd382044e799371855a0090
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" python3"
 fi

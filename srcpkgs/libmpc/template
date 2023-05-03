@@ -13,7 +13,7 @@ changelog="https://gitlab.inria.fr/mpc/mpc/-/raw/master/NEWS"
 distfiles="${GNU_SITE}/mpc/mpc-${version}.tar.gz"
 checksum=ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8
 
-if [ -z "$CHROOT_READY" ]; then
+if [[ ! -v CHROOT_READY ]]; then
 	CFLAGS="-I${XBPS_MASTERDIR}/usr/include"
 	LDFLAGS="-L${XBPS_MASTERDIR}/usr/lib"
 fi

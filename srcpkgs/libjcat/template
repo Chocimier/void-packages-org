@@ -14,7 +14,7 @@ homepage="https://github.com/hughsie/libjcat"
 distfiles="https://github.com/hughsie/libjcat/archive/${version}.tar.gz"
 checksum=d2f9d554b9d91abc59ff5e10d79801d30e3efcfcb27cd4cee9688381f51a3832
 
-if [ "$XBPS_CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args="-Dman=false"
 else
 	hostmakedepends+=" help2man"

@@ -20,7 +20,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) depends+=" linux-headers" ;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	depends+=" openssl-devel gmp-devel libada-devel libmpc-devel flex"
 fi
 

@@ -23,7 +23,7 @@ conflicts="protobuf18>=0 protobuf23>=0 protobuf24>=0
  protobuf25>=0 protobuf26>=0 protobuf28>=0"
 replaces="${conflicts}"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# needs host protoc
 	hostmakedepends+=" ${pkgname}"
 	configure_args+=" --with-protoc=/usr/bin/protoc"

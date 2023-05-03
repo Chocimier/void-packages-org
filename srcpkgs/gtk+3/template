@@ -50,7 +50,7 @@ desc_option_cloudproviders="Enable integration with cloudproviders, such as Next
 
 # Enable all options (other than cloudproviders) by default.
 build_options_default="colord cups gir broadway wayland x11"
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -79,10 +79,10 @@ gtk+3-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
 		vmove usr/share/aclocal

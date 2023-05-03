@@ -12,7 +12,7 @@ distfiles="https://www.kernel.org/pub/software/scm/git/git-${version}.tar.xz"
 checksum=4893b8b98eefc9fdc4b0e7ca249e340004faa7804a433d17429e311e1fef21d2
 repository=bootstrap
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	checkdepends="perl gnupg"
 	makedepends+=" libcurl-devel"
 fi
@@ -46,7 +46,7 @@ do_configure() {
 		NO_REGEX = Yes
 		EOF
 	fi
-	if ! [ "$CHROOT_READY" ]; then
+	if ! [[ -v CHROOT_READY ]]; then
 		cat <<-EOF >>config.mak
 		ZLIB_PATH = ${XBPS_MASTERDIR}/usr
 		NO_CURL = Yes
@@ -56,13 +56,13 @@ do_configure() {
 
 do_build() {
 	make ${makejobs} git
-	if [ "$CHROOT_READY" ]; then
+	if [[ -v CHROOT_READY ]]; then
 		make ${makejobs} git-http-fetch git-remote-http
 	fi
 }
 
 do_check() {
-	if [ "$CHROOT_READY" ] && [ "$XBPS_ALLOW_CHROOT_BREAKOUT" ]; then
+	if [[ -v CHROOT_READY ]] && [ "$XBPS_ALLOW_CHROOT_BREAKOUT" ]; then
 		export IKNOWWHATIAMDOING=YES
 	fi
 	make test ${makejobs}
@@ -75,7 +75,7 @@ do_install() {
 	vinstall git 755 usr/libexec/chroot-git
 	ln -s git $DESTDIR/usr/libexec/chroot-git/git-upload-pack
 	ln -s git $DESTDIR/usr/libexec/chroot-git/git-receive-pack
-	if [ "$CHROOT_READY" ]; then
+	if [[ -v CHROOT_READY ]]; then
 		vinstall git-http-fetch 755 usr/libexec/chroot-git
 		vinstall git-remote-http 755 usr/libexec/chroot-git
 		ln -s git-remote-http \

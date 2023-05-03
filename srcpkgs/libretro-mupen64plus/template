@@ -37,7 +37,7 @@ do_build() {
 		*) _args="ARCH=${XBPS_TARGET_MACHINE%-musl}";;
 	esac
 
-	if [ "$build_option_gles3" ]; then
+	if build_option gles3; then
 		_args+=" FORCE_GLES3=1"
 	elif [ "$builld_option_gles" ]; then
 		_args+=" FORCE_GLES=1"

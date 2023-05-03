@@ -22,7 +22,7 @@ conflicts="util-linux>=0"
 provides="util-linux-${version}_${revision}"
 repository=bootstrap
 
-if [ -z "$CHROOT_READY" ]; then
+if [[ ! -v CHROOT_READY ]]; then
 	CFLAGS+=" -I${XBPS_MASTERDIR}/usr/include"
 	LDFLAGS+=" -L${XBPS_MASTERDIR}/usr/lib"
 fi

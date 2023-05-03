@@ -42,7 +42,7 @@ if [ "$XBPS_TARGET_ENDIAN" = "be" ]; then
 else
 	_options+=" BIGENDIAN=0"
 fi
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	_options+=" NOASM=1"
 fi
 if [ "$XBPS_TARGET_WORDSIZE" = 32 ]; then
@@ -56,7 +56,7 @@ else
 		LDFLAGS+=" -Wl,--no-keep-memory"
 	fi
 fi
-if [ "$build_option_qt" ]; then
+if build_option qt; then
 	_options+=" USE_QTDEBUG=1"
 fi
 
@@ -66,7 +66,7 @@ fi
 do_configure() {
 	# When linking mame expects liblua.so but we have liblua5.3.so
 	ln -sf liblua5.3.so ${XBPS_CROSS_BASE}/usr/lib/liblua.so
-	if [ "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		case "$XBPS_TARGET_MACHINE" in
 			i686*|x86_64*) ;;
 			*) # Cross compilers don't need/use -m32 or -m64

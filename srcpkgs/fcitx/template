@@ -47,7 +47,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*-musl) configure_args+=" -DENABLE_BACKTRACE=OFF";;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" fcitx"
 fi
 
@@ -69,7 +69,7 @@ pre_configure() {
 	vsed -i -e 's;INCLUDE(${FCITX4_PREFIX}/share/cmake/fcitx;INCLUDE(${CMAKE_CURRENT_LIST_DIR};' \
 		cmake/FcitxConfig.cmake
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# use host binaries
 		vsed -i -e 's;${PROJECT_BINARY_DIR}/tools/dev;/usr/lib/fcitx/libexec;' \
 			cmake/FcitxMacro.cmake
@@ -99,7 +99,7 @@ libfcitx_package() {
 		vmove "usr/lib/*.so.*"
 		vmove "usr/lib/fcitx/fcitx-*.so"
 		vmove usr/lib/fcitx/libexec
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 		vlicense COPYING.LIBS
@@ -115,7 +115,7 @@ fcitx-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/share/cmake
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

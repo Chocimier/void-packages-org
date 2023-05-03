@@ -28,7 +28,7 @@ pre_build() {
 		 -e "s|PACKAGE_BUGREPORT|\"https:\/\/github.com\/ritze\/pinentry-dmenu\"|g" \
 		 -i pinentry/pinentry.c
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s|CC =.*|CC = ${CC}|g" -i config.mk
 	fi
 }

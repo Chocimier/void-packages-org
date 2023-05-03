@@ -12,7 +12,7 @@ homepage="http://dgen.sourceforge.net"
 distfiles="${SOURCEFORGE_SITE}/dgen/${pkgname}-${version}.tar.gz"
 checksum=99e2c06017c22873c77f88186ebcc09867244eb6e042c763bb094b02b8def61e
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" ${makedepends}"
 fi
 

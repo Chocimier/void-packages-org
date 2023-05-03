@@ -16,7 +16,7 @@ nocross=yes
 
 build_options="native_build"
 
-if [ -z "$build_option_native_build" ]; then
+if ! build_option native_build; then
 	configure_args="--enable-sse --enable-sse2
 	  --disable-sse3 --disable-ssse3 --disable-sse41 --disable-sse42
 	  --disable-avx --disable-avx2 --disable-fma --disable-fma4

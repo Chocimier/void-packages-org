@@ -33,7 +33,7 @@ subpackages="libpyside2-python3-devel libpyside2-python3"
 # needed by shiboken2 runtime
 export CLANG_INSTALL_DIR=/usr
 
-if [ ${CROSS_BUILD} ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools qt5-tools qt5-remoteobjects qt5-scxml"
 fi
 
@@ -43,12 +43,12 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	fi
 fi
 
-if [ "$build_option_webengine" ]; then
+if build_option webengine; then
 	subpackages+=" python3-pyside2-webengine"
 fi
 
 pre_build() {
-	if [ ${CROSS_BUILD} ]; then
+	if [[ -v CROSS_BUILD ]]; then
 
 		# make clang of shiboken aware of crossbuild
 		SHIBOKEN_CLANG_OPTIONS="--target=${XBPS_CROSS_TRIPLET}"

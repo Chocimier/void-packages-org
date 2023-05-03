@@ -13,7 +13,7 @@ homepage="https://github.com/xbmc/peripheral.joystick"
 distfiles="https://github.com/xbmc/peripheral.joystick/archive/${version}-${_kodi_release}.tar.gz"
 checksum=4dc63c6c5bdad25881eeba800765d97c53b2583addf28e71bbcd67775452ecdb
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DCMAKE_MODULE_PATH=${XBPS_CROSS_BASE}/usr/share/kodi/cmake"
 	configure_args+=" -DKODI_INCLUDE_DIR=${XBPS_CROSS_BASE}/usr/include/kodi"
 fi

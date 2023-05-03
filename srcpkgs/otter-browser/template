@@ -21,10 +21,10 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	build_options_default="webengine"
 fi
 
-if [ "$build_option_webengine" ]; then
+if build_option webengine; then
 	makedepends+=" qt5-webengine-devel"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-declarative-devel qt5-multimedia-devel qt5-xmlpatterns-devel"
 fi

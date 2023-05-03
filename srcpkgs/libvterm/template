@@ -13,7 +13,7 @@ distfiles="https://www.leonerd.org.uk/code/libvterm/libvterm-${version}.tar.gz"
 checksum=25a8ad9c15485368dfd0a8a9dca1aec8fea5c27da3fa74ec518d5d3787f0c397
 
 post_extract() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp /usr/bin/libtool .
 		sed -e "s,CCLD=.*,CCLD=$CC,g;s,CC=.*,CC=$CC,g" -i libtool
 		sed -e "s,libtool,./libtool,g" -i Makefile

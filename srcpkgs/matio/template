@@ -13,7 +13,7 @@ homepage="https://github.com/tbeu/matio"
 distfiles="https://github.com/tbeu/matio/releases/download/v${version}/matio-${version}.tar.gz"
 checksum=9f91eae661df46ea53c311a1b2dcff72051095b023c612d7cbfc09406c9f4d6e
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" ac_cv_va_copy=C99"
 fi
 

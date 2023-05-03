@@ -21,12 +21,12 @@ case "$XBPS_MACHINE" in
 esac
 
 post_build() {
-	if [ "$build_option_man" ]; then
+	if build_option man; then
 		pandoc -s -t man bird_exporter.1.md -o bird_exporter.1
 	fi
 }
 post_install() {
-	if [ "$build_option_man" ]; then
+	if build_option man; then
 		vman bird_exporter.1
 	fi
 	vsv bird_exporter

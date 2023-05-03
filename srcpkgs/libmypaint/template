@@ -14,7 +14,7 @@ distfiles="https://github.com/mypaint/libmypaint/releases/download/v${version}/l
 checksum=741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
 
 build_options="gir"
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default="gir"
 fi
 
@@ -29,7 +29,7 @@ libmypaint-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-*"
 		fi
 	}

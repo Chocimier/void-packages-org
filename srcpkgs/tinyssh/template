@@ -12,7 +12,7 @@ homepage="https://tinyssh.org"
 distfiles="https://github.com/janmojzis/tinyssh/archive/${version}.tar.gz"
 checksum=234656fc8d369608eb5d0f3a26280e0e38e2e6b134cfc610b6e24bce176acd4f
 
-if [ -n "${CROSS_BUILD}" ] ; then
+if [[ -v CROSS_BUILD ]] ; then
 	make_build_target=cross-compile
 fi
 

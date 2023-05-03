@@ -20,7 +20,7 @@ distfiles="${GNOME_SITE}/${pkgname}/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=59caed8ca72b1ac6437c9844f0677f8a296d52cfd1c0049116026abfb1d87d9b
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --disable-binreloc"
 fi
 

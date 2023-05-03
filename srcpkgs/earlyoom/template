@@ -23,7 +23,7 @@ esac
 
 do_install() {
 	vbin earlyoom
-	if [ "$build_option_man" ]; then
+	if build_option man; then
 		vman earlyoom.1
 	fi
 	vsv earlyoom

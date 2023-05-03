@@ -18,6 +18,6 @@ changelog="https://raw.githubusercontent.com/horizon-eda/horizon/master/CHANGELO
 distfiles="https://github.com/horizon-eda/horizon/archive/v${version}.tar.gz"
 checksum=e1165ec11dc222fd5c41a1da752b2aae44eca80f6f785dd4069dcdd225ae1d53
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	make_build_args+=" INC_OCE=-I$XBPS_CROSS_BASE/usr/include/opencascade"
 fi

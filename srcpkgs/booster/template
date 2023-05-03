@@ -34,7 +34,7 @@ do_build() {
 do_install() {
 	local _srcdir="${GOPATH}/bin"
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_srcdir="${_srcdir}/linux_${GOARCH}"
 	fi
 

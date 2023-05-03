@@ -32,7 +32,7 @@ case "$XBPS_MACHINE" in
 	x86_64*|i686*|ppc64le*|ppc64) build_options_default="docs" ;;
 esac
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	depends+=" python3-PyOpenGL-accelerate"
 	case "$XBPS_TARGET_MACHINE" in
 		ppc64*) depends+=" libopencv-python3";;

@@ -13,7 +13,7 @@ changelog="https://gitlab.com/lv2/suil/-/raw/master/NEWS"
 distfiles="http://download.drobilla.net/${pkgname}-${version}.tar.bz2"
 checksum=daa763b231b22a1f532530d3e04c1fae48d1e1e03785e23c9ac138f207b87ecd
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-devel"
 	makedepends+=" lv2"
 fi

@@ -26,7 +26,7 @@ desc_option_reiserfs="Enable support for converting reiserfs disk to btrfs"
 desc_option_e2fs="Enable support for converting ext2/3/4 disk to btrfs"
 
 pre_build() {
-	if [ $CROSS_BUILD ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		${BUILD_CC} ${BUILD_CFLAGS} kernel-lib/mktables.c -o mktables
 	fi
 }

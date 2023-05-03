@@ -34,7 +34,7 @@ case $XBPS_TARGET_MACHINE in
 		;;
 esac
 
-if [ -n "$_use_c_engine" ]; then
+if [[ -v _use_c_engine ]]; then
 	hostmakedepends+=" glew-devel libatomic-devel ghc clang"
 	makedepends+=" glew-devel libatomic-devel"
 	configure_args+=" -DBUILD_ENGINE_C=1"
@@ -42,7 +42,7 @@ if [ -n "$_use_c_engine" ]; then
 fi
 
 pre_configure() {
-	if [ -n "$_use_c_engine" ]; then
+	if [[ -n _use_c_engine ]]; then
 		# remove option not supported by clang
 		CFLAGS=${CFLAGS/-fstack-clash-protection/}
 		CXXFLAGS=${CXXFLAGS/-fstack-clash-protection/}

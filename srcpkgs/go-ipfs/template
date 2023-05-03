@@ -20,7 +20,7 @@ make_dirs="/var/lib/ipfs 0700 _ipfs _ipfs"
 _ipfs_homedir="/var/lib/ipfs"
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CGO_ENABLED=0
 	fi
 }

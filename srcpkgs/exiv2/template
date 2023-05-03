@@ -17,7 +17,7 @@ if [ -n "$XBPS_CHECK_PKGS" ]; then
 	configure_args+=" -DEXIV2_BUILD_UNIT_TESTS=ON"
 fi
 
-if [ -n "$XBPS_CCACHE" ]; then
+if [[ -v XBPS_CCACHE ]]; then
 	configure_args+=" -DBUILD_WITH_CCACHE=ON"
 fi
 

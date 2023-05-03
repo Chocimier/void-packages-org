@@ -12,7 +12,7 @@ homepage="https://invent.kde.org/frameworks/kded"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=ac588d6ee850ce60b5128043617c6986cd04122e792052b1d515c4343ed851fb
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake kdoctools"
 	configure_args+=" -DMEINPROC5_EXECUTABLE=/usr/bin/meinproc5"
 fi

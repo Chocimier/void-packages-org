@@ -76,7 +76,7 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 esac
 
-if [ "$_have_amd" ]; then
+if [[ -v _have_amd ]]; then
 	# amd cards can use clover
 	_have_opencl=yes
 	_have_vulkan=yes
@@ -88,7 +88,7 @@ if [ "$_have_amd" ]; then
 	configure_args+=" -Dvideo-codecs=h264dec,h264enc,h265dec,h265enc,vc1dec"
 fi
 
-if [ "$_have_intel" ]; then
+if [[ -v _have_intel ]]; then
 	_have_vulkan=yes
 	_gallium_drivers+=",crocus,iris,i915"
 	_vulkan_drivers+=",intel,intel_hasvk"
@@ -97,9 +97,9 @@ if [ "$_have_intel" ]; then
 	subpackages+=" mesa-intel-dri"
 fi
 
-if [ "$_have_nv" ]; then
+if [[ -v _have_nv ]]; then
 	_gallium_drivers+=",nouveau"
-	if [ "$_have_arm" ]; then
+	if [[ -v _have_arm ]]; then
 		_gallium_drivers+=",tegra"
 		# transitional dummy packages
 		subpackages+=" mesa-tegra-dri"
@@ -108,7 +108,7 @@ if [ "$_have_nv" ]; then
 	subpackages+=" mesa-nouveau-dri"
 fi
 
-if [ "$_have_arm" ]; then
+if [[ -v _have_arm ]]; then
 	_have_vulkan=yes
 	_gallium_drivers+=",kmsro"
 	_gallium_drivers+=",v3d,vc4,freedreno,etnaviv,lima,panfrost"
@@ -120,15 +120,15 @@ if [ "$_have_arm" ]; then
 	subpackages+=" mesa-lima-dri mesa-panfrost-dri"
 fi
 
-if [ "$_have_virgl" ]; then
+if [[ -v _have_virgl ]]; then
 	_gallium_drivers+=",virgl"
 fi
 
-if [ "$_have_nine" ]; then
+if [[ -v _have_nine ]]; then
 	configure_args+=" -Dgallium-nine=true"
 fi
 
-if [ "$_have_vmware" ]; then
+if [[ -v _have_vmware ]]; then
 	_gallium_drivers+=",svga"
 	configure_args+=" -Dgallium-xa=enabled"
 	subpackages+=" libxatracker"
@@ -139,14 +139,14 @@ else
 fi
 
 # enabled currently by amd drivers
-if [ "$_have_opencl" ]; then
+if [[ -v _have_opencl ]]; then
 	hostmakedepends+=" clang rust rust-bindgen"
 	makedepends+=" clang libclc rust SPIRV-LLVM-Translator-devel SPIRV-Tools-devel"
 	subpackages+=" mesa-opencl"
 	configure_args+=" -Dgallium-opencl=icd -Dgallium-rusticl=true -Drust_std=2021"
 fi
 
-if [ "$_have_hwdec" ]; then
+if [[ -v _have_hwdec ]]; then
 	configure_args+=" -Dgallium-vdpau=enabled -Dgallium-va=enabled"
 	subpackages+=" mesa-vaapi mesa-vdpau"
 else
@@ -160,16 +160,16 @@ _dri_drivers=${_dri_drivers/=,/=}
 
 configure_args+=" ${_vulkan_drivers} ${_dri_drivers}"
 
-if [ "$_have_vulkan" ]; then
+if [[ -v _have_vulkan ]]; then
 	_have_zink=yes
 	configure_args+=" -Dvulkan-layers=device-select,overlay"
-	if [ "$_have_intel" ]; then
+	if [[ -v _have_intel ]]; then
 		configure_args+=",intel-nullhw"
 	fi
 	subpackages+=" mesa-vulkan-overlay-layer"
 fi
 
-if [ "$_have_zink" ]; then
+if [[ -v _have_zink ]]; then
 	_gallium_drivers+=",zink"
 	makedepends+=" vulkan-loader"
 fi
@@ -185,7 +185,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 post_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		find -iname "*.ninja" -exec sed -i "{}" \
 			-e "/rustc/s; --sysroot ${XBPS_CROSS_BASE}/usr;;g" \
 			-e "s; /usr/lib/; ${XBPS_CROSS_BASE}/usr/lib/;g" \
@@ -266,10 +266,10 @@ libOSMesa_package() {
 MesaLib-devel_package() {
 	depends="mesa>=${version}_${revision} libOSMesa>=${version}_${revision}
 	 libgbm-devel>=${version}_${revision}"
-	if [ "$_have_vmware" ]; then
+	if [[ -v _have_vmware ]]; then
 		depends+=" libxatracker>=${version}_${revision}"
 	fi
-	if [ "$_have_opencl" ]; then
+	if [[ -v _have_opencl ]]; then
 		depends+=" mesa-opencl>=${version}_${revision}"
 	fi
 	depends+=" libdrm-devel libglvnd-devel"
@@ -281,10 +281,10 @@ MesaLib-devel_package() {
 		vmove usr/lib/libGLX_mesa.so
 		vmove usr/lib/libOSMesa.so
 		vmove usr/lib/libglapi.so
-		if [ "$_have_vmware" ]; then
+		if [[ -v _have_vmware ]]; then
 			vmove usr/lib/libxatracker.so
 		fi
-		if [ "$_have_opencl" ]; then
+		if [[ -v _have_opencl ]]; then
 			vmove usr/lib/libMesaOpenCL.so
 			vmove usr/lib/libRusticlOpenCL.so
 		fi
@@ -373,7 +373,7 @@ mesa-ati-dri_package() {
 	lib32mode=full
 	short_desc="Mesa DRI drivers for ATI GPUs (transitional dummy package)"
 	depends="mesa-dri mesa-vulkan-radeon"
-	if [ "$_have_hwdec" ]; then
+	if [[ -v _have_hwdec ]]; then
 		depends+=" mesa-vaapi mesa-vdpau"
 	fi
 }
@@ -418,7 +418,7 @@ mesa-nouveau-dri_package() {
 	lib32mode=full
 	short_desc="Mesa DRI drivers for NVIDIA GPUs (transitional dummy package)"
 	depends="mesa-dri"
-	if [ "$_have_hwdec" ]; then
+	if [[ -v _have_hwdec ]]; then
 		depends+=" mesa-vaapi mesa-vdpau"
 	fi
 }

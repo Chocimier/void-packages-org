@@ -24,7 +24,7 @@ build_options_default="hiredis"
 desc_option_hiredis="Enable hiredis support"
 desc_option_rust="Enable rust protocol parsers"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" rust lua"
 fi
 
@@ -34,7 +34,7 @@ conf_files="/etc/${pkgname}/*.* /etc/${pkgname}/rules/*"
 CFLAGS="-fcommon"
 
 post_configure() {
-	if [ "$build_option_rust" ]; then
+	if build_option rust; then
 		vsed -i rust/Makefile \
 			-e 's/#RUST_TARGET[[:space:]]*=.*/RUST_TARGET = /'
 	fi

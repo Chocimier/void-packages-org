@@ -16,7 +16,7 @@ homepage="https://invent.kde.org/plasma/kde-gtk-config"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname%5}-${version}.tar.xz"
 checksum=98f5adf85bc56e01956f749849694d21c222e98d082e9b82ee8b469ffa6220e2
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kcoreaddons"
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
 fi

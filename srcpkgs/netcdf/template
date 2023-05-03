@@ -13,7 +13,7 @@ homepage="https://www.unidata.ucar.edu/software/netcdf/"
 distfiles="https://github.com/Unidata/netcdf-c/archive/v${version}.tar.gz"
 checksum=05d064a2d55147b83feff3747bea13deb77bef390cb562df4f9f9f1ce147840d
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --disable-netcdf-4"
 else
 	configure_args+=" --enable-netcdf-4"

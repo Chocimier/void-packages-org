@@ -15,7 +15,7 @@ homepage="https://github.com/rbuehlma/pvr.zattoo"
 distfiles="https://github.com/rbuehlma/pvr.zattoo/archive/${version}-${_kodi_release}.tar.gz"
 checksum=ac09db721e51b47f1ca7f4c2201833dbcd69040fd19b09c194fa7491ff4dad41
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DCMAKE_MODULE_PATH=${XBPS_CROSS_BASE}/usr/share/kodi/cmake"
 	configure_args+=" -DKODI_INCLUDE_DIR=${XBPS_CROSS_BASE}/usr/include/kodi"
 fi

@@ -26,7 +26,7 @@ subpackages="libmagick libmagick-devel"
 keep_libtool_archives=yes
 conf_files="/etc/ImageMagick-${version%%.*}/*.xml"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# XXX native perl uses XBPS_TARGET_CFLAGS (-mtune=generic)
 	configure_args+=" --with-perl --with-perl-options=INSTALLDIRS=vendor"
 	hostmakedepends+=" perl"
@@ -39,7 +39,7 @@ pre_check() {
 }
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e "s,${XBPS_CROSS_TRIPLET}-,,g" \
 			$DESTDIR/usr/bin/*-config
 	fi

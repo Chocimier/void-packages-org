@@ -40,7 +40,7 @@ post_install() {
 	vbin tools/btgatt-client
 	vbin tools/btgatt-server
 	vsv bluetoothd
-	if [ "$build_option_mesh" ]; then
+	if build_option mesh; then
 		vsv bluetooth-meshd
 	fi
 

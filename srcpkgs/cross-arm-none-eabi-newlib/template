@@ -6,7 +6,7 @@ version=3.1.0.20181231
 revision=3
 build_style=gnu-configure
 configure_args="
- --prefix=/usr --target=${_triplet} --host=${XBPS_CROSS_TRIPLET}
+ --prefix=/usr --target=${_triplet} --host=${XBPS_CROSS_TRIPLET-}
  --with-gnu-as --with-gnu-ld --disable-nls
  --disable-newlib-supplied-syscalls --enable-newlib-retargetable-locking
  --enable-interwork"

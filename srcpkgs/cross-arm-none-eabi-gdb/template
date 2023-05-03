@@ -21,7 +21,7 @@ distfiles="${GNU_SITE}/gdb/gdb-${version}.tar.xz"
 checksum=0e1793bf8f2b54d53f46dea84ccfd446f48f81b297b28c4f7fc017b818d69fed
 make_check=no  # See gdb/template.
 
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Make python3.x detection work in cross builds
 	CPPFLAGS="-I${XBPS_CROSS_BASE}/${py3_inc}"
 fi

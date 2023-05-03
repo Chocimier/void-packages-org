@@ -15,7 +15,7 @@ homepage="https://invent.kde.org/frameworks/sonnet"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
 checksum=28ef6a2da7f2321975d902e123c616811e1c19ef7bddd8550c1ac7294900e08f
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" sonnet"
 fi
 

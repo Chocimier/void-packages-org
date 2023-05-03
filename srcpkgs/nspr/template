@@ -18,7 +18,7 @@ if [ "$XBPS_TARGET_WORDSIZE" = 64 ]; then
 	configure_args+=" --enable-64bit"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# nspr misused host in place of build
 	configure_args+=" --host=$XBPS_TRIPLET --target=$XBPS_CROSS_TRIPLET"
 	export HOST_CC="$CC_FOR_BUILD"

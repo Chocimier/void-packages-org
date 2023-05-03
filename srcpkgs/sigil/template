@@ -22,7 +22,7 @@ distfiles="${homepage}/archive/${version}.tar.gz"
 checksum=35b6051d966c2848a8a031ebe691449229b3c95a56145647dc71857acc18fad5
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-tools-devel qt5-svg-devel
 	 qt5-webengine-devel qt5-xmlpatterns-devel qt5-multimedia-devel
 	 qt5-sensors-devel qt5-declarative-devel qt5-location-devel

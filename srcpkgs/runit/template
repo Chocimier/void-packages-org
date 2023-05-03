@@ -16,7 +16,7 @@ make_check=no
 
 build_options="static"
 
-if [ "$build_option_static" ]; then
+if build_option static; then
 	CFLAGS="-static"
 	LDFLAGS="-static"
 fi

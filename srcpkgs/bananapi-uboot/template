@@ -28,7 +28,7 @@ do_configure() {
 do_build() {
 	unset CFLAGS CXXFLAGS LDFLAGS
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make CFLAGS="-fcommon" ARCH=arm CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-
 	else
 		make CFLAGS="-fcommon" ARCH=arm

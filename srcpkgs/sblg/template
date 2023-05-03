@@ -15,7 +15,7 @@ distfiles="https://kristaps.bsd.lv/sblg/snapshots/${pkgname}-${version}.tar.gz"
 checksum=f178b6c9b50f87155cf5f06a7b8511e65ffa0cfc48e5097488d12bcce69d81ed
 
 pre_configure() {
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	case $XBPS_TARGET_MACHINE in
 		*-musl) echo HAVE___PROGNAME=true HAVE_ERR=1 HAVE_MEMMEM=1\
 			HAVE_MEMCHR=1 HAVE_PROGRAM_INVOCATION_SHORT_NAME=1\

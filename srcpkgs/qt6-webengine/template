@@ -63,7 +63,7 @@ esac
 
 subpackages="qt6-webengine-devel"
 
-#if [ "$build_option_examples" ]; then
+#if build_option examples; then
 	subpackages+=" qt6-webengine-examples"
 #fi
 

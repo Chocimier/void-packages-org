@@ -32,7 +32,7 @@ if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
 	makedepends+=" libexecinfo-devel"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" rust llvm15"
 	# These are required for building the buildhost's stage0/1
 	hostmakedepends+=" libffi-devel libxml2-devel ncurses-devel zlib-devel"
@@ -54,7 +54,7 @@ _clear_vendor_checksums() {
 
 post_patch() {
 	rm -rf src/llvm-project
-	if [ "$build_option_bindist" ]; then
+	if build_option bindist; then
 		for x in ${FILESDIR}/patches/static-llvm/*.patch; do
 			msg_normal "Applying patch $x\n"
 			patch -sNp1 -i ${x}
@@ -72,7 +72,7 @@ post_patch() {
 do_configure() {
 	local _local_rebuild _use_debug _use_debug_rustc _use_rpath _use_docs _llvm_shared
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_local_rebuild="true"
 	else
 		_local_rebuild="false"
@@ -88,7 +88,7 @@ do_configure() {
 	# if true, the binaries will be built with rpath, so the binaries will be
 	# usable directly from the build directory, this is not desirable for
 	# packaging but is useful when building bootstrap binaries
-	if [ "$build_option_bindist" ]; then
+	if build_option bindist; then
 		_use_rpath="true"
 		_use_docs="false"
 		_llvm_shared="false"
@@ -149,7 +149,7 @@ do_configure() {
 		linker = "${CC_host:-$CC}"
 	EOF
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cat >> config.toml <<- EOF
 			[target.${RUST_TARGET}]
 			llvm-config = "/usr/bin/llvm-config"
@@ -195,7 +195,7 @@ do_check() {
 }
 
 do_install() {
-	if [ "$build_option_bindist" ]; then
+	if build_option bindist; then
 		mkdir -p ${XBPS_SRCDISTDIR}/distfiles
 		install -m 0644 \
 			build/dist/rustc-${version}-${RUST_TARGET}.tar.xz \

@@ -24,7 +24,7 @@ distfiles="https://gcompris.net/download/qt/src/gcompris-qt-${version}.tar.xz"
 checksum=bad9ace08961254c1bfaa64f9df60f1902b3d3aaeb16a527c0e26302010ebc21
 
 post_extract() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i "/set(CMAKE_PREFIX_PATH/d" CMakeLists.txt
 	fi
 }

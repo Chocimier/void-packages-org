@@ -15,7 +15,7 @@ checksum=34b0a422df3fecd7597587048552457d48ae764c43bbefd2a9d62ceb6c8bac71
 
 CFLAGS="-Wno-error -Wno-deprecated-declarations"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" perl-Pango"
 	export REALFULLPERLRUN="/usr/bin/perl -I/usr/lib/perl5/vendor_perl"
 	make_build_args='FULLPERLRUN=$(REALFULLPERLRUN)'

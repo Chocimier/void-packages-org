@@ -19,7 +19,7 @@ homepage="https://invent.kde.org/frameworks/kdelibs4support"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/portingAids/${pkgname}-${version}.tar.xz"
 checksum=4d5051221c293aeec014ced6547df6fbfcaf0111dc732a48eadc55f72c8f87ed
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# gettaddrinfo runtime test is always fine (can't be achieved in crossbuild)
 	configure_args+=" -DHAVE_GOOD_GETADDRINFO_EXITCODE=0"
 	configure_args+=" -DHAVE_GOOD_GETADDRINFO_EXITCODE__TRYRUN_OUTPUT=0"

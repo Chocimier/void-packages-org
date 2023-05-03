@@ -16,7 +16,7 @@ changelog="https://doc.zeroc.com/ice/latest/release-notes"
 distfiles="https://github.com/zeroc-ice/ice/archive/v${version}.tar.gz"
 checksum=f2ab6b151ab0418fab30bafc2524d9ba4c767a1014f102df88d735fc775f9824
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Cross build requires the host's slice2cpp
 	hostmakedepends+=" Ice"
 fi
@@ -32,7 +32,7 @@ do_configure() {
 	vsed 's|-ledit|-leditline|' -i config/Make.rules.Linux
 	vsed 's|editline/readline.h|editline.h|' -i cpp/src/IceStorm/Parser.cpp cpp/src/IceGrid/Parser.cpp
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Use host's slice2cpp
 		vsed -i config/Make.project.rules \
 			-e 's/$($6_path) |/|/' \

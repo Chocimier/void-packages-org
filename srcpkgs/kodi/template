@@ -88,7 +88,7 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 esac
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	make_build_target+=" kodi-test"
 else
 	hostmakedepends+=" libmariadbclient-devel SDL2_image-devel lzo-devel
@@ -102,7 +102,7 @@ if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 	find -type f | \
 		grep "configure\.ac\|Makefile\|cmake\|config\.site" | \
 		xargs sed -i  -e "s;-isystem;-I;g"
@@ -111,7 +111,7 @@ pre_configure() {
 	. /etc/profile.d/openjdk.sh
 
 	# Build tools needed to run on the host
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		for i in JsonSchemaBuilder TexturePacker; do
 			CC= LD= CXX= LDFLAGS= CFLAGS= CXXFLAGS= \
 				make -C tools/depends/native/$i native/$i

@@ -36,7 +36,7 @@ pulse_homedir="/var/empty"
 build_options="avahi"
 build_options_default="avahi"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" glib"
 fi
 

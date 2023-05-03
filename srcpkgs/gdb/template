@@ -34,7 +34,7 @@ ignore_elf_files="
  /usr/share/gdb/guile/gdb/printing.go
  /usr/share/gdb/guile/gdb.go"
 
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Make python3.x detection work in cross builds
 	CPPFLAGS="-I${XBPS_CROSS_BASE}/${py3_inc}"
 fi

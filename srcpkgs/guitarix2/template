@@ -30,7 +30,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) configure_args+=" --disable-sse" ;;
 esac
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	post_extract() {
 		# don’t test load the ladspa plugin when cross compiling
 		vsed -i "/features='test_loadable',/d" src/ladspa/wscript

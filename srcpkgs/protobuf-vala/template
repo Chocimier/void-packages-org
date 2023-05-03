@@ -17,7 +17,7 @@ checksum=c12547813fa22ee2b15967f17146b08e2a4d90800810fe63730332aea6777c48
 disable_parallel_build=yes
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e '/^noinst_PROGRAMS/s/=.*/=/' src/Makefile.in
 	fi
 }

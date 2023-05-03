@@ -38,7 +38,7 @@ do_build() {
 	LDFLAGS+=" $($PKG_CONFIG --libs-only-l --static libarchive)"
 	LDFLAGS+=" -lrt -ldl -lpthread"
 	: >nim.cfg
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		cat >>nim.cfg <<-EOF
 		gcc.options.always = "$CPPFLAGS $CFLAGS -pthread"
 		gcc.options.linker = "$LDFLAGS"

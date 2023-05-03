@@ -29,7 +29,7 @@ gnome-online-accounts-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/lib/goa-1.0
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

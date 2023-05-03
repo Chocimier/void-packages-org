@@ -20,14 +20,14 @@ pre_build() {
 	vsed -e 's|/usr/local|$(PREFIX)|g' -i Makefile
 	cp -f ${FILESDIR}/config .config
 
-	if [ "$build_option_dbus" ]; then
+	if build_option dbus; then
 		vsed -i -e 's, -u, -uq,' dbus/*.service.in
 	else
 		vsed -i -e 's|#\{0,1\}\(CONFIG_CTRL_IFACE_DBUS_NEW\)=\(.*\)|\1=|' .config
 		vsed -i -e 's|#\{0,1\}\(CONFIG_CTRL_IFACE_DBUS_INTRO\)=\(.*\)|\1=|' .config
 	fi
 
-	if [ "$build_option_readline" ]; then
+	if build_option readline; then
 		vsed -i -e 's|#\{0,1\}\(CONFIG_READLINE\)=\(.*\)|\1=y|' .config
 	fi
 }
@@ -38,7 +38,7 @@ do_build() {
 do_install() {
 	make PREFIX=/usr BINDIR=/usr/bin DESTDIR=${DESTDIR} install
 
-	if [ "$build_option_dbus" ]; then
+	if build_option dbus; then
 		install -d ${DESTDIR}/usr/share/dbus-1/system-services
 		install -m644 dbus/*.service ${DESTDIR}/usr/share/dbus-1/system-services/
 		vinstall dbus/dbus-${pkgname}.conf 644 etc/dbus-1/system.d ${pkgname}.conf

@@ -56,7 +56,7 @@ fi
 
 pre_build() {
 	# help gi-docgen find gi files on cross
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export XDG_DATA_DIRS=/usr/$XBPS_CROSS_TRIPLET/usr/share/
 	fi
 }

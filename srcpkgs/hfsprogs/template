@@ -19,7 +19,7 @@ fi
 pre_build() {
 	sed -i 's/[F|f]sck_hfs/fsck.hfsplus/g' fsck_hfs.tproj/fsck_hfs.8
 	sed -i 's/[N|n]ewfs_hfs/mkfs.hfsplus/g' newfs_hfs.tproj/newfs_hfs.8
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s|CFLAGS :=|CFLAGS := --target=${XBPS_CROSS_TRIPLET} --sysroot=${XBPS_CROSS_BASE}|" Makefile
 		sed -i "s|LDFLAGS :=|LDFLAGS := -L${XBPS_CROSS_BASE}/usr/lib|" Makefile
 	fi

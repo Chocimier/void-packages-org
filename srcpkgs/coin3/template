@@ -17,7 +17,7 @@ checksum=b00d2a8e9d962397cf9bf0d9baa81bcecfbd16eef675a98c792f5cf49eb6e805
 CFLAGS=-DNDEBUG
 CXXFLAGS=-DNDEBUG
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# bypass runtime test (quote hashing is fine with gcc 9.3)
 	configure_args+=" -DHAVE_HASH_QUOTING_EXITCODE=0"
 	configure_args+=" -DHAVE_HASH_QUOTING_EXITCODE__TRYRUN_OUTPUT=''"

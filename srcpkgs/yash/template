@@ -20,13 +20,13 @@ alternatives="
 register_shell="/bin/yash"
 
 post_extract() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i 's/checkby "${tempout}"/true/' configure
 	fi
 }
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make CC="$BUILD_CC" CFLAGS="$BUILD_CFLAGS" \
 			LDFLAGS= LDLIBS= makesignum
 	fi

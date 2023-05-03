@@ -18,7 +18,7 @@ checksum=d5a4af4202813f5b5eb81c202ba632f964493cc381730e15ee3f6106321a714a
 
 build_options="qt6"
 
-if [ "$build_option_qt6" ]; then
+if build_option qt6; then
 	configure_args="-DBUILD_WITH_QT6=ON -DQT_HOST_PATH=/usr"
 	hostmakedepends+=" qt6-base qt6-tools"
 	makedepends+=" qt6-base-devel qt6-plugin-mysql

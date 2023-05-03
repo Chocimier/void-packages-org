@@ -40,7 +40,7 @@ esac
 
 unset depends
 
-if [ "$build_option_gles" ]; then
+if build_option gles; then
 	configure_args+=" -DSDL_OPENGLES=ON"
 	# libGLESv2.so.2 is dynamically loaded with dlopen.
 	shlib_requires="libGLESv2.so.2"
@@ -49,7 +49,7 @@ else
 	configure_args+=" -DSDL_OPENGLES=OFF"
 fi
 
-if [ "$build_option_rpi" ]; then
+if [[ $XBPS_TARGET_MACHINE =~ arm* ]] && build_option rpi; then
 	# RaspberryPi, use Videocore IV
 	configure_args+=" -DSDL_OPENGLES=ON"
 	makedepends+=" rpi-userland-devel"
@@ -57,7 +57,7 @@ if [ "$build_option_rpi" ]; then
 	LDFLAGS="-L${XBPS_CROSS_BASE}/opt/vc/lib -Wl,-rpath=/opt/vc/lib"
 fi
 
-if [ "$build_option_opengl" ]; then
+if build_option opengl; then
 	# libGL.so.1 is dynamically loaded with dlopen.
 	shlib_requires+=" libGL.so.1"
 	depends+=" virtual?libGL"
@@ -66,52 +66,52 @@ else
 	configure_args+=" -DSDL_OPENGL=OFF"
 fi
 
-if [ "$build_option_opengl" -o "$build_option_gles" ]; then
+if build_option opengl || build_option gles; then
 	makedepends+=" glu-devel"
 fi
 
-if [ "$build_option_pulseaudio" ]; then
+if build_option pulseaudio; then
 	configure_args+=" -DSDL_PULSEAUDIO=ON"
 	makedepends+=" pulseaudio-devel"
 else
 	configure_args+=" -DSDL_PULSEAUDIO=OFF"
 fi
 
-if [ "$build_option_pipewire" ]; then
+if build_option pipewire; then
 	configure_args+=" -DSDL_PIPEWIRE=ON"
 	makedepends+=" pipewire-devel"
 else
 	configure_args+=" -DSDL_PIPEWIRE=OFF"
 fi
 
-if [ "$build_option_sndio" ]; then
+if build_option sndio; then
 	configure_args+=" -DSDL_SNDIO=ON"
 	makedepends+=" sndio-devel"
 else
 	configure_args+=" -DSDL_SNDIO=OFF"
 fi
 
-if [ "$build_option_wayland" ]; then
-	if [ -z "$build_option_gles" ]; then
+if build_option wayland; then
+	if ! build_option gles; then
 		msg_error "$pkgname: wayland option requires gles.\n"
 	fi
 	configure_args+=" -DSDL_WAYLAND=ON -DSDL_WAYLAND_SHARED=OFF -DSDL_WAYLAND_LIBDECOR=ON"
 	makedepends+=" libxkbcommon-devel libdecor-devel wayland-devel wayland-protocols"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		hostmakedepends+=" wayland-devel"
 	fi
 else
 	configure_args+=" -DSDL_WAYLAND=OFF"
 fi
 
-if [ "$build_option_x11" ]; then
+if build_option x11; then
 	configure_args+=" -DSDL_X11=ON -DSDL_X11_SHARED=OFF"
 	makedepends+=" libSM-devel libXcursor-devel libXScrnSaver-devel libXrandr-devel"
 else
 	configure_args+=" -DSDL_X11=OFF"
 fi
 
-if [ "$build_option_vulkan" ]; then
+if build_option vulkan; then
 	configure_args+=" -DSDL_VULKAN=ON"
 	makedepends+=" Vulkan-Headers vulkan-loader"
 else

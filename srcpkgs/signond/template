@@ -15,7 +15,7 @@ distfiles="${homepage}/-/archive/VERSION_${version}/signond-VERSION_${version}.t
 checksum=3dd57c25e1bf1583b2cb857f96831e38e73d40264ff66ca43e63bb7233f76828
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		CXXFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/qt5"
 		for i in ${XBPS_CROSS_BASE}/usr/include/qt5/*; do
 			CXXFLAGS+=" -I$i"

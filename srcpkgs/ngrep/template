@@ -13,7 +13,7 @@ homepage="https://github.com/jpr5/ngrep"
 distfiles="https://github.com/jpr5/ngrep/archive/V${version/./_}.tar.gz"
 checksum=dc4dbe20991cc36bac5e97e99475e2a1522fd88c59ee2e08f813432c04c5fff3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-pcap-includes=$XBPS_CROSS_BASE/usr/include/pcap"
 else
 	configure_args+=" --with-pcap-includes=/usr/include/pcap"

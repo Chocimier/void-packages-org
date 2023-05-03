@@ -27,7 +27,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) ;;
 esac
 
-if [ "$build_option_assembly" ]; then
+if build_option assembly; then
 	case "$XBPS_TARGET_MACHINE" in
 		x86_64*|i686*)
 			# see https://bitbucket.org/multicoreware/x265_git/issues/559
@@ -48,7 +48,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i CMakeLists.txt -e "s; -mcpu=native;;"
 	fi
 }

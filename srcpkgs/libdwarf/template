@@ -12,7 +12,7 @@ homepage="https://www.prevanders.net/dwarf.html"
 distfiles="https://prevanders.net/${pkgname}-${version}.tar.gz"
 checksum=1c5ce59e314c6fe74a1f1b4e2fa12caea9c24429309aa0ebdfa882f74f016eff
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="elfutils-devel"
 fi
 

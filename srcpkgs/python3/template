@@ -36,7 +36,7 @@ alternatives="
  python:python:/usr/bin/python${version%.*}
  python:python.1:/usr/share/man/man1/python${version%.*}.1"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" python3"
 	configure_args+=" --with-build-python=python3.11"
 fi
@@ -55,7 +55,7 @@ post_extract() {
 }
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		patch -Np0 -i ${FILESDIR}/cross.patch
 	fi
 }
@@ -121,7 +121,7 @@ do_install() {
 	sed -e "s,${XBPS_WRAPPERDIR},/usr/bin,g" -i \
 		${DESTDIR}/usr/lib/python${version%.*}/_sysconfigdata_*_*.py \
 		${DESTDIR}/usr/lib/python${version%.*}/config-${version%.*}*/Makefile
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Remove references to cross toolchain.
 		sed -i "s/$XBPS_CROSS_TRIPLET-//g" \
 			${DESTDIR}/usr/lib/python${version%.*}/_sysconfigdata_*_*.py \

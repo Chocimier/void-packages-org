@@ -14,7 +14,7 @@ distfiles="https://github.com/neovim/${pkgname}/archive/v${version}.tar.gz"
 checksum=6f0ee21c8605340cfbb458cbd195b4d074e6d16dd0c0e12f2627ca773f3cabf1
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp /usr/bin/libtool .
 		vsed -e "s,CCLD=.*,CCLD=$CC,g;s,CC=.*,CC=$CC,g" -i libtool
 		vsed -e 's,libtool,./libtool,g' -i Makefile

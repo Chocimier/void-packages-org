@@ -21,7 +21,7 @@ build_options_default="gir"
 # FIXME: drop gtk-doc generation from cross builds to avoid aarch64-musl & armv6l-musl
 # python relocation errors on CI that are not reproducible when building locally
 # https://github.com/void-linux/void-packages/runs/8028582126
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -Dgtk_doc=false"
 fi
 
@@ -31,10 +31,10 @@ libqrtr-glib-devel_package() {
 	pkg_install() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove usr/share/gtk-doc
 		fi
 		vmove "usr/lib/*.so"

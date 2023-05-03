@@ -99,14 +99,14 @@ do_configure() {
 		ppc*-musl) _args+=" --disable-decimal-float";;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CC_FOR_TARGET="$CC"
 		export GCC_FOR_TARGET="$CC"
 		export CXX_FOR_TARGET="$CXX"
 
 		_args+=" --host=$XBPS_CROSS_TRIPLET"
 		_args+=" --with-build-sysroot=${XBPS_CROSS_BASE}"
-	elif [ -z "$CHROOT_READY" ]; then
+	elif [[ ! -v CHROOT_READY ]]; then
 		export LD_LIBRARY_PATH="${XBPS_MASTERDIR}/usr/lib${XBPS_TARGET_WORDSIZE}"
 		_args+=" --build=${_target_triplet}"
 	else

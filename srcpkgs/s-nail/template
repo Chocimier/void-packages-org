@@ -22,7 +22,7 @@ alternatives="
 "
 
 do_build() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		cross=no
 	else
 		cross=yes

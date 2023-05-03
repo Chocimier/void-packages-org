@@ -87,12 +87,12 @@ build_options_default="
  qhull
  zlib"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# hdf5 is nocross
 	build_options_default+=" hdf5"
 fi
 
-if [ -n "$CROSS_BUILD" ];then
+if [[ -v CROSS_BUILD ]];then
 	# cross build cannot determine integer size for BLAS
 	# our BLAS (lapack and openblas) are built with 32 bit ints
 	# even in 64 bit architectures

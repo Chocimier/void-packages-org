@@ -40,7 +40,7 @@ fi
 
 nocross="execute lemon during build"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" wxPython4"
 	configure_args+=" -DPYTHON_DEST=/${py3_sitelib}
 	-DwxWidgets_CONFIG_OPTIONS='--prefix=${XBPS_CROSS_BASE}'"

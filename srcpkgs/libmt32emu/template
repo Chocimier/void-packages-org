@@ -21,7 +21,7 @@ desc_option_libsamplerate="Use libsamplerate for sample rate conversion"
 build_options_default="libsoxr"
 vopt_conflict libsoxr libsamplerate
 
-if [ "$build_option_libsoxr" -o "$build_option_libsamplerate" ]; then
+if build_option libsoxr || build_option libsamplerate; then
 	configure_args+=" -Dlibmt32emu_WITH_INTERNAL_RESAMPLER=off"
 fi
 

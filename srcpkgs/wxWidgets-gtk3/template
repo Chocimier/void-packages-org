@@ -19,7 +19,7 @@ post_install() {
 	local _config="gtk3-unicode-3.0"
 	# remove all occurrences of $XBPS_CROSS_TRIPLET in wx-config:
 	#   - mark this build as native build
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		rename "${XBPS_CROSS_TRIPLET}-" "" \
 			${DESTDIR}/usr/lib/wx/config/* \
 			${DESTDIR}/usr/lib/wx/include/*

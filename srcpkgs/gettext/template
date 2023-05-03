@@ -58,7 +58,7 @@ gettext-devel-examples_package() {
 gettext-devel_package() {
 	depends="${sourcepkg}>=${version}_${revision}
 	 gettext-devel-tools>=${version}_${revision}"
-	if [ -n "${_intl_lib}" ]; then
+	if [[ -v _intl_lib ]]; then
 		depends+=" gettext-libs>=${version}_${revision}"
 	fi
 	short_desc+=" - development files"

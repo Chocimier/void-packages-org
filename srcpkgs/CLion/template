@@ -61,13 +61,13 @@ post_extract() {
 			;;
 	esac
 
-	if [ ! "$build_option_bundled_cmake" ]; then
+	if ! build_option bundled_cmake; then
 		rm -rf bin/cmake
 	fi
-	if [ ! "$build_option_bundled_gdb" ]; then
+	if ! build_option bundled_gdb; then
 		rm -rf bin/gdb
 	fi
-	if [ ! "$build_option_bundled_lldb" ]; then
+	if ! build_option bundled_lldb; then
 		rm -rf bin/lldb
 	fi
 }

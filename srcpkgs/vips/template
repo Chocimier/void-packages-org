@@ -38,7 +38,7 @@ build_options_default="gir"
 desc_option_gtk_doc="Build GTK-doc documentation"
 desc_option_hdf5="HDF5 support"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc hdf5"
 fi
 
@@ -46,7 +46,7 @@ libvips_package() {
 	short_desc+=" - library"
 	pkg_install() {
 		vmove "usr/lib/*.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 	}
@@ -59,7 +59,7 @@ libvips-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}
@@ -69,7 +69,7 @@ libvips-doc_package() {
 	short_desc+=" - documentation"
 	pkg_install() {
 		vmove usr/share/doc
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
 	}

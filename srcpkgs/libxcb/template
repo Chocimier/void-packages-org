@@ -14,7 +14,7 @@ changelog="https://gitlab.freedesktop.org/xorg/lib/libxcb/-/raw/master/NEWS"
 distfiles="https://xorg.freedesktop.org/archive/individual/lib/libxcb-${version}.tar.xz"
 checksum=cc38744f817cf6814c847e2df37fcb8997357d72fa4bcbc228ae0fe47219a059
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" xcb-proto"
 fi
 

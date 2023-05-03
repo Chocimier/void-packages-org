@@ -32,14 +32,14 @@ pre_configure() {
 }
 
 post_install() {
-	if [ "$build_option_x11" ]; then
+	if build_option x11; then
 		vmkdir /etc/xdg/autostart
 		vinstall vmware-user-suid-wrapper/vmware-user.desktop 0644 /etc/xdg/autostart/
 		vbin scripts/common/vmware-xdg-detect-de
 		chmod 4755 "${DESTDIR}/usr/bin/vmware-user-suid-wrapper"
 	fi
 
-	if [ ! "$build_option_pam" ]; then
+	if ! build_option pam; then
 		rm -rf "${DESTDIR}/etc/pam.d/vmtoolsd"
 	fi
 

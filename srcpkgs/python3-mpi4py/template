@@ -24,7 +24,7 @@ post_extract() {
 }
 
 pre_build() {
-	if [ "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Need to tell OpenMPI wrappers to use cross compilers
 		export OMPI_CC="${CC}"
 		export OMPI_FC="${FC}"

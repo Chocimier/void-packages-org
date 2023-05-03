@@ -12,14 +12,14 @@ homepage="https://www.postgresql.org"
 build_options="languages"
 desc_option_languages="Include procedural languages as dependency"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default="languages"
 fi
 
 subpackages="postgresql-doc postgresql-client postgresql-contrib postgresql-full"
 
 # XXX disabled for now in cross builds.
-if [ "$build_option_languages" ]; then
+if build_option languages; then
 	subpackages+=" postgresql-plperl postgresql-plpython postgresql-pltcl"
 fi
 
@@ -57,7 +57,7 @@ postgresql-full_package() {
 	depends="postgresql postgresql-client postgresql-doc postgresql-contrib postgresql-libs"
 	short_desc="PostgreSQL all packages meta package"
 
-	if [ "$build_option_languages" ]; then
+	if build_option languages; then
 		depends+=" postgresql-plpython postgresql-plperl postgresql-pltcl"
 	fi
 }

@@ -13,7 +13,7 @@ homepage="https://community.kde.org/KDE_PIM/Akonadi"
 distfiles="${KDE_SITE}/release-service/${version}/src/akonadi-contacts-${version}.tar.xz"
 checksum=afd816058723d4fda79b61f0f052b24d47b822699695522db21c1a2141d7f83b
 
-if [ "$CROSS_BUILD" ];then
+if [[ -v CROSS_BUILD ]];then
 	hostmakedepends+=" qt5-qmake qt5-host-tools python3 kconfig"
 fi
 

@@ -45,7 +45,7 @@ case "$XBPS_TARGET_MACHINE" in
 	mips*-musl|ppc*) _have_gccgo=no ;;
 esac
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends="tar texinfo perl flex"
 else
 	_have_gccgo=no
@@ -65,7 +65,7 @@ build_options_default="ada"
 desc_option_ada="Enable Ada build"
 desc_option_gnatboot="Enable Ada bootstrap using adacore.com binaries"
 
-if [ "$build_option_gnatboot" ]; then
+if build_option gnatboot; then
 	case "$XBPS_TARGET_MACHINE" in
 	x86_64)
 		_gnat_tarball="gnat-gpl-2017-x86_64-linux-bin.tar.gz"
@@ -82,7 +82,7 @@ if [ "$build_option_gnatboot" ]; then
 	esac
 fi
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	subpackages+=" gcc-fortran libgfortran-devel libgfortran"
 	subpackages+=" gcc-objc gcc-objc++ libobjc-devel libobjc"
 fi
@@ -96,7 +96,7 @@ if [ "$_have_gccgo" = "yes" ]; then
 fi
 
 subpackages+=" libstdc++-devel libstdc++ libgcc-devel"
-if [ "$build_option_gnatboot" -o "$build_option_ada" ]; then
+if build_option gnatboot || build_option ada; then
 	subpackages+=" gcc-ada libada-devel libada"
 fi
 
@@ -146,9 +146,9 @@ case "$XBPS_TARGET_MACHINE" in
 	x86_64*|i686) subpackages+=" libitm libitm-devel";;
 	*) subpackages+=" libitm libitm-devel";;
 esac
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" cross-${_triplet}"
-	if [ "$build_option_ada" ]; then
+	if build_option ada; then
 		hostmakedepends+=" gcc-ada"
 	fi
 fi
@@ -161,7 +161,7 @@ post_extract() {
 	mv mpc-${_mpc_version} mpc
 	mv isl-${_isl_version} isl
 
-	if [ "$build_option_gnatboot" ]; then
+	if build_option gnatboot; then
 		local f="${XBPS_SRCDISTDIR}/${pkgname}-${version}/${_gnat_tarball}"
 		msg_normal "Extracting ${_gnat_tarball} ...\n"
 		mkdir -p ${wrksrc}/gnat-ins
@@ -223,7 +223,7 @@ do_configure() {
 		_langs="c,c++,lto"
 	fi
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CC_FOR_TARGET="$CC"
 		export GCC_FOR_TARGET="$CC"
 		export CXX_FOR_TARGET="$CXX"
@@ -233,7 +233,7 @@ do_configure() {
 		_args+=" --host=$XBPS_CROSS_TRIPLET"
 		_args+=" --with-build-sysroot=${XBPS_CROSS_BASE}"
 		_langs+=",objc,obj-c++,fortran"
-	elif [ -z "$CHROOT_READY" ]; then
+	elif [[ ! -v CHROOT_READY ]]; then
 		export LD_LIBRARY_PATH="${XBPS_MASTERDIR}/usr/lib${XBPS_TARGET_WORDSIZE}"
 		_args+=" --build=${_triplet}"
 	else
@@ -294,7 +294,7 @@ do_configure() {
 
 	mkdir -p build
 	cd build
-	if [ "$build_option_gnatboot" ]; then
+	if build_option gnatboot; then
 		_args+=" --enable-languages=${_langs},ada"
 		_args+=" --enable-libada"
 		CONFIG_SHELL=/bin/bash \
@@ -303,7 +303,7 @@ do_configure() {
 		GNATMAKE="${wrksrc}/gnat/bin/gnatmake" \
 		PATH="${wrksrc}/gnat/bin:$PATH" \
 			${wrksrc}/configure ${_args}
-	elif [ "$build_option_ada" ]; then
+	elif build_option ada; then
 		_args+=" --enable-languages=${_langs},ada"
 		CONFIG_SHELL=/bin/bash \
 			${wrksrc}/configure ${_args}
@@ -314,11 +314,11 @@ do_configure() {
 	fi
 }
 do_build() {
-	if [ -z "$CHROOT_READY" ]; then
+	if [[ ! -v CHROOT_READY ]]; then
 		export LD_LIBRARY_PATH="${XBPS_MASTERDIR}/usr/lib${XBPS_TARGET_WORDSIZE}"
 	fi
 	cd build
-	if [ "$build_option_gnatboot" ]; then
+	if build_option gnatboot; then
 		CC="${wrksrc}/gnat/bin/gcc" \
 		GNATBIND="${wrksrc}/gnat/bin/gnatbind" \
 		GNATMAKE="${wrksrc}/gnat/bin/gnatmake" \
@@ -329,7 +329,7 @@ do_build() {
 	fi
 }
 pre_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# XXX otherwise links to host libpthread
 		for f in $(find ${wrksrc}/build/${XBPS_CROSS_TRIPLET} -type f -name libtool); do
 			sed -e "s,add_dir=\"-L\$libdir\",add_dir=\"-L${XBPS_CROSS_BASE}\$libdir\",g" -i $f
@@ -443,7 +443,7 @@ gcc-fortran_package() {
 		vmove usr/lib/gcc/${_triplet}/${_minorver}/f951
 		vmove usr/lib/gcc/${_triplet}/${_minorver}/libcaf_single.a
 		vmove usr/lib/gcc/${_triplet}/${_minorver}/finclude
-		if [ "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			# A number of OMP modules are not built when cross
 			# compiling gcc. Copy them from the cross compiler.
 			local src="/usr/lib/gcc/${_triplet}/${version}/finclude"

@@ -11,6 +11,6 @@ homepage="https://github.com/pvanek/qlipper"
 distfiles="https://github.com/pvanek/qlipper/archive/${version}.tar.gz"
 checksum=9039458cfa18bd0be78b1e32e7da33b2e7e2c19d02d4b895d6946353ac8f706d
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-tools qt5-qmake qt5-host-tools"
 fi

@@ -12,7 +12,7 @@ homepage="https://www.gnupg.org"
 distfiles="https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-${version}.tar.bz2"
 checksum=3b9c02a004b68c256add99701de00b383accccf37177e0d6c58289664cce0c03
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" ac_cv_sys_symbol_underscore=no"
 fi
 

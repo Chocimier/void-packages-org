@@ -79,7 +79,7 @@ python_version=3
 # Virtual package cares only about year part of version
 provides="tex-${version%${version#????}}_1"
 
-if [ "$CROSS_BUILD" ] ; then
+if [[ -v CROSS_BUILD ]] ; then
 	# Tangle is required for cross compile
 	hostmakedepends+=" texlive"
 fi
@@ -110,7 +110,7 @@ if [ "${_luajit_host_cc}" != "broken" ] ; then
 	build_options_default+=" luajit"
 fi
 
-if [ ! "$build_option_luajit" ] ; then
+if ! build_option luajit ; then
 	configure_args+=" --disable-luajittex --disable-mfluajit
 	 --disable-mfluajit-nowin --disable-luajithbtex"
 else
@@ -169,7 +169,7 @@ pre_build() {
 	if [ -n "$build_option_luajit" ] ; then
 		export HOST_CC="${_luajit_host_cc}"
 		export HOSTCC="${_luajit_host_cc}"
-		if [ -n "$CROSS_BUILD" ] ; then
+		if [[ -v CROSS_BUILD ]] ; then
 			# LuaJIT configure script does not cross compile correctly
 			local _cflags=$CFLAGS
 			local _ldflags=$LDFLAGS
@@ -273,7 +273,7 @@ texlive-LuaTeX_package() {
 	depends="${sourcepkg}>=${version}_${revision} bash"
 	short_desc+=" - extended pdfTeX using Lua"
 	pkg_install() {
-		if [ "$build_option_luajit" ] ; then
+		if build_option luajit ; then
 			for i in luajittex mfluajit mfluajit-nowin luajithbtex texluajit \
 					 texluajitc ; do
 				vmove "usr/bin/${i}"

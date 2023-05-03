@@ -13,7 +13,7 @@ homepage="https://github.com/xbmc/vfs.sftp"
 distfiles="https://github.com/xbmc/vfs.sftp/archive/${version}-${_kodi_release}.tar.gz"
 checksum=b15c5dde7b3aadb3e82e61cb9b0440812b6c2f65b38c6c25aef726f97e746f68
 
-if [ -n "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DCMAKE_MODULE_PATH=${XBPS_CROSS_BASE}/usr/share/kodi/cmake"
 	configure_args+=" -DKODI_INCLUDE_DIR=${XBPS_CROSS_BASE}/usr/include/kodi"
 fi

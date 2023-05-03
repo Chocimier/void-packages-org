@@ -30,7 +30,7 @@ pango-xft_package() {
 	short_desc+=" - X font rendering"
 	pkg_install() {
 		vmove "usr/lib/libpangoxft*.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0/PangoXft-1.0.typelib
 		fi
 	}
@@ -40,7 +40,7 @@ pango-view_package() {
 	pkg_install() {
 		vmove usr/bin/pango-view
 		# XXX help2man needs to run host binary
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove usr/share/man/man1/pango-view.1
 		fi
 	}
@@ -51,7 +51,7 @@ pango-devel_package() {
 	pkg_install() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-*"
 		fi
 		vmove "usr/lib/*.so"

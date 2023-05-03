@@ -14,7 +14,7 @@ distfiles="${GNOME_SITE}/${pkgname}/${version}/${pkgname}-${version}.tar.xz"
 checksum=7c4ba0bff001f06d8983cfc105adaac42df1d1267a2591798a780bac557a5819
 lib32disabled=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gtk-update-icon-cache"
 fi
 

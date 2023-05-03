@@ -30,7 +30,7 @@ fi
 pre_configure() {
 	sed -i configure \
 		-e "s;^\(  APR_BUILD_DIR=\).*$;\1${XBPS_CROSS_BASE}/usr/share/apr-1/build;"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" --with-apr=${XBPS_WRAPPERDIR}/apr-1-config"
 	else
 		configure_args+=" --with-apr=/usr/bin/apr-1-config"
@@ -53,7 +53,7 @@ post_configure() {
 post_install() {
 	# remove static libs
 	find ${DESTDIR} -type f -name \*.a -delete
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e "s,$XBPS_CROSS_BASE,,g" "$DESTDIR/usr/bin/apu-1-config"
 	fi
 }

@@ -48,7 +48,7 @@ conf_files="
 	/etc/rpc
 	/etc/gai.conf
 	/etc/ld.so.conf"
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends="bison gettext perl python3 texinfo"
 fi
 makedepends="kernel-libc-headers"
@@ -82,7 +82,7 @@ do_configure() {
 		arm64*) configure_args+=" --with-march=armv8-a";;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" --host=${XBPS_CROSS_TRIPLET}"
 		configure_args+=" --with-sysroot=${XBPS_CROSS_BASE}"
 		configure_args+=" --with-headers=${XBPS_CROSS_BASE}/usr/include"

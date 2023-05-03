@@ -20,7 +20,7 @@ distfiles="https://launchpad.net/apparmor/${version%.*}/${version}/+download/app
 checksum=b8ffac45d0b283afe574ddd5542142ba1a62c354df110cff862b99201f29c843
 replaces="apparmor-vim>=0"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	configure_args="--with-perl --with-python"
 	hostmakedepends+=" swig"
 	makedepends="python3-devel"
@@ -55,7 +55,7 @@ post_install() {
 	make DESTDIR="${DESTDIR}" install -C profiles
 
 	# requires perl bindings not generated when cross-compiling
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		rm -f ${DESTDIR}/usr/bin/aa-notify
 	fi
 
@@ -70,7 +70,7 @@ libapparmor_package() {
 	license="LGPL-2.1-only"
 	pkg_install() {
 		vmove "usr/lib/libapparmor.so*"
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove usr/lib/perl5
 			vmove "${py3_sitelib}/LibAppArmor*"
 		fi

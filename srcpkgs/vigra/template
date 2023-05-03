@@ -17,7 +17,7 @@ make_check=no # all tests fail with: [Unknown system error -8] Process not start
 python_version=3
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		g++ config/output_cplusplus_version.cxx -o gccbugcheck
 		sed "s#%OUTPUT%#$(./gccbugcheck)#" $FILESDIR/TryRunResults.cmake > TryRunResults.cmake
 		configure_args+=" -C $PWD/TryRunResults.cmake"

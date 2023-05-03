@@ -20,7 +20,7 @@ build_options_default="wayland x11"
 
 pre_build() {
 	# this file is racey, so pre-generate it ahead of time
-	if [ "$build_option_wayland" ]; then
+	if build_option wayland; then
 		ninja -C build src/xdg-shell-client-protocol.h
 	fi
 }

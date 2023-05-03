@@ -15,7 +15,7 @@ checksum=e08ab50672e24b51d30938ac60a6caa38bd8f5fb5f8fa3375dec0e69031cb620
 
 subpackages="opencamlib-devel"
 # opencamlib-python3 cannot be cross compiled because of vtk-python3
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	subpackages+=" opencamlib-python3"
 fi
 

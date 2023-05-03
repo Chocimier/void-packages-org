@@ -24,7 +24,7 @@ build_options="x11 gtk3 huge"
 desc_option_huge="Enable support for many language interpreters"
 build_options_default="x11 gtk3"
 # XXX vim-huge cannot be cross compiled for now.
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" huge"
 fi
 
@@ -52,7 +52,7 @@ do_configure() {
 	nohuge_args="--disable-perlinterp --disable-pythoninterp
 		--disable-rubyinterp --disable-netbeans --disable-gpm"
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+="
 			--host=${XBPS_CROSS_TRIPLET}
 			vim_cv_toupper_broken=no vim_cv_terminfo=yes
@@ -68,24 +68,24 @@ do_configure() {
 	./configure ${configure_args} ${args} ${nohuge_args} --disable-xim --enable-gui=no --with-x=no
 
 	# X11 version.
-	if [ "$build_option_x11" ]; then
+	if build_option x11; then
 		cd $wrksrc/vim-x11
 		./configure ${configure_args} ${args} ${nohuge_args} --enable-gui=no --with-x
 	fi
 
 	# GTK+ version.
-	if [ "$build_option_gtk3" ]; then
+	if build_option gtk3; then
 		cd $wrksrc/gvim
 		./configure ${configure_args} ${args} ${nohuge_args} --enable-gui=gtk3 --with-x --with-vim-name=gvim
 	fi
 
 	# Huge versions
-	if [ "$build_option_huge" ]; then
+	if build_option huge; then
 		cd $wrksrc/vim-huge
 		./configure ${configure_args} ${args} --with-x=yes --enable-gui=no \
 			--with-features=huge --enable-perlinterp --enable-python3interp \
 			--enable-rubyinterp --enable-luainterp --enable-terminal
-		if [ "$build_option_gtk3" ]; then
+		if build_option gtk3; then
 
 			cd $wrksrc/gvim-huge
 			./configure ${configure_args} ${args} \
@@ -124,7 +124,7 @@ do_install() {
 	rm -f ${DESTDIR}/usr/bin/{ex,view}
 
 	# install gvim icons
-	if [ "$build_option_gtk3" ]; then
+	if build_option gtk3; then
 		cd ${wrksrc}/gvim
 		sed -i "s|/locolor|/hicolor|g" src/Makefile
 		for d in 16 32 48; do

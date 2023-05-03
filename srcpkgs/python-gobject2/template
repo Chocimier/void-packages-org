@@ -18,7 +18,7 @@ python_version=2 #unverified
 
 pre_configure() {
 	NOCONFIGURE=1 autoreconf -fi
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s,\(PYTHON_INCLUDES\)=.*,\1=-I${XBPS_CROSS_BASE}/usr/include/python2.7,g" configure
 	fi
 }

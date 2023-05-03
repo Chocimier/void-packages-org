@@ -46,7 +46,7 @@ make_dirs="
 	/var/spool/postfix/saved	0700	postfix	root
 	/var/spool/postfix/trace	0700	postfix	root"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# XXX postfix-install needs native binaries.
 	hostmakedepends+=" $pkgname"
 fi
@@ -83,7 +83,7 @@ do_build() {
 }
 
 pre_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e 's,bin/postconf,/usr/bin/postconf,g' -i postfix-install
 	fi
 }

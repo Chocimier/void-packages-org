@@ -28,7 +28,7 @@ at-spi2-core-devel_package() {
 		vmove usr/include/at-spi-2.0
 		vmove usr/lib/libatspi.so
 		vmove usr/lib/pkgconfig/atspi-2.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Atspi-2.0.gir
 		fi
 	}
@@ -37,7 +37,7 @@ at-spi2-core-devel_package() {
 atk_package() {
 	short_desc="Set of interfaces for accessibility"
 	pkg_install() {
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0/Atk-1.0.typelib
 		fi
 		vmove "usr/lib/libatk-1.0.so.*"
@@ -51,7 +51,7 @@ atk-devel_package() {
 		vmove usr/include/atk-1.0
 		vmove usr/lib/libatk-1.0.so
 		vmove usr/lib/pkgconfig/atk.pc
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0/Atk-1.0.gir
 		fi
 	}

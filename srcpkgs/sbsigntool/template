@@ -29,7 +29,7 @@ post_extract() {
 }
 
 post_patch() {
-	[ ! "$CROSS_BUILD" ] && return
+	[[ ! -v CROSS_BUILD ]] && return
 
 	case "${XBPS_TARGET_MACHINE}" in
 		arm*) _ARCH=arm ;;

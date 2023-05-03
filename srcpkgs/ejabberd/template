@@ -20,7 +20,7 @@ checksum=b8e93b51ae3cb650a2870fae1b6705404bb155289e97be7e9a54961a9effb959
 build_options="sqlite"
 build_options_default="sqlite"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" erlang"
 	configure_args="--with-erlang=${XBPS_CROSS_BASE}/usr/lib/erlang/usr/include"
 	broken="configure: error: cannot run test program while cross compiling"

@@ -25,7 +25,7 @@ make_dirs="
  /var/lib/colord 0755 colord colord
  /var/lib/colord/icc 0755 colord colord"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" colord"
 fi
 
@@ -36,7 +36,7 @@ build_options_default="gir vala"
 libcolord_package() {
 	short_desc+=" - runtime library"
 	pkg_install() {
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 		vmove "usr/lib/*.so.*"
@@ -50,10 +50,10 @@ colord-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
 	}

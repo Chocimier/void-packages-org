@@ -29,7 +29,7 @@ replaces="notmuch-emacs>=0"
 conflicts="gpgme<1.14.0_1"
 subpackages="libnotmuch libnotmuch-devel notmuch-mutt notmuch-python3"
 
-if [ ! "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	makedepends+=" ruby-devel"
 	subpackages+=" notmuch-ruby"
 fi
@@ -68,7 +68,7 @@ do_install() {
 	python3 setup.py build --build-base=build \
 		install --prefix=/usr --root=${DESTDIR}
 	cd -
-	if [ ! "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		make DESTDIR=${DESTDIR} -C bindings/ruby install
 	fi
 	rm -f ${DESTDIR}/usr/share/applications/mimeinfo.cache

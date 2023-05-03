@@ -14,7 +14,7 @@ distfiles="${CPAN_SITE}/XML/${pkgname/perl-/}-${version}.tar.gz"
 checksum=f0bca4d0c2da35d879fee4cd13f352014186cedab27ab5e191f39b5d7d4f46cf
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Disable link and execute check for libxml2
 		sed -i Makefile.PL -e"s;_libxml_check_lib('xml2');1;"
 	fi

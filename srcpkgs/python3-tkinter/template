@@ -30,7 +30,7 @@ license="Python-2.0"
 distfiles="https://www.python.org/ftp/python/${version}/Python-${version}.tar.xz"
 checksum=8a5db99c961a7ecf27c75956189c9602c968751f11dbeae2b900dbff1c085b5e
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" python3"
 	configure_args+=" --with-build-python=python3.11"
 fi
@@ -42,7 +42,7 @@ post_extract() {
 }
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		patch -Np0 -i ${FILESDIR}/cross.patch
 	fi
 }

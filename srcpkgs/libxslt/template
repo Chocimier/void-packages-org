@@ -16,7 +16,7 @@ checksum=3a4b27dc8027ccd6146725950336f1ec520928f320f144eb5fa7990ae6123ab4
 python_version=3
 CFLAGS="-I$XBPS_CROSS_BASE/usr/include/python$py3_ver"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" libxslt"
 fi
 
@@ -29,7 +29,7 @@ post_configure() {
 }
 
 post_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		XSLTPROC=/usr/bin/xsltproc
 	else
 		XSLTPROC=${wrksrc}/xsltproc/xsltproc
@@ -38,7 +38,7 @@ post_build() {
 }
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Remove $XBPS_CROSS_BASE in pkg-config
 		vsed -i -e "s,-I${XBPS_CROSS_BASE}/usr/include,-I\${includedir}," \
 			$DESTDIR/usr/bin/xslt-config

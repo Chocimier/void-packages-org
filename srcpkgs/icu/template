@@ -37,7 +37,7 @@ pre_configure() {
 	*-musl) sed -i -e 's,DU_HAVE_STRTOD_L=1,DU_HAVE_STRTOD_L=0,' configure ;;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Configure and build for host.
 		mkdir host-build
 		(
@@ -80,7 +80,7 @@ post_install() {
 
 	# for big endian, we need to convert the file that's there with icupkg
 	local _icupkg_path="${DESTDIR}/usr"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_icupkg_path="${wrksrc}/host-icu"
 	fi
 

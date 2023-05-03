@@ -15,7 +15,7 @@ nostrip=yes
 # If we are cross-building we need to pass the cross-compilation triplet
 # to the CROSS_COMPILE environment variable so the build system uses
 # the cross tooling
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	export CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-
 fi
 

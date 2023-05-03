@@ -22,7 +22,7 @@ lib32disabled=yes
 python_version=2
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s,\(PYTHON_INCLUDES\)=.*,\1=-I${XBPS_CROSS_BASE}/usr/include/python2.7,g" configure
 	fi
 }

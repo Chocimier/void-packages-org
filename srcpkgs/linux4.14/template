@@ -72,7 +72,7 @@ do_configure() {
 		ppc*) arch=powerpc;;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_args="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
 
@@ -106,10 +106,10 @@ do_build() {
 		aarch64*) _args="Image modules dtbs"; arch=arm64;;
 		ppc*) _args="zImage modules"; arch=powerpc;;
 	esac
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_cross="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	fi
-	if [ "${_patchver}" ]; then
+	if [[ -v _patchver ]]; then
 		_version="EXTRAVERSION=${_patchver}"
 	fi
 	export LDFLAGS=

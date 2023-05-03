@@ -17,7 +17,7 @@ distfiles="https://gitlab.gnome.org/World/Fragments/-/archive/$version/Fragments
 checksum=26e20d8cca8b7a2542b2d0e808d10dda082de52037dd8826ec6b00f0437f4564
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i src/meson.build \
 		 	-e "s%rust_target /%'${RUST_TARGET}' / rust_target /%"
 	fi

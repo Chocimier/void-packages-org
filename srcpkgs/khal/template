@@ -30,7 +30,7 @@ post_install() {
 	vlicense COPYING
 
 	local _pypath="${DESTDIR}/${py3_sitelib}"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		_pypath="${_pypath}:${XBPS_CROSS_BASE}/${py3_lib}"
 	fi
 

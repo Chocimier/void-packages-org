@@ -52,7 +52,7 @@ do_configure() {
 				${t}/.config;;
 		esac
 
-		if [ "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			vsed -i -e \
 				"s,\(CONFIG_CROSS_COMPILER_PREFIX\).*,\1=\"${XBPS_CROSS_TRIPLET}-\",g" \
 				${t}/.config

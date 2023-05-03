@@ -16,7 +16,7 @@ pre_configure() {
 	autoreconf -fi
 }
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	post_build() {
 		sed -i -e "s|${XBPS_CROSS_BASE}||" lrdf.pc
 	}

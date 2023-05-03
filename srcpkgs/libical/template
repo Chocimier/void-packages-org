@@ -34,7 +34,7 @@ libical-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove usr/lib/*.a
 		vmove usr/lib/*.so
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

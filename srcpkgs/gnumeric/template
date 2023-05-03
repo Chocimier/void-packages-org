@@ -19,7 +19,7 @@ make_check=no
 # cause build failures
 hostmakedepends+=" perl-XML-Parser"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	CFLAGS="-I${XBPS_CROSS_BASE}/usr/include"
 	configure_args+=" --without-perl"
 fi

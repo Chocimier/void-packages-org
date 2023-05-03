@@ -40,7 +40,7 @@ pre_configure() {
 	vsed -i configure.ac \
 		-e '/m4_define(\[giac_micro_version]/ s/\[0]/[0-'${version##*.}']/'
 	autoreconf -fi
-	if [ "$build_option_openblas" ]; then
+	if build_option openblas; then
 		export BLAS_LIBS=-lopenblas
 		export BLAS_CFLAGS=-I/usr/include/openblas
 		export LAPACK_LIBS=-lopenblas

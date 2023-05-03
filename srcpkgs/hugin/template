@@ -20,7 +20,7 @@ distfiles="${SOURCEFORGE_SITE}/hugin/hugin/hugin-${version%.*}/hugin-${version}.
 checksum=97c8562a0ba9a743e0b955a43dfde048b1c60cd9e5f2ee2b69de1a81646e05a7
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" python3"
 else
 	makedepends+=" flann-devel"

@@ -29,7 +29,7 @@ xfce4-panel-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove usr/share/gtk-doc
 		vmove "usr/lib/*.so"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 			vmove usr/share/vala
 		fi

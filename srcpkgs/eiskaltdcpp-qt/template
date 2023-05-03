@@ -15,7 +15,7 @@ homepage="https://github.com/eiskaltdcpp/eiskaltdcpp"
 distfiles="https://github.com/eiskaltdcpp/eiskaltdcpp/archive/v${version}.tar.gz"
 checksum=2ed853a57c57aab0e87fdea273a01707184ee425a2aaf9fcd2e0a32c57a2de2c
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-devel"
 fi
 

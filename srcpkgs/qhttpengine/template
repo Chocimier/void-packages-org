@@ -12,7 +12,7 @@ homepage="https://github.com/nitroshare/qhttpengine"
 distfiles="https://github.com/nitroshare/qhttpengine/archive/${version}.tar.gz"
 checksum=6505cf889909dc29bab4069116656e7ca5a9e879f04935139439c5691a76c55e
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools"
 fi
 

@@ -12,6 +12,6 @@ homepage="https://github.com/daedreth/URXVTConfig"
 distfiles="https://github.com/daedreth/URXVTConfig/archive/${version}.tar.gz"
 checksum=74ad9539f4d795ddeca56d53b02483c6ad162a24576b9667e2de54cc84ffd8f3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-devel"
 fi

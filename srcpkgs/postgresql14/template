@@ -39,7 +39,7 @@ make_dirs="
  /var/lib/postgresql   0750 postgres postgres
  /var/lib/postgresql${_major} 0750 postgres postgres"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --without-perl --without-python --without-tcl"
 fi
 
@@ -153,7 +153,7 @@ postgresql14-libs-devel_package() {
 }
 
 # XXX disabled for now in cross builds.
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 
 postgresql14-plperl_package() {
 	depends="${sourcepkg}>=${version}_${revision}"

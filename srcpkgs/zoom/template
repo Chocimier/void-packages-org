@@ -23,7 +23,7 @@ build_options="systemqt"
 desc_option_systemqt="Use system QT libraries"
 
 pre_install() {
-	if [ "${build_option_systemqt}" ]; then
+	if build_option systemqt; then
 		rm -f opt/zoom/libQt5*.so{,.*}
 		rm -f opt/zoom/libicu*.so{,.*}
 

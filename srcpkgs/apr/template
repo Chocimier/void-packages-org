@@ -16,7 +16,7 @@ checksum=e2e148f0b2e99b8e5c6caa09f6d4fb4dd3e83f744aa72a952f94f5a14436f7ea
 CFLAGS="-DAPR_IOVEC_DEFINED=1"
 
 # Can't run test programs when cross compiling
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" apr_cv_pthreads_cflags=-pthread"
 	configure_args+=" apr_cv_process_shared_works=yes"
 	configure_args+=" apr_cv_mutex_robust_shared=yes"
@@ -30,7 +30,7 @@ if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
 fi
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i Makefile \
 			-e "/LINK_PROG.*OBJECTS_gen_test_char/s|.*|\t${BUILD_CC} ${BUILD_CFLAGS} tools/gen_test_char.c -o tools/gen_test_char|"
 		# Fixup some not detected configure results to match native builds
@@ -43,7 +43,7 @@ pre_build() {
 }
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i -e "s,$XBPS_CROSS_BASE,,g" \
 			"$DESTDIR/usr/bin/apr-1-config" \
 			"$DESTDIR/usr/share/apr-1/build/apr_rules.mk"

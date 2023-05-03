@@ -47,7 +47,7 @@ if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
 	makedepends+=" musl-legacy-compat"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" libX11-devel libxcb-devel pciutils-devel libXext-devel libglvnd-devel
 	 libjpeg-turbo-devel libXi-devel nss-devel libpng-devel libwebp-devel
 	 libxml2-devel $(vopt_if pulseaudio pulseaudio-devel) libxslt-devel libxkbcommon-devel
@@ -61,7 +61,7 @@ if [ ! "$XBPS_WORDSIZE" = "$XBPS_TARGET_WORDSIZE" ]; then
 	broken="chromium (v8) can only be cross compiled if word size matches"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	case "${XBPS_TARGET_MACHINE}" in
 		aarch64*) ;;
 		*) nocross="chromium can not be cross compiled for this architecture" ;;
@@ -101,7 +101,7 @@ _setup_clang() {
 	export BUILD_NM=llvm-nm
 	export BUILD_CFLAGS="-Wno-unknown-warning-option"
 	export BUILD_CXXFLAGS="-Wno-unknown-warning-option"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		CFLAGS+=" --gcc-toolchain=/usr"
 		CFLAGS+=" --sysroot=${XBPS_CROSS_BASE}"
 		CFLAGS+=" -nostdinc"
@@ -121,7 +121,7 @@ _setup_clang() {
 }
 
 _setup_toolchain() {
-	if [ "$build_option_clang" ]; then
+	if build_option clang; then
 		_setup_clang
 	fi
 }
@@ -253,7 +253,7 @@ do_configure() {
 		'chrome_pgo_phase=0'
 	)
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		conf+=(
 			'custom_toolchain="//build/toolchain/linux/unbundle:default"'
 			'host_toolchain="//build/toolchain/linux/unbundle:host"'
@@ -277,7 +277,7 @@ do_configure() {
 		aarch64*) conf+=( 'target_cpu="arm64"' ) ;;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		case "${XBPS_MACHINE}" in
 			x86_64*) conf+=( 'host_cpu="x64"' ) ;;
 			i686*) conf+=( 'host_cpu="x86"' ) ;;

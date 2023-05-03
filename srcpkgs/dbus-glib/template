@@ -15,7 +15,7 @@ homepage="http://www.freedesktop.org/wiki/Software/DBusBindings"
 distfiles="http://dbus.freedesktop.org/releases/$pkgname/$pkgname-$version.tar.gz"
 checksum=7d550dccdfcd286e33895501829ed971eeb65c614e73aadb4a08aeef719b143a
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-dbus-binding-tool=dbus-binding-tool"
 	hostmakedepends+=" dbus-glib-devel"
 fi

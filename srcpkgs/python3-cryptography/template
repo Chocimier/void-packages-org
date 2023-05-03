@@ -19,7 +19,7 @@ changelog="https://raw.githubusercontent.com/pyca/cryptography/master/CHANGELOG.
 distfiles="${PYPI_SITE}/c/cryptography/cryptography-${version}.tar.gz"
 checksum=bc5b871e977c8ee5a1bbc42fa8d19bcc08baf0c51cbf1586b0e87a2694dde42f
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" rust-std"
 	export PYO3_CROSS_LIB_DIR="${XBPS_CROSS_BASE}/usr/lib"
 	export PYO3_CROSS_INCLUDE_DIR="${XBPS_CROSS_BASE}/usr/include"

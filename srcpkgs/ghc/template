@@ -38,11 +38,11 @@ desc_option_bindist="Create a binary distribution"
 # some components rely on stage2 binaries being runnable on the host
 # even cross-compiled bindists are incomplete, and you should only
 # use them to compile proper bindists on newly bootstrapped targets
-if [ -z "$build_option_bindist" ]; then
+if ! build_option bindist; then
 	# final package builds use system libffi as well as gmp and ncurses
 	configure_args=" --with-system-libffi"
 	makedepends+=" libffi-devel ncurses-devel gmp-devel"
-elif [ -z "$CROSS_BUILD" ]; then
+elif [[ ! -v CROSS_BUILD ]]; then
 	# native bindist builds use gmp and ncurses, but builtin libffi
 	makedepends+=" ncurses-devel gmp-devel"
 elif [ "${XBPS_MACHINE%-*}" != "${XBPS_TARGET_MACHINE%-*}" ]; then
@@ -65,7 +65,7 @@ esac
 # GHC's bundled tarball is from 2017, buggy on some archs
 _ffi_rev=4d6d2866ae43e55325e8ee96561221804602cd7a
 
-if [ "$build_option_bindist" ]; then
+if build_option bindist; then
 	# Required to make the binary distribution tarball
 	hostmakedepends+=" tar xz libtool libltdl-devel"
 	# Fetch a safe libffi tarball
@@ -75,14 +75,14 @@ if [ "$build_option_bindist" ]; then
 fi
 
 post_extract() {
-	[ "$build_option_bindist" ] || return 0
+	build_option bindist || return 0
 
 	# update libffi for all bindists
 	rm -f libffi-tarballs/libffi-*.tar.gz
 	cp ${XBPS_SRCDISTDIR}/${pkgname}-${version}/libffi-${_ffi_rev}.tar.gz \
 	 libffi-tarballs
 
-	[ "$CROSS_BUILD" ] || return 0
+	[[ -v CROSS_BUILD ]] || return 0
 
 	# create build config for cross bindists
 	local flav="quick"
@@ -123,7 +123,7 @@ post_install() {
 	vlicense LICENSE
 
 	local arch dest
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		arch=${XBPS_CROSS_TRIPLET%%-*}
 	else
 		arch=${XBPS_TRIPLET%%-*}
@@ -134,7 +134,7 @@ post_install() {
 		dest=ghc-${version}-${arch}-void-linux.tar.xz
 	fi
 
-	if [ "$build_option_bindist" ]; then
+	if build_option bindist; then
 		msg_normal "Creating binary distribution for ${XBPS_TARGET_MACHINE}...\n"
 		make ${makejobs} binary-dist
 		mkdir -p ${XBPS_SRCDISTDIR}/distfiles

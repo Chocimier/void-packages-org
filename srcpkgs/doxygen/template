@@ -17,7 +17,7 @@ checksum=55b454b35d998229a96f3d5485d57a0a517ce2b78d025efb79d57b5a2e4b2eec
 build_options="wizard"
 desc_option_wizard="build Qt5 GUI configuration tool, doxywizard"
 
-if [ "$build_option_wizard" ]; then
+if build_option wizard; then
 	configure_args+=" -Dbuild_wizard=1"
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 	makedepends+=" qt5-devel"
@@ -25,7 +25,7 @@ fi
 
 post_install() {
 	vman doc/doxygen.1
-	if [ "$build_option_wizard" ]; then
+	if build_option wizard; then
 		vman doc/doxywizard.1
 	fi
 }

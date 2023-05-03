@@ -11,14 +11,14 @@ homepage="https://joker-lang.org/"
 distfiles="https://github.com/candid82/joker/archive/v${version}.tar.gz"
 checksum=c14789a091d38f7c9373705e9dc9edd24ab6c3c877f83788db4a0b14ebef26ef
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" joker"
 fi
 
 pre_build() {
 	JOKER="joker"
 
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		JOKER="../joker"
 		go generate ./...
 		go build

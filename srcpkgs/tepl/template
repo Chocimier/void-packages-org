@@ -21,7 +21,7 @@ make_check_pre="xvfb-run"
 build_options="gir gtk_doc"
 build_options_default="gir"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -32,10 +32,10 @@ tepl-devel_package() {
 		vmove usr/include
 		vmove usr/lib/*.so
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
-		if [ "$build_option_gtk_doc" ]; then
+		if build_option gtk_doc; then
 			vmove usr/share/gtk-doc
 		fi
 	}

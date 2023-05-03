@@ -13,7 +13,7 @@ distfiles="https://www.aquamaniac.de/rdm/attachments/download/386/${pkgname}-${v
 checksum=a97ab42f7298cbb2617b2bda53ca51a2b0fe5f780bde098a39a5f4a3243e3418
 disable_parallel_build=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	export PKG_CONFIG_PATH=${XBPS_CROSS_BASE}/usr/lib/pkgconfig
 	configure_args+=" -with-xmlmerge=/usr/bin/xmlmerge"
 fi

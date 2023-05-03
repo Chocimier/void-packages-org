@@ -12,7 +12,7 @@ homepage="https://kde.org/"
 distfiles="${KDE_SITE}/${pkgname}/${version}/${pkgname}-${version}.tar.xz"
 checksum=8de5df5a3abeed2b13fc56f33d1846ae5b90adfc2127bc1b0ffa5e300b7663c3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake kcoreaddons"
 fi
 

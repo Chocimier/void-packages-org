@@ -17,7 +17,7 @@ repository=bootstrap
 
 conflicts="distcc>=0"
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	makedepends="binutils-devel"
 fi
 

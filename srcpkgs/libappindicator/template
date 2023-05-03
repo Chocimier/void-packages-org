@@ -26,7 +26,7 @@ CFLAGS+=" -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_56 -DGLIB_VERSION_MAX_ALLOW
 
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i 's:^py_prefix=`:py_prefix='"$XBPS_CROSS_BASE"'`:' configure
 	fi
 }

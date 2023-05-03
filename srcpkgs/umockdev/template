@@ -13,7 +13,7 @@ homepage="https://github.com/martinpitt/umockdev"
 distfiles="https://github.com/martinpitt/umockdev/releases/download/${version}/umockdev-${version}.tar.xz"
 checksum=6c6ebf6e6209b6a49746e0d91a448d027b54271bab82ed70a132ecf294ca13cf
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gobject-introspection qemu-user-static"
 fi
 

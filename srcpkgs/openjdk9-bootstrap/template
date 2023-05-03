@@ -59,7 +59,7 @@ case "$XBPS_TARGET_MACHINE" in
 	armv[56]*) broken="Unsupported architecture" ;;
 esac
 
-if [ -n "$_use_zero" ]; then
+if [[ -v _use_zero ]]; then
 	makedepends+=" libffi-devel"
 	configure_args+=" --with-jvm-variants=zero"
 	case "$XBPS_TARGET_MACHINE" in

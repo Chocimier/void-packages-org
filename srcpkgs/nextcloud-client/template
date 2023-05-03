@@ -34,7 +34,7 @@ if [ "$XBPS_TARGET_ENDIAN" = "le" ]; then
 	fi
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-qmake qt5-host-tools qt5-tools"
 	# provides desktoptojson
 	hostmakedepends+=" $(vopt_if dolphin 'kcoreaddons')"

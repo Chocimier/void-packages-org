@@ -28,7 +28,7 @@ case "${XBPS_TARGET_MACHINE}" in
 	*) broken="Unsupported architecture ${XBPS_TARGET_MACHINE}" ;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	if [ "${XBPS_MACHINE%%-musl}" = "${XBPS_TARGET_MACHINE%%-musl}" ]; then
 		broken="Cross-compiling to different libc is not supported"
 	fi
@@ -75,7 +75,7 @@ do_check() {
 do_install() {
 	local bindir
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		bindir=bin/linux_${_goarch}
 	else
 		bindir=bin

@@ -16,7 +16,7 @@ distfiles="https://gitlab.gnome.org/GNOME/gnome-terminal/-/archive/${version}/gn
 checksum=8e23c837cef30aaf041495e877455628db33b51c7018a2385af2fa8bdd34dcd5
 lib32disabled=yes
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" desktop-file-utils"
 	configure_args+=" -Dsearch_provider=false"
 fi

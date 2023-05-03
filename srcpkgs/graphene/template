@@ -47,7 +47,7 @@ graphene-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/lib/graphene-1.0
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

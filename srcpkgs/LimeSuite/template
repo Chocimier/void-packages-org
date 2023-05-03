@@ -41,7 +41,7 @@ desc_option_octave="Enable the LimeSuite Octave plugin"
 
 # TODO: the cmake build system executes octave-config
 # which needs additional care in crossbuilds
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default="octave"
 fi
 

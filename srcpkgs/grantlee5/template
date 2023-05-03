@@ -11,7 +11,7 @@ homepage="https://github.com/steveire/grantlee"
 distfiles="${homepage}/archive/v${version}.tar.gz>${pkgname}-${version}.tar.gz"
 checksum=ba288ae9ed37ec0c3622ceb40ae1f7e1e6b2ea89216ad8587f0863d64be24f06
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-tools-devel"
 fi
 

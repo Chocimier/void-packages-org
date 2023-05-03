@@ -18,7 +18,7 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#ktorrent"
 distfiles="${KDE_SITE}/release-service/${version}/src/ktorrent-${version}.tar.xz"
 checksum=a06a23eea3a0db8a543bbe477493ebeb8396b78b9e0f86384c3ef1eb8d7fb53e
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
 	hostmakedepends+=" kdoctools kconfig kcoreaddons"
 fi

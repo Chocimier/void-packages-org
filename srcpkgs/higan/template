@@ -24,7 +24,7 @@ pre_install() {
 	vlicense $wrksrc/LICENSE.txt
 }
 
-if [ "$build_option_icarus" ];then
+if build_option icarus;then
 	post_build() {
 		cd $wrksrc/icarus
 		make ${makejobs} compiler=${CXX} platform=linux

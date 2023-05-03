@@ -18,7 +18,7 @@ alternatives="
 "
 
 build_options="static"
-if [ "$build_option_static" ]; then
+if build_option static; then
 	LDFLAGS+=" -static"
 fi
 

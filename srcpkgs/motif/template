@@ -15,12 +15,12 @@ distfiles="${SOURCEFORGE_SITE}/motif/Motif%20${version}%20Source%20Code/motif-${
 checksum=859b723666eeac7df018209d66045c9853b50b4218cecadb794e2359619ebce7
 replaces="lesstif>=0"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" $makedepends"
 fi
 
 post_patch() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i lib/Xm/Makefile.am -e 's|$(top_builddir)/config/util/makestr|/usr/bin/qemu-${XBPS_TARGET_QEMU_MACHINE}-static &|'
 		vsed -i tools/wml/Makefile.am -e 's|\./wmluiltok|/usr/bin/qemu-${XBPS_TARGET_QEMU_MACHINE}-static &|'
 		vsed -i tools/wml/Makefile.am -e 's|\./wml |/usr/bin/qemu-${XBPS_TARGET_QEMU_MACHINE}-static &|'

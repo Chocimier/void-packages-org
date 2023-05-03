@@ -16,7 +16,7 @@ case "$XBPS_TARGET_MACHINE" in
 	armv7*)
 		build_options="neon"
 		build_options_default="neon"
-		if [ "$build_option_neon" ]; then
+		if build_option neon; then
 			CXXFLAGS="-mfpu=neon"
 		else
 			CXXFLAGS="-DPFFFT_SIMD_DISABLE=1"

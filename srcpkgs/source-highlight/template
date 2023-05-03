@@ -15,7 +15,7 @@ checksum=3a7fd28378cb5416f8de2c9e77196ec915145d44e30ff4e0ee8beb3fe6211c91
 
 export CXXFLAGS="-std=c++14"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends="source-highlight"
 fi
 
@@ -25,7 +25,7 @@ post_patch() {
 }
 
 post_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e 's,SRCHILITEEXE =.*,SRCHILITEEXE = source-highlight,g' -i doc/Makefile
 	fi
 }

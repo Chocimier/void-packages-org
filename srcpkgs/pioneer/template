@@ -17,7 +17,7 @@ homepage="https://pioneerspacesim.net"
 distfiles="https://github.com/pioneerspacesim/pioneer/archive/${version}.tar.gz"
 checksum=415b55bab7f011f7244348428e13006fa67a926b9be71f2c4ad24e92cfeb051c
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" pioneer-modelcompiler"
 fi
 

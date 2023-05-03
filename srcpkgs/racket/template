@@ -19,12 +19,12 @@ checksum=398422e2b42373e14e4e0f96da3d95cb5744247ba3f73ea99815fb693c2714ab
 nostrip=yes
 patch_args="-Np2"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" racket sqlite-devel"
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" --enable-racket=/usr/bin/racket
 		 --enable-scheme=${wrksrc}/src"
 	fi
@@ -33,7 +33,7 @@ pre_configure() {
 pre_build() {
 	# Build ChezScheme for the host so we can use it to build Racket
 	# Using "--enable-racket=auto" above selects the wrong compiler toolchain
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		(
 		cd ChezScheme
 

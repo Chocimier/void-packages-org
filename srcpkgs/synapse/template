@@ -26,7 +26,7 @@ changelog="https://raw.githubusercontent.com/matrix-org/synapse/develop/CHANGES.
 distfiles="https://github.com/matrix-org/synapse/archive/v${version}.tar.gz"
 checksum=bea5b8e40be5f79977732867dae34eb45667aae41c3ee366a3164d5e20c8b327
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" rust-std"
 fi
 

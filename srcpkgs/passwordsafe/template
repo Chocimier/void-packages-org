@@ -23,7 +23,7 @@ else
 fi
 
 pre_configure() {
-	if [ -n "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# ykpers-1 includes are hardcoded, add cross base
 		vsed -e "s|-I\(/usr/include/ykpers-1\)|-I${XBPS_CROSS_BASE}\1|" -i CMakeLists.txt
 	fi

@@ -38,7 +38,7 @@ fi
 
 pre_configure() {
 	# CMake won't search in those directories because of CMAKE_FIND_ROOT_PATH
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" -D_find_sip_py=$wrksrc/cmake/modules/FindSIP.py"
 		configure_args+=" -D_find_pyqt5_py=$wrksrc/cmake/modules/FindPyQt5.py"
 	fi

@@ -19,7 +19,7 @@ checksum=fe9016276970bef214a1a244348558644514d7fdfaa4fc8b9d0e87afcbb4e7dc
 nostrip_files=/usr/lib/maxima/$version/binary-sbcl/maxima
 nopie_files=/usr/lib/maxima/$version/binary-sbcl/maxima
 
-if [ "$build_option_sbcl" ]; then
+if build_option sbcl; then
 	# binary-sbcl/maxima uses libgmp but this won't show up in objdump
 	shlib_requires=libgmp.so.10
 fi
@@ -48,7 +48,7 @@ post_configure() {
 }
 
 post_build() {
-	if [ "$build_option_ecl" ]; then
+	if build_option ecl; then
 		# everything will go in the same directory, use rpath=$ORIGIN
 		patchelf --remove-rpath src/binary-ecl/libmaxima-ecl.so
 		patchelf --set-rpath \$ORIGIN \
@@ -60,7 +60,7 @@ post_build() {
 }
 
 do_check() {
-	if [ "$build_option_ecl" ]; then
+	if build_option ecl; then
 		echo "maxima-ecl: check that maxima.fas works (#34273)"
 		ecl --eval '(require :maxima "src/binary-ecl/maxima.fas")' \
 		    --eval '(quit)'
@@ -75,7 +75,7 @@ do_check() {
 			"
 		echo PASS
 	fi
-	if [ "$build_option_sbcl" ]; then
+	if build_option sbcl; then
 		echo "maxima-sbcl: check that long arithmetic is fast (#34849)"
 		timeout -v 30s ./maxima-local -q -l sbcl --batch-string="
 			showtime : true $

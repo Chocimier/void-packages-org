@@ -25,7 +25,7 @@ libayatana-appindicator-devel_package() {
 		vmove "usr/lib/*.so"
 		vmove usr/lib/pkgconfig
 		vmove usr/share/gir-1.0
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
 	}

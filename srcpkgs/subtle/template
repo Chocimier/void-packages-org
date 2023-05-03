@@ -13,7 +13,7 @@ distfiles="https://hg.unexist.dev/subtle/archive/${version#*.*.}.tar.gz"
 checksum=58b4bf85ae348f120a77001042f036570c239cd3327802b012506ea0158d8d86
 conf_files="/etc/xdg/subtle/subtle.rb"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	if [ "$XBPS_WORDSIZE" != "$XBPS_TARGET_WORDSIZE" ]; then
 		broken="Word size must match"
 	fi

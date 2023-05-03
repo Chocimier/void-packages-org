@@ -23,6 +23,6 @@ desc_option_scale="Enable high quality scaling options"
 desc_option_video="Enable video support"
 desc_option_kde="Enable background blur (KDE) option"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi

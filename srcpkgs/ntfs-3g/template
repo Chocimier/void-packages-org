@@ -28,7 +28,7 @@ build_options_default="crypto extras"
 post_install() {
 	mv ${DESTDIR}/sbin/* ${DESTDIR}/usr/bin
 	ln -sf ntfs-3g ${DESTDIR}/usr/bin/mount.ntfs
-	if [ -z "$build_option_quarantined" ]; then
+	if ! build_option quarantined; then
 		# Remove documentation for a non-existent executable file.
 		rm "${DESTDIR}/usr/share/man/man8/ntfsfallocate.8"
 	fi

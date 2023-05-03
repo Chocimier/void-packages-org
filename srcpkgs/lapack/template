@@ -14,7 +14,7 @@ changelog="https://netlib.org/lapack/release_notes.html"
 distfiles="https://github.com/Reference-LAPACK/lapack/archive/v${version}.tar.gz"
 checksum=5a5b3bac27709d8c66286b7a0d1d7bf2d7170ec189a1a756fdf812c97aa7fd10
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DTEST_FORTRAN_COMPILER=OFF"
 fi
 

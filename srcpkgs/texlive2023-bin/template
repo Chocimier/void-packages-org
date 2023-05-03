@@ -32,15 +32,15 @@ do_install() {
 	vmkdir opt/texlive${version}-installer
 	vcopy "install-tl-*/*" /opt/texlive${version}-installer
 	vinstall ${FILESDIR}/void.profile 644 opt/texlive${version}-installer
-	if [ "$build_option_infraonly" ]; then
+	if build_option infraonly; then
 		echo "selected_scheme scheme-infraonly"
-	elif [ "$build_option_basic" ]; then
+	elif build_option basic; then
 		echo "selected_scheme scheme-basic"
-	elif [ "$build_option_small" ]; then
+	elif build_option small; then
 		echo "selected_scheme scheme-small"
 	elif [ "$build_option_medium" = "medium" ];then
 		echo "selected_scheme scheme-medium"
-	elif [ "$build_option_full" ];then
+	elif build_option full;then
 		echo "selected_scheme scheme-full"
 	fi >>${DESTDIR}/opt/texlive${version}-installer/void.profile
 	vlicense ${DESTDIR}/opt/texlive${version}-installer/LICENSE.CTAN

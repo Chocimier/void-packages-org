@@ -21,7 +21,7 @@ do_fetch() {
 do_build() {
 	unset CFLAGS CXXFLAGS LDFLAGS
 	make distclean
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make ARCH=mips CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- ci20_mmc
 		make ARCH=mips CROSS_COMPILE=${XBPS_CROSS_TRIPLET}- ${makejobs}
 	else

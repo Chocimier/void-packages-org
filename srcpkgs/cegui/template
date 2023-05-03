@@ -26,7 +26,7 @@ build_options="irrlicht ogre"
 desc_option_irrlicht="Enable support for Irrlicht"
 desc_option_ogre="Enable support for Ogre"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	# irrlicht interface fails to cross compile
 	build_options_default+=" irrlicht"
 fi

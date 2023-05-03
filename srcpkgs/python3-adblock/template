@@ -17,7 +17,7 @@ changelog="https://raw.githubusercontent.com/ArniDagur/python-adblock/master/CHA
 distfiles="${PYPI_SITE}/a/adblock/adblock-${version}.tar.gz"
 checksum=11651e956c69b3ee571404754df665854717255b80f437e9dc323ee82b564e72
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" rust-std"
 	export PYO3_CROSS_LIB_DIR="${XBPS_CROSS_BASE}/usr/lib"
 	export PYO3_CROSS_INCLUDE_DIR="${XBPS_CROSS_BASE}/usr/include"

@@ -16,7 +16,7 @@ distfiles="https://launchpad.net/soundconverter/trunk/${version}/+download/sound
 checksum=873206ff82c3dfbd397ab3d8bd76fbba847017d2ed28a20a0778eb86960cb19d
 python_version=3
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gtk+3-devel gstreamer1-devel"
 fi
 

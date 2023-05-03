@@ -198,7 +198,7 @@ _split() {
 	fi
 }
 
-unset _languages
+_languages=""
 _add_lang() {
 	local pkglang="${3:-$1}"
 	_languages="$_languages ${pkglang//_/-}"
@@ -437,7 +437,7 @@ do_configure() {
 		opts+=" --disable-skia"
 	fi
 
-	if [ "$build_option_java" ]; then
+	if build_option java; then
 		opts+=" --with-java"
 		opts+=" --with-jdk-home=/usr/lib/jvm/openjdk11"
 		# also disables hamcrest

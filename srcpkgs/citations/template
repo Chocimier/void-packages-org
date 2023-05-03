@@ -17,7 +17,7 @@ checksum=77ac6a7cc442de74eccfc3f07687803cd1feca2da348753eddd34404b94bf253
 
 # Allows the cross build to know where the file is placed--build.ninja does not account for cross build
 pre_build() {
-	if [ "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i build/build.ninja -e 's, && cp src/release/citations src/citations,,'
 	fi
 }
@@ -25,7 +25,7 @@ pre_build() {
 # Take the cross-build folder into account when copying the file for the install
 post_build() {
 	pwd
-	if [ "${CROSS_BUILD}" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp -r build/src/*-linux-*/release/citations build/src/citations
 	fi
 }

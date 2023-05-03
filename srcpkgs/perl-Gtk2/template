@@ -13,7 +13,7 @@ homepage="http://gtk2-perl.sourceforge.net/"
 distfiles="${SOURCEFORGE_SITE}/gtk2-perl/Gtk2-$version.tar.gz"
 checksum=49c443743b2eefe11a768002724f7f6a4c48efc94ff3cd3a559fb7e7b693c967
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" perl-Gtk2"
 	export REALFULLPERLRUN="/usr/bin/perl -I/usr/lib/perl5/vendor_perl"
 	make_build_args='PERLRUN=$(REALFULLPERLRUN) FULLPERLRUN=$(REALFULLPERLRUN)'

@@ -14,7 +14,7 @@ homepage="http://qsynth.sourceforge.io"
 distfiles="${SOURCEFORGE_SITE}/${pkgname}/${pkgname}-${version}.tar.gz"
 checksum=ee9202178a6453c84d8016e61fd9a364e3dbbd306b4f3658baaa05be29927c3e
 
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-x11extras-devel"
 	configure_args+=" ac_cv_path_ac_cv_qmake=${XBPS_WRAPPERDIR}/qmake"
 fi

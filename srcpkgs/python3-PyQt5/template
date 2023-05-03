@@ -77,7 +77,7 @@ python3-PyQt5-opengl_package() {
 	short_desc="${short_desc} - opengl module"
 	pkg_install() {
 		vmove "${py3_sitelib}/PyQt5/QtOpenGL.*"
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove "${py3_sitelib}/PyQt5/_QOpenGLFunctions_*"
 		fi
 	}

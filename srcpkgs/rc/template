@@ -21,7 +21,7 @@ build_options="readline libedit static"
 build_options_default="readline"
 
 pre_configure() {
-	if [ "$build_option_static" ]; then
+	if build_option static; then
 		CFLAGS+=" -static"
 		LDFLAGS+=" -static"
 	fi
@@ -31,7 +31,7 @@ pre_configure() {
 pre_build() {
 	sed -i 's/i != SIGCLD/i != SIGCHLD/' fn.c
 	sed -i 's/(SIGCLD/(SIGCHLD/g' signal.c
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make CC="$BUILD_CC" CFLAGS="$BUILD_CFLAGS" LIBS= LDFLAGS= \
 			sigmsgs.c sigmsgs.h statval.h
 	fi

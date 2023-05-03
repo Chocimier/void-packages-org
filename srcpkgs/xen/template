@@ -44,7 +44,7 @@ build_options="stubdom"
 build_options_default="stubdom"
 desc_option_stubdom="Build xen with stubdom"
 
-if [ "$build_option_stubdom" ]; then
+if build_option stubdom; then
 	_gmp_version=4.3.2
 	_grub_version=0.97
 	_zlib_version=1.2.3
@@ -115,7 +115,7 @@ post_extract() {
 	tar -czf tools/firmware/etherboot/ipxe.tar.gz \
 		-C tools/firmware/etherboot/ ipxe
 
-	if [ "$build_option_stubdom" ]; then
+	if build_option stubdom; then
 		# Patch a patch
 		vsed -i stubdom/grub.patches/99minios \
 			-e"/RAW_ADDR/s/(int) grub_scratch_mem/(long) grub_scratch_mem/"

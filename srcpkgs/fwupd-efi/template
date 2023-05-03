@@ -17,6 +17,6 @@ homepage="https://github.com/fwupd/fwupd-efi"
 distfiles="https://github.com/fwupd/fwupd-efi/archive/refs/tags/${version}.tar.gz"
 checksum=0e76057c178e221f63eaf9142fa1d06780a8eb3df7cf0c11f92660138dec5c83
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -Defi-cc=/usr/bin/${XBPS_CROSS_TRIPLET}-gcc"
 fi

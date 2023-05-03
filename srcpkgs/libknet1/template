@@ -21,7 +21,7 @@ CFLAGS="-Wno-format-truncation"
 build_options="man"
 build_options_default=""
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" man"
 fi
 
@@ -41,7 +41,7 @@ libknet1-devel_package() {
 		vmove usr/include/libknet.h
 		vmove usr/lib/libknet.so
 		vmove usr/lib/pkgconfig/libknet.pc
-		if [ "$build_option_man" ]; then
+		if build_option man; then
 			vmove "usr/share/man/man3/knet*"
 		fi
 	}
@@ -61,7 +61,7 @@ libnozzle1-devel_package() {
 		vmove usr/include/libnozzle.h
 		vmove usr/lib/libnozzle.so
 		vmove usr/lib/pkgconfig/libnozzle.pc
-		if [ "$build_option_man" ]; then
+		if build_option man; then
 			vmove "usr/share/man/man3/nozzle*"
 		fi
 	}

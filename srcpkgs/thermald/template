@@ -14,7 +14,7 @@ distfiles="https://github.com/intel/thermal_daemon/archive/v${version}.tar.gz"
 checksum=9c69588b94a98b4843cd46e3bae570f55020b5e2bf1b417a0c6990f6519070c9
 conf_files='/etc/thermald/*'
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" dbus-glib-devel" # for dbus-binding-tool
 fi
 

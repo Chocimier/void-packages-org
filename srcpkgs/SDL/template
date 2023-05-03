@@ -24,7 +24,7 @@ checksum=d6d316a793e5e348155f0dd93b979798933fb98aa1edebcc108829d6474aad00
 build_options="x11 opengl aalib pulseaudio"
 build_options_default="x11 opengl pulseaudio"
 
-if [ "$build_option_opengl" ]; then
+if build_option opengl; then
 	# libGL.so.1 is dynamically loaded with dlopen.
 	shlib_requires="libGL.so.1"
 	depends="virtual?libGL"

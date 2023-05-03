@@ -12,7 +12,7 @@ homepage="https://gitlab.com/BenjaminDobell/Heimdall"
 distfiles="https://gitlab.com/BenjaminDobell/Heimdall/-/archive/v${version}/Heimdall-v${version}.tar.bz2"
 checksum=2de553496fff1441a3e917b3da9e862192bd7bb05d9cab376fefcc12f82d2f05
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Need some devel packages in the host
 	hostmakedepends+=" qt5-tools-devel"
 fi

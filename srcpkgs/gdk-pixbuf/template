@@ -21,12 +21,12 @@ checksum=ee9b6c75d13ba096907a2e3c6b27b61bcd17f5c7ebeab5a5b439d2f2e39fe44b
 build_options="gir"
 build_options_default="gir"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gdk-pixbuf-devel"
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		touch gdk-pixbuf/loaders.cache
 	fi
 }
@@ -40,7 +40,7 @@ gdk-pixbuf-devel_package() {
 		vmove usr/include
 		vmove "usr/bin/*csource*"
 		vmove "usr/share/man/man1/*csource*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

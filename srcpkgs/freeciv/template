@@ -19,7 +19,7 @@ nopie_files="/usr/bin/freeciv-ruledit"
 # gtk3.22 is a client supporting gtk+>=3.22
 _clients="gtk3.22,sdl2"
 subpackages="freeciv-gtk2 freeciv-gtk3 freeciv-sdl freeciv-xaw"
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	_clients+=",qt"
 	makedepends+=" qt5-devel"
 	subpackages+=" freeciv-qt5"

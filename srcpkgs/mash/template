@@ -30,7 +30,7 @@ mash-devel_package() {
 		vmove usr/include
 		vmove usr/lib/pkgconfig
 		vmove usr/share/gtk-doc
-		if [ -z "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			vmove usr/share/gir-1.0
 		fi
 		vmove usr/lib/*.so

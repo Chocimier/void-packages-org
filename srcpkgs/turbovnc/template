@@ -22,7 +22,7 @@ conflicts="tigervnc>=0"
 # Need this to make <sys/socket.h> define struct ucred with musl
 CFLAGS="-D_GNU_SOURCE"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	makedepends+=" openjdk17"
 fi
 

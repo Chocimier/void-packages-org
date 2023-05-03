@@ -15,14 +15,14 @@ homepage="http://dar.linux.free.fr/"
 distfiles="${SOURCEFORGE_SITE}/dar/dar-${version}.tar.gz"
 checksum=1c609f691f99e6a868c0a6fcf70d2f5d2adee5dc3c0cbf374e69983129677df5
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-gpgme-prefix=${XBPS_CROSS_BASE}/usr
 	 ac_cv_lib_gcrypt_gcry_check_version=false"
 	LDFLAGS="-L${XBPS_CROSS_BASE}/usr/lib -lgcrypt"
 fi
 
 post_extract() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# skip building checks, its trying to execute a target
 		# binary and we don't run the checks for cross builds
 		# anywyas.

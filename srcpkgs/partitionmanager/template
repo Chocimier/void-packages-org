@@ -17,6 +17,6 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#partitionma
 distfiles="${KDE_SITE}/release-service/${version}/src/partitionmanager-${version}.tar.xz"
 checksum=ba2590741b6ff3ca21a2431ff67f9ec07a8ab4ec27f6c145a0198aa856521077
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
 fi

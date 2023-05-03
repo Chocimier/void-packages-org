@@ -50,7 +50,7 @@ post_patch() {
 do_check() {
 	cd build
 	if [ "$XBPS_CHECK_PKGS" = full ]; then
-		if [ ! "$CROSS_BUILD" ]; then
+		if [[ ! -v CROSS_BUILD ]]; then
 			mem="--mem"
 		fi
 		vtargetrun ${XBPS_CROSS_BASE}/usr/bin/perl mysql-test/mtr --parallel=${XBPS_MAKEJOBS} ${mem} --force --max-test-fail=40

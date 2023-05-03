@@ -17,7 +17,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) configure_args+=" --disable-jit" ;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	post_configure() {
 		make $makejobs \
 		 CC=$CC_FOR_BUILD CFLAGS=$CFLAGS_FOR_BUILD \

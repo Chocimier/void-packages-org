@@ -14,7 +14,7 @@ distfiles="https://github.com/snowballstem/snowball/archive/refs/tags/v${version
 checksum=425cdb5fba13a01db59a1713780f0662e984204f402d3dae1525bda9e6d30f1a
 
 post_patch() {
-	if [ -n "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -i GNUmakefile \
 			-e 's|\t\./snowball|\tqemu-${XBPS_TARGET_QEMU_MACHINE}-static ./snowball|'
 	fi

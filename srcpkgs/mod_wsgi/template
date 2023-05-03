@@ -15,7 +15,7 @@ checksum=ee926a3fd5675890b908ebc23db1f8f7f03dc3459241abdcf35d46c68e1be29b
 lib32disabled=yes
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp -a ${XBPS_CROSS_BASE}/usr/bin/apxs ${wrksrc}
 		cp -a ${XBPS_CROSS_BASE}/usr/share/apache/webroot/build/config_vars.mk ${wrksrc}
 

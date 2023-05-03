@@ -21,7 +21,7 @@ checksum=90a4d459fb074deafbbea7b962a1423395122daaf8ad73f2b5927ae0ed808fd0
 LDFLAGS="-lncursesw"
 
 pre_configure() {
-	[ -z "$CROSS_BUILD" ] && return 0
+	[[ ! -v CROSS_BUILD ]] && return 0
 	local perlprefix=${XBPS_STATEDIR}/perlprefix-${XBPS_TARGET_MACHINE}
 	mkdir -p $perlprefix
 	cp "$XBPS_CROSS_BASE/usr/lib/perl5/core_perl/Config"*.p? $perlprefix

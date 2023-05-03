@@ -30,7 +30,7 @@ build_options="gnutls gssapi ldap rtmp ssh ssl zstd"
 build_options_default="ssh ssl zstd"
 vopt_conflict ssl gnutls
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" curl"
 fi
 
@@ -45,7 +45,7 @@ pre_check() {
 }
 
 post_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Copy hostmakedepends' version
 		vcompletion /usr/share/zsh/site-functions/_curl zsh
 		vcompletion /usr/share/fish/vendor_completions.d/curl.fish fish

@@ -19,7 +19,7 @@ changelog="https://mkvtoolnix.download/doc/NEWS.md"
 distfiles="https://mkvtoolnix.download/sources/mkvtoolnix-${version}.tar.xz"
 checksum=e7ad116f374cdf8370fa566ed7fe23ecdcf413dbe6dd90ab3f82904d0cf7516f
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --with-boost=${XBPS_CROSS_BASE}/usr"
 fi
 

@@ -20,7 +20,7 @@ make_dirs="
  /var/lib/inspircd 0750 ${pkgname} ${pkgname}"
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# configure script runs compiled executables to check for compiler features
 		vsed -i '/return 0 unless.*test_file(/d' make/configure.pm
 	fi

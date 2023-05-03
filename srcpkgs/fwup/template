@@ -14,7 +14,7 @@ changelog="https://github.com/fwup-home/fwup/raw/main/CHANGELOG.md"
 distfiles="https://github.com/fwup-home/fwup/releases/download/v${version}/fwup-${version}.tar.gz"
 checksum=021c51fdd3b759dfd48b4e415c00f6c6cb697f2ba3224833dff814d5b6e71dff
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	hostmakedepends+=" help2man"
 fi
 

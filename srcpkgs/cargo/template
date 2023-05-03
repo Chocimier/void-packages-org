@@ -18,26 +18,20 @@ replaces="cargo-tree>=0"
 build_options="static bindist"
 desc_option_bindist="Generate a tarball for bootstrap"
 
-if [ -n "$build_option_static" -o -n "$build_option_bindist" ]; then
+if build_option static || build_option bindist; then
 	_build_static=yes
-fi
-
-if [ -z "$_build_static" ]; then
 	makedepends+=" libgit2-devel"
 fi
 
 do_build() {
 	local cargs
 
-	if [ -n "$_build_static" ]; then
+	if [[ -v _build_static ]]; then
 		unset LIBSSH2_SYS_USE_PKG_CONFIG
 		export OPENSSL_STATIC=1
 		# rust-openssl can not be linked static if pkg-config is used
 		export OPENSSL_NO_PKG_CONFIG
 		export OPENSSL_DIR="${XBPS_CROSS_BASE}/usr"
-	fi
-
-	if [ -n "$_build_static" ]; then
 		cargs+=" --features=all-static"
 	fi
 
@@ -46,11 +40,11 @@ do_build() {
 
 do_install() {
 	local cbin="target/release/cargo"
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cbin="target/${RUST_TARGET}/release/cargo"
 	fi
 
-	if [ "$build_option_bindist" ]; then
+	if build_option bindist; then
 		local dest="cargo-${version}-${RUST_TARGET}"
 		mkdir -p ${XBPS_SRCDISTDIR}/distfiles ${dest}/cargo/bin
 		install -m 0755 ${cbin} ${dest}/cargo/bin

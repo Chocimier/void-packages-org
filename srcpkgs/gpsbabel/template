@@ -15,7 +15,7 @@ checksum=30b186631fb43db576b8177385ed5c31a5a15c02a6bc07bae1e0d7af9058a797
 
 replaces="gpsbabel-gui>=0"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-devel qt5-webkit-devel"
 	configure_args+=" ac_cv_prog_QMAKE=${XBPS_WRAPPERDIR}/qmake"
 fi

@@ -17,7 +17,7 @@ distfiles="https://gitlab.gnome.org/GNOME/fractal/-/archive/${version}/fractal-$
 checksum=33d8b5303f9309bc4a29bdcabe263f316cfb8805b50d7f4b6b2f0a0a7dd9efaf
 
 post_patch() {
-	[ -z "$CROSS_BUILD" ] && return 0
+	[[ ! -v CROSS_BUILD ]] && return 0
 
 	vsed -i scripts/cargo.sh \
 		-e 's;"$CARGO_TARGET_DIR";&/${RUST_TARGET};' \

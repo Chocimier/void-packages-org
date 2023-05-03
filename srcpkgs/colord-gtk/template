@@ -31,10 +31,10 @@ colord-gtk-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/share/gir-1.0
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
-		if [ "$build_option_docs" ]; then
+		if build_option docs; then
 			vmove usr/share/gtk-doc
 		fi
 	}

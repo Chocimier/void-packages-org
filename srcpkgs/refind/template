@@ -23,7 +23,7 @@ do_build() {
 		*) _ARCH="${XBPS_TARGET_MACHINE%-musl}";;
 	esac
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		export CROSS_COMPILE="${XBPS_CROSS_TRIPLET}-"
 	fi
 

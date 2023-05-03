@@ -25,10 +25,10 @@ libgexiv2-devel_package() {
 		vmove usr/include
 		vmove usr/lib/*.so
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_vala" ]; then
+		if build_option vala; then
 			vmove usr/share/vala
 		fi
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove "usr/share/gir-*"
 		fi
 	}

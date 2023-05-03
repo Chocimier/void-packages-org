@@ -27,12 +27,12 @@ CFLAGS="-UGDK_PIXBUF_DISABLE_DEPRECATED"
 build_options="gir cups"
 build_options_default="gir cups"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" automake libtool gtk-doc glib-devel gdk-pixbuf-devel gtk-update-icon-cache"
 fi
 
 pre_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		autoreconf -if
 	fi
 	vsed -i -e '/DATADIRNAME=/s/=.*/=share/' \
@@ -53,7 +53,7 @@ gtk+-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove usr/lib/gtk-2.0/include
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 		vmove usr/share/gtk-doc

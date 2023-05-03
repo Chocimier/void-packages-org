@@ -17,7 +17,7 @@ CFLAGS=-fPIC
 
 build_options="native_build"
 
-if [ -z "$build_option_native_build" ]; then
+if ! build_option native_build; then
 	configure_args+=" --disable-tuning"
 fi
 

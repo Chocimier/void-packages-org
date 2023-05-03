@@ -28,7 +28,7 @@ build_options="rrdtool perl notify prometheus"
 desc_option_rrdtool="Enable support for RRDTool"
 desc_option_prometheus="Enable write_prometheus plugin"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default="rrdtool perl"
 fi
 

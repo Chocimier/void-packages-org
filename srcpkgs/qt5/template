@@ -40,7 +40,7 @@ CXXFLAGS="-Wno-deprecated-declarations -Wno-class-memaccess -Wno-packed-not-alig
 # Required for musl libc
 LDFLAGS="-pthread -ldl -fPIE -Wl,-z,stack-size=2097152"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Need some devel packages in the host to build qmake, moc, uic, rcc
 	# wayland-devel contains /usr/bin/wayland-scanner
 	hostmakedepends+=" icu-devel wayland-devel zlib-devel libxml2-devel"
@@ -87,7 +87,7 @@ _install_subpkg() {
 	rm -f ${PKGDESTDIR}/usr/lib/*.so
 	rm -f ${PKGDESTDIR}/usr/lib/*.prl
 	if [ -d ${PKGDESTDIR}/usr/lib/qt5/bin ]; then
-		if [ "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			for f in $(find ${PKGDESTDIR}/usr/lib/qt5/bin -name "*-target" -type f); do
 				base=${f##*/}
 				mv -v ${f} ${f%-target}
@@ -123,7 +123,7 @@ _install_devel() {
 
 _move_target_binaries() {
 	local f
-	[ -z "$CROSS_BUILD" ] && return 0
+	[[ ! -v CROSS_BUILD ]] && return 0
 	vmkdir usr/lib/qt5/bin
 	for f in $@; do
 		if [ -f ${DESTDIR}/usr/lib/qt5/bin/${f}-target ]; then
@@ -190,7 +190,7 @@ do_configure() {
 	esac
 
 	# Cross build patches
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# This also sets default {C,CXX,LD}FLAGS for projects built using qmake
 		vsed -i -e "s|^\(QMAKE_CFLAGS_RELEASE.*\)|\1 ${XBPS_CFLAGS}|" \
 			${wrksrc}/qtbase/mkspecs/common/gcc-base.conf
@@ -253,7 +253,7 @@ do_configure() {
 	opts+=" -skip qtsystems"
 	opts+=" -skip qtspeech"
 	LDFLAGS+=" -Wl,--no-keep-memory"  # needs more than 8GB RAM else
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		spec=void-${XBPS_CROSS_TRIPLET}-g++
 		_create_config ${spec}
 		opts+=" -device ${spec}"
@@ -290,7 +290,7 @@ do_build() {
 do_install() {
 	local f base bin dir dirs
 
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		unset CC CXX LD CPP AR AS RANLIB
 	fi
 	cd ${wrksrc}/qtbase
@@ -305,7 +305,7 @@ do_install() {
 		ln -sf /usr/lib/qt5/bin/${base} ${PKGDESTDIR}/usr/bin/${base}-qt5
 	done
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vmkdir usr/bin
 		vmkdir usr/lib/qt5/bin
 
@@ -1140,7 +1140,7 @@ qt5-qmake_package() {
 			-e 's%/usr/lib/lib\([^[:space:]]*\)\.[sa][o]*%-l\1%g' \;
 
 		# Undo changes to mkspecs/common/gcc-base.conf and g++-unix.conf
-		if [ "$CROSS_BUILD" ]; then
+		if [[ -v CROSS_BUILD ]]; then
 			vsed -i ${PKGDESTDIR}/usr/lib/qt5/mkspecs/common/gcc-base.conf \
 				-e "s|^\(QMAKE_CFLAGS_RELEASE.*\) ${XBPS_CFLAGS}|\1|"
 			vsed -i ${PKGDESTDIR}/usr/lib/qt5/mkspecs/common/g++-unix.conf \

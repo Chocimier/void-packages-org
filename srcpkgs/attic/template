@@ -14,7 +14,7 @@ distfiles="${PYPI_SITE}/A/Attic/Attic-${version}.tar.gz"
 checksum=6650cd28072101c2e05941e77b93a62f91da6179785e4e4b4880916c469bba2c
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -i "s|\(possible_openssl_prefixes\) =.*|\1 = ['${XBPS_CROSS_BASE}/usr']|" setup.py
 	fi
 

@@ -45,11 +45,11 @@ do_build() {
 	local _cflags=$CFLAGS
 	local _ldflags=$LDFLAGS
 
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		local cross="CROSS=${XBPS_CROSS_TRIPLET}-"
 	fi
 
-	if [ "$build_option_lua52compat" ]; then
+	if build_option lua52compat; then
 		local _xcflags="XCFLAGS=-DLUAJIT_ENABLE_LUA52COMPAT"
 	fi
 

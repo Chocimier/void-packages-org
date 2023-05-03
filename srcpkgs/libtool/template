@@ -37,7 +37,7 @@ post_install() {
 	# sysroot var will be set and cflags will include extra cross-related
 	# things that need to go; the target libtool script is meant to be used
 	# in native environments, not in cross environments, so patch the script
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# e.g. AR="armv7l-linux-gnueabihf-ar" becomes AR="ar"
 		vsed -i -e "s,\([A-Z]\+\)=\"${XBPS_CROSS_TRIPLET}\-\(.*\)\",\1=\"\2\",g" \
 		 ${PKGDESTDIR}/usr/bin/libtool

@@ -14,7 +14,7 @@ distfiles="https://github.com/vgough/encfs/releases/download/v${version}/${pkgna
 checksum=4709f05395ccbad6c0a5b40a4619d60aafe3473b1a79bafb3aa700b1f756fd63
 
 # Can't run test programs when cross compiling
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args="-DBUILD_UNIT_TESTS=0"
 fi
 

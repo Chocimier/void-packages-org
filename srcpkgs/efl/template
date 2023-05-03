@@ -62,7 +62,7 @@ else
 	configure_args+=" -Dbuild-tests=false"
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" gettext-devel efl-devel"
 fi
 
@@ -81,13 +81,13 @@ desc_option_glib="Enable GLib integration"
 desc_option_ibus="Enable IBus input method support (needs glib)"
 
 # sanitize options
-if [ -n "$build_option_wayland" -a -z "$build_option_drm" ]; then
+if build_option wayland && ! build_option drm; then
 	broken="wayland requires drm"
 fi
-if [ -n "$build_option_ibus" -a -z "$build_option_glib" ]; then
+if build_option ibus && ! build_option glib; then
 	broken="ibus requires glib integration"
 fi
-if [ -n "$build_option_gles2" -a -z "$build_option_opengl" ]; then
+if build_option gles2 && ! build_option opengl; then
 	broken="gles2 needs opengl"
 fi
 

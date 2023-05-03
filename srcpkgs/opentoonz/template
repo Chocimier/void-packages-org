@@ -21,7 +21,7 @@ export CMAKE_GENERATOR="Unix Makefiles"
 
 pre_configure() {
 	# Upstream uses their own modified version of tiff
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args="-DTIFF_LIBRARY=${wrksrc}/thirdparty/tiff-4.0.3/libtiff/.libs/libtiff.a
 		 -DTIFF_INCLUDE_DIR=${wrksrc}/thirdparty/tiff-4.0.3/libtiff"
 		_args="--host=${XBPS_TRIPLET}"

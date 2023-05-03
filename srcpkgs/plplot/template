@@ -30,11 +30,11 @@ if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
 	broken="PTHREAD_MUTEX_RECURSIVE_NP"
 fi
 
-if ! [ "$CROSS_BUILD" ]; then
+if ! [[ -v CROSS_BUILD ]]; then
 	build_options_default="gen_tools"
 fi
 
-if [ "$build_option_ada" ]; then
+if build_option ada; then
 	subpackages="plplot-ada $subpackages"
 else
 	configure_args+=" -DENABLE_ada=OFF"
@@ -47,7 +47,7 @@ post_patch() {
 }
 
 pre_build() {
-	if ! [ "$build_option_gen_tools" ]; then
+	if ! build_option gen_tools; then
 		ln -s /usr/lib/qsastime/deltaT-gen build/lib/qsastime
 		ln -s /usr/lib/qsastime/tai-utc-gen build/lib/qsastime
 		ln -s /usr/libexec/plhershey-unicode-gen build/include
@@ -55,7 +55,7 @@ pre_build() {
 }
 
 post_install() {
-	if [ "$build_option_gen_tools" ]; then
+	if build_option gen_tools; then
 		vinstall build/lib/qsastime/deltaT-gen.cmake 644 usr/lib/qsastime
 		vinstall build/lib/qsastime/deltaT-gen 755 usr/lib/qsastime
 		vinstall build/lib/qsastime/tai-utc-gen.cmake 644 usr/lib/qsastime
@@ -115,7 +115,7 @@ plplot-devel_package() {
 		vmove usr/lib/pkgconfig
 		vmove "usr/lib/*.so"
 		vmove "usr/lib/*.a"
-		if [ "$build_option_gen_tools" ]; then
+		if build_option gen_tools; then
 			vmove usr/lib/qsastime
 			vmove usr/libexec
 		fi

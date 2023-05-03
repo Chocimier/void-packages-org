@@ -20,7 +20,7 @@ python_version=3	# Must be same version as scons
 system_accounts="gpsd"
 
 subpackages="gpsd-devel gpsd-qt gpsd-qt-devel"
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	subpackages+=" gpsd-python gpsd-xgps"
 	makedepends+=" python3-devel python3-gobject-devel"
 else
@@ -43,7 +43,7 @@ post_install() {
 	vlicense COPYING
 	vlicense AUTHORS
 	vbin gpsinit
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		mv ${DESTDIR}/usr/local/lib/python* "${DESTDIR}/usr/lib"
 	fi
 }

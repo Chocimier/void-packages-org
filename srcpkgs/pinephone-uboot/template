@@ -39,7 +39,7 @@ checksum="395e61790d4877e11c470445dfee834a017a4b5df5f7ee34ebcaa125713150dc
 
 _or1k="CROSS_COMPILE=or1k-none-elf-"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	_cross="CROSS_COMPILE=${XBPS_CROSS_TRIPLET}-"
 	_hostcc="HOST_COMPILE=${XBPS_CROSS_TRIPLET}-"
 fi

@@ -16,7 +16,7 @@ checksum=a28d43e7e505f8ed15c8360bd91603eaf3206c225a542d0116669caafd89154c
 
 # build system deals poorly with cross headers so include
 # them manually
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	CXXFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/qt5"
 	CXXFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/qt5/QtCore"
 	CXXFLAGS+=" -I${XBPS_CROSS_BASE}/usr/include/qt5/QtGui"

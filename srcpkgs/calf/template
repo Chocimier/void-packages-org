@@ -27,7 +27,7 @@ pre_configure() {
 }
 
 pre_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		vsed -e "s|exec |exec /usr/bin/qemu-${XBPS_TARGET_QEMU_MACHINE}-static |" -i src/calfmakerdf
 	fi
 }

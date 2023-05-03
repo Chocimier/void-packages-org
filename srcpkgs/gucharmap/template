@@ -36,7 +36,7 @@ skip_extraction="Blocks.txt DerivedAge.txt NamesList.txt Scripts.txt UnicodeData
 build_options="gir gtk_doc"
 build_options_default="gir"
 
-if [ -z "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	build_options_default+=" gtk_doc"
 fi
 
@@ -54,7 +54,7 @@ gucharmap-devel_package() {
 		vmove usr/include
 		vmove "usr/lib/*.so"
 		vmove usr/lib/pkgconfig
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 	}

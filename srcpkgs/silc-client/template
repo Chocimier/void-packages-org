@@ -20,7 +20,7 @@ LDFLAGS="-lncursesw"
 # Package build options
 build_options="perl"
 
-if [ "$build_option_perl" ]; then
+if build_option perl; then
 	configure_args+=" --with-perl"
 	hostmakedepends+=" perl"
 else

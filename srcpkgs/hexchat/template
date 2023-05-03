@@ -26,7 +26,7 @@ case "$XBPS_TARGET_MACHINE" in
 	*) build_options_default+=" LuaJIT" ;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" dbus-glib-devel python3-cffi gdk-pixbuf perl
 	 shared-mime-info"
 fi

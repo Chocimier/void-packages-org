@@ -12,7 +12,7 @@ distfiles="https://github.com/thkukuk/rpcsvc-proto/releases/download/v${version}
 checksum=9429e143bb8dd33d34bf0663f571d4d4a1103e1afd7c49791b367b7ae1ef7f35
 
 pre_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		make -C rpcgen CC=${CC_host} CFLAGS="${XBPS_CFLAGS}" LDFLAGS="${XBPS_LDFLAGS}"
 		cp rpcgen/rpcgen rpcgen/rpcgen-host
 		make -C rpcgen clean

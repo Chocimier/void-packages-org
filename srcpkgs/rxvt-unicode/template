@@ -35,7 +35,7 @@ desc_option_unicode3="Use 21 instead of 16 bits to represent unicode chars"
 build_options_default="gdk_pixbuf perl startup_notification unicode3"
 
 _cross_perl() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		sed -e "s#/usr/lib#${XBPS_CROSS_BASE}\0#g" \
 			-e "s#/usr/share#${XBPS_CROSS_BASE}\0#g" \
 			-e "s# -m[^ ]*##g"
@@ -45,7 +45,7 @@ _cross_perl() {
 }
 
 do_configure() {
-	if [ "$build_option_perl" ]; then
+	if build_option perl; then
 		./configure $configure_args \
 			PERL=perl \
 			PERL_O=rxvtperl.o \
@@ -58,7 +58,7 @@ do_configure() {
 }
 
 pre_configure() {
-	if [ "$build_option_perl" ]; then
+	if build_option perl; then
 		sed -i 's/rxvt_perl_link=no/rxvt_perl_link=yes/' configure
 		sed -i '/PERLFLAGS=/d' configure
 	fi

@@ -13,6 +13,6 @@ homepage="https://github.com/disels/qxkb"
 distfiles="https://github.com/disels/qxkb/archive/${_githash}.tar.gz"
 checksum=b6adb516dc5dd7f1966160cada981cc8ddc5ddfb22a4b038cc05eccb81d36f8a
 
-if [ "${CROSS_BUILD}" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi

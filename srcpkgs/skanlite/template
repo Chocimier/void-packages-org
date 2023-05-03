@@ -14,6 +14,6 @@ changelog="https://kde.org/announcements/changelogs/gear/${version}/#skanlite"
 distfiles="${KDE_SITE}/release-service/${version}/src/skanlite-${version}.tar.xz"
 checksum=9f8198d25eb275e35ea597bf2cbcff7410117614e8e5141a4bada3942fd7dd8c
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kdoctools qt5-host-tools qt5-qmake"
 fi

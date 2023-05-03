@@ -18,7 +18,7 @@ if [ "$XBPS_TARGET_LIBC" = musl ]; then
 	export ac_cv_header_sys_cdefs_h=no
 fi
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# Tell configure we have GNU getopt
 	configure_args+=" gl_cv_func_getopt_gnu=yes"
 fi

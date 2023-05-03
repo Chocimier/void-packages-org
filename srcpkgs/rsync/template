@@ -19,7 +19,7 @@ checksum=4e7d9d3f6ed10878c58c5fb724a67dacf4b6aac7340b13e488fb2dc41346f2bb
 # Force enable IPv6 on musl - upstream bug https://bugzilla.samba.org/show_bug.cgi?id=10715
 CFLAGS="-DINET6"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" --disable-simd"
 fi
 

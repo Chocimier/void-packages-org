@@ -14,7 +14,7 @@ checksum=6885ff47b9cdb211de47d368c17853f406daaf98b148aaecdf10de29cc04b0b3
 
 replaces="chroot-coreutils>=0 coreutils-doc>=0 b2sum>=0"
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	hostmakedepends+=" perl"
 	# allow run ./configure by root in ethereal chroot
 	if [ "$XBPS_ALLOW_CHROOT_BREAKOUT" ]; then
@@ -34,7 +34,7 @@ alternatives="
 pre_configure() {
 	# Build natively all utils for the host, we need this to generate
 	# the manpages via help2man.
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		env CC=cc LD=ld AR=ar RANLIB=ranlib \
 			CFLAGS=-Os CXXFLAGS=-Os LDFLAGS= \
 			$_force_unsafe_configure \
@@ -48,7 +48,7 @@ pre_configure() {
 }
 
 do_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		configure_args+=" fu_cv_sys_stat_statfs2_bsize=no
 			gl_cv_func_working_mkstemp=yes
 			gl_cv_func_working_acl_get_file=yes "
@@ -65,7 +65,7 @@ do_configure() {
 		--enable-install-program=arch,hostname \
 		--enable-no-install-program=kill,uptime \
 		--disable-rpath
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Use install when cross compiling
 		cp Makefile Makefile.cfg.orig
 		sed -e 's;^\(cu_install_program =\).*;\1 install;' \
@@ -74,7 +74,7 @@ do_configure() {
 }
 
 do_build() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		cp Makefile Makefile.orig
 		sed '/src_make_prime_list/d' Makefile.orig > Makefile
 		depbase=$(echo src/make-prime-list.o | sed 's|[^/]*$|.deps/&|;s|\.o$||')
@@ -117,7 +117,7 @@ do_check() {
 
 do_install() {
 	make DESTDIR=${DESTDIR} install
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		mv ${wrksrc}/coreutils-${XBPS_MACHINE}/share/man \
 			${DESTDIR}/usr/share
 		# provided by procps-ng

@@ -16,7 +16,7 @@ homepage="https://invent.kde.org/plasma/breeze"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
 checksum=62d80ebd690c7822bf05b19bec8b37af67cc1cd4bb3f38d2a88d8360fd6b1901
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DKF5_HOST_TOOLING=/usr/lib/cmake"
 fi
 

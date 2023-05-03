@@ -15,7 +15,7 @@ homepage="https://invent.kde.org/plasma/plasma-sdk"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
 checksum=f98849e361c19b192998bb4966f561ea8539d6ceb98fc967e783edb36c36db21
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" kpackage-devel kconfig-devel kcoreaddons-devel plasma-framework"
 	configure_args+=" -DKF5_HOST_TOOLING=/usr/lib/cmake"
 fi

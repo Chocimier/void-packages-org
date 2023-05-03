@@ -22,7 +22,7 @@ export GETTEXT_INCLUDE_DIR="${XBPS_CROSS_BASE}/usr/include"
 
 
 post_patch() {
-	[ -z "$CROSS_BUILD" ] && return 0
+	[[ ! -v CROSS_BUILD ]] && return 0
 	vsed -i scripts/cargo.sh \
 		-e 's%"$CARGO_TARGET_DIR"/%&${RUST_TARGET}/%' \
 		-e '/CARGO_HOME/d'

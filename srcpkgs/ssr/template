@@ -15,7 +15,7 @@ homepage="http://www.maartenbaert.be/simplescreenrecorder/"
 distfiles="https://github.com/MaartenBaert/ssr/archive/${version}.tar.gz"
 checksum=69fccf8df6e7285d4df5033eed8748f4eae13b407488906dcf4810a277d557b8
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools qt5-qmake"
 fi
 

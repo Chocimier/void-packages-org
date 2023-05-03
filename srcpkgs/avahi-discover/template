@@ -90,7 +90,7 @@ do_install() {
 	mv ${wrksrc}/tmpinstall/usr/lib/pkgconfig/avahi-libevent* ${DESTDIR}/usr/lib/pkgconfig
 	mv ${wrksrc}/tmpinstall/usr/share/avahi/interfaces/*.ui ${DESTDIR}/usr/share/avahi/interfaces
 
-	if [ "$build_option_gir" ]; then
+	if build_option gir; then
 		mv ${wrksrc}/tmpinstall/usr/lib/girepository-1.0 ${DESTDIR}/usr/lib
 		mv ${wrksrc}/tmpinstall/usr/share/gir-1.0 ${DESTDIR}/usr/share
 	fi
@@ -126,7 +126,7 @@ avahi-glib-libs-devel_package() {
 	pkg_install() {
 		vmove "usr/include/avahi-g*"
 		vmove "usr/lib/pkgconfig/avahi-g*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/share/gir-1.0
 		fi
 		vmove usr/lib/libavahi-glib.so
@@ -139,7 +139,7 @@ avahi-glib-libs_package() {
 	pkg_install() {
 		vmove "usr/lib/libavahi-glib.so.*"
 		vmove "usr/lib/libavahi-gobject.so.*"
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/lib/girepository-1.0
 		fi
 	}
@@ -182,7 +182,7 @@ avahi-ui-utils_package() {
 		vmove usr/share/applications/bvnc.desktop
 		vmove usr/share/applications/bssh.desktop
 		vmove usr/share/man/man1/bssh.1
-		if [ "$build_option_gir" ]; then
+		if build_option gir; then
 			vmove usr/bin/avahi-discover-standalone
 		fi
 		vmove usr/bin/bssh

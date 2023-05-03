@@ -22,6 +22,6 @@ depends+="
  chroot-bash chroot-grep chroot-gawk chroot-distcc
  chroot-util-linux chroot-git tzdata"
 
-if [ "$CHROOT_READY" ]; then
+if [[ -v CHROOT_READY ]]; then
 	depends+=" ccache"
 fi

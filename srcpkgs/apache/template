@@ -46,7 +46,7 @@ make_dirs="
 # Do not redefine struct iovec in include/apr_want.h
 CFLAGS="-DAPR_IOVEC_DEFINED=1 -I${XBPS_CROSS_BASE}/usr/include/apr-1"
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# FIXME: is sizeof(void*) ever less than sizeof(long)?
 	export ap_cv_void_ptr_lt_long=no
 	# This is missing in cross compiled apr-1-config (?)
@@ -60,7 +60,7 @@ pre_configure() {
 		-i docs/conf/httpd.conf.in
 
 	cat ${FILESDIR}/xbps.layout >> config.layout
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# pcre{,2}-config detection doesn't work on cross
 		# since httpd-2.4.53, manually export PCRE_CONFIG
 		# to let configure know where it is
@@ -74,7 +74,7 @@ pre_configure() {
 }
 
 post_configure() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# Build gen_test_char using $BUILD_CC
 		sed -i server/Makefile \
 			-e "s;\$(LINK) \$(EXTRA_LDFLAGS) \$(\(gen_test_char\).*;${BUILD_CC} -o \1 \1.c -I${XBPS_CROSS_BASE}/usr/include/apr-1;"

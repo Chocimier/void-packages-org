@@ -20,13 +20,13 @@ case $XBPS_TARGET_MACHINE in
 	i686*) CFLAGS+=" -ffloat-store" ;;
 esac
 
-if [ -n "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	# depend on host gfan for installlinks
 	hostmakedepends+=" gfan"
 fi
 
 do_install() {
-	if [ -z "$CROSS_BUILD" ]; then
+	if [[ ! -v CROSS_BUILD ]]; then
 		# Makefile doesn't support DESTDIR so we add it to PREFIX
 		make PREFIX=${DESTDIR}/usr install
 	else

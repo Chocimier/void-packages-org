@@ -74,7 +74,7 @@ case "$XBPS_TARGET_MACHINE" in
 esac
 
 # specifically do not enable docs because with zero it takes hours
-if [ -n "$_use_zero" ]; then
+if [[ -v _use_zero ]]; then
 	makedepends+=" libffi-devel"
 	configure_args+=" --with-jvm-variants=zero"
 else
@@ -83,7 +83,7 @@ fi
 
 provides="java-environment-${version}_1"
 
-if [ ! "$CROSS_BUILD" ]; then
+if [[ ! -v CROSS_BUILD ]]; then
 	hostmakedepends+=" openjdk7-bootstrap"
 	configure_args+=" --with-boot-jdk=/usr/lib/jvm/java-1.7-openjdk"
 else
@@ -260,7 +260,7 @@ openjdk8-doc_package() {
 	short_desc+=" - documentation"
 	pkg_install() {
 		cd ${wrksrc}
-		if [ "$build_option_docs" ]; then
+		if build_option docs; then
 			vmkdir usr/share/doc/openjdk8
 			cp -a build/linux-*/docs/* ${PKGDESTDIR}/usr/share/doc/openjdk8
 		fi

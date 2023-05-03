@@ -12,7 +12,7 @@ configure_args="
  --enable-ld
  --enable-multilib
  --enable-plugins
- --host=${XBPS_CROSS_TRIPLET}
+ --host=${XBPS_CROSS_TRIPLET-}
  --prefix=/usr
  --target=${_triplet}
  --with-gnu-as

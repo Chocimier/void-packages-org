@@ -69,11 +69,11 @@ case "$XBPS_TARGET_MACHINE" in
 		;;
 esac
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	hostmakedepends+=" qt5-host-tools"
 fi
 
-if [ "$build_option_rpi" ]; then
+if build_option rpi; then
 	configure_args+=" --enable-omxil --enable-omxil-vout --enable-rpi-omxil"
 	makedepends+=" rpi-userland-devel"
 
@@ -94,7 +94,7 @@ pre_configure() {
 }
 
 pre_install() {
-	if [ "$CROSS_BUILD" ]; then
+	if [[ -v CROSS_BUILD ]]; then
 		# install .lua files instead of precompiled .luac ones
 		# scripts precompiled with 64 bit host compiler won’t run on 32 bit target
 		# same with respect to endianess

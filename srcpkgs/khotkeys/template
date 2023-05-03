@@ -14,6 +14,6 @@ homepage="https://invent.kde.org/plasma/khotkeys"
 distfiles="${KDE_SITE}/plasma/${version}/${pkgname}-${version}.tar.xz"
 checksum=841224dea79b4607ecebe79b5c94e36bfbc290b623d5efe5dbe1cd566a921023
 
-if [ "$CROSS_BUILD" ]; then
+if [[ -v CROSS_BUILD ]]; then
 	configure_args+=" -DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
 fi
