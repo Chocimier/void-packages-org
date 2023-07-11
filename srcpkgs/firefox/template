@@ -5,6 +5,8 @@
 pkgname=firefox
 version=112.0.2
 revision=1
+build_options="alsa jack dbus pulseaudio xscreensaver sndio wayland lto clang"
+build_options_default="alsa jack dbus pulseaudio xscreensaver sndio wayland clang"
 build_helper="rust"
 short_desc="Mozilla Firefox web browser"
 maintainer="Duncaen <duncaen@voidlinux.org>"
@@ -26,9 +28,6 @@ makedepends="nss-devel libjpeg-turbo-devel gtk+3-devel icu-devel
  $(vopt_if sndio sndio-devel) $(vopt_if jack jack-devel)"
 depends="nss>=3.72 nspr>=4.32 desktop-file-utils hicolor-icon-theme"
 conflicts="firefox-esr>=0"
-
-build_options="alsa jack dbus pulseaudio xscreensaver sndio wayland lto clang"
-build_options_default="alsa jack dbus pulseaudio xscreensaver sndio wayland clang"
 
 desc_option_lto="Enable Link Time Optimization"
 desc_option_clang="Build with clang"
