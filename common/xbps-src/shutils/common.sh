@@ -174,6 +174,10 @@ set_build_options() {
     local f j pkgopts _pkgname
     local -A options
 
+    if [ "$PKG_BUILD_OPTIONS" ]; then
+        return 0
+    fi
+
     if [ -z "$build_options" ]; then
         return 0
     fi
@@ -211,32 +215,13 @@ set_build_options() {
         [[ -z "${options[$f]}" ]] && options[$f]=1
     done
 
-    # Prepare final options.
-    for f in ${build_options}; do
-        if [[ ${options[$f]} -eq 1 ]]; then
-            eval export build_option_${f}=1
-        else
-            eval unset build_option_${f}
-        fi
-    done
-
-    # Re-read pkg template to get conditional vars.
-    if [ -z "$XBPS_BUILD_OPTIONS_PARSED" ]; then
-        source_file $XBPS_SRCPKGDIR/$pkgname/template
-        XBPS_BUILD_OPTIONS_PARSED=1
-        unset PKG_BUILD_OPTIONS
-        set_build_options
-        unset XBPS_BUILD_OPTIONS_PARSED
-        return 0
-    fi
-
     # Sort pkg build options alphabetically.
-    export PKG_BUILD_OPTIONS=$(
+    export PKG_BUILD_OPTIONS=" $(
         for f in ${build_options}; do
             [[ "${options[$f]}" -eq 1 ]] || printf '~'
             printf '%s\n' "$f"
         done | sort | tr -s '\n' ' '
-    )
+    ) "
 }
 
 source_file() {
@@ -404,6 +389,7 @@ setup_pkg() {
 
     export XBPS_INSTALL_XCMD XBPS_QUERY_XCMD XBPS_RECONFIGURE_XCMD \
         XBPS_REMOVE_XCMD XBPS_RINDEX_XCMD XBPS_UHELPER_XCMD
+    export PKG_BUILD_OPTIONS
 
     # Source all sourcepkg environment setup snippets.
     # Source all subpkg environment setup snippets.
@@ -424,7 +410,6 @@ setup_pkg() {
         unset CROSS_BUILD
         source_file ${XBPS_SRCPKGDIR}/${basepkg}/template
     fi
-
 
     # Check if required vars weren't set.
     _vars="pkgname version short_desc revision homepage license"
@@ -527,8 +512,6 @@ setup_pkg() {
     else
         source_file ${XBPS_COMMONDIR}/build-profiles/${XBPS_MACHINE}.sh
     fi
-
-    set_build_options
 
     export CFLAGS="$XBPS_CFLAGS $XBPS_CROSS_CFLAGS $CFLAGS $dbgflags"
     export CXXFLAGS="$XBPS_CXXFLAGS $XBPS_CROSS_CXXFLAGS $CXXFLAGS $dbgflags"

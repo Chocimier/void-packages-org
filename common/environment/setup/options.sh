@@ -1,17 +1,21 @@
 # vim: set ts=4 sw=4 et:
 #
+
 build_option() {
-	local rv=0
-	for x; do
-        local name="build_option_$x"
-		[[ "${!name}" ]] || rv=1
-	done
-	return $rv
+    local rv=0
+    set_build_options
+    for x; do
+        case " $PKG_BUILD_OPTIONS " in
+            *" $x "*);;
+            *) rv=1;;
+        esac
+    done
+    return $rv
 }
 
 vopt_if() {
-    local name="build_option_$1" t="$2" f="$3"
-    if [ ${!name} ]; then
+    local name="$1" t="$2" f="$3"
+    if build_option $name; then
         echo -n "$t"
     else
         echo -n "$f"
@@ -32,15 +36,15 @@ vopt_enable() {
 }
 
 vopt_conflict() {
-    local opt1="$1" opt2="$2" n1="build_option_$1" n2="build_option_$2"
-    if [ "${!n1}" -a "${!n2}" ]; then
+    local opt1="$1" opt2="$2"
+    if build_option "$opt1" && build_option "$opt2"; then
         msg_error "options '${opt1}' and '${opt2}' conflict\n"
     fi
 }
 
 vopt_require() {
-    local opt1="$1" opt2="$2" n1="build_option_$1" n2="build_option_$2"
-    if [ "${!n1}" -a ! "${!n2}" ]; then
+    local opt1="$1" opt2="$2"
+    if build_option "$opt1" && ! build_option "$opt2"; then
         msg_error "options '${opt1}' requires option '${opt2}'\n"
     fi
 }
