@@ -170,6 +170,32 @@ msg_normal_append() {
     [ -n "$NOCOLORS" ] || printf "\033[m"
 }
 
+set_build_options_global() {
+    # Select build options from conf
+    export XBPS_CURRENT_PKG=${pkgname}
+    local pkgopts="$(
+        . $XBPS_CONFIG_FILE 2>/dev/null
+        var="XBPS_PKG_OPTIONS_${XBPS_CURRENT_PKG//[^A-Za-z0-9_]/_}"
+        echo ${!var:-${XBPS_PKG_OPTIONS}}
+    )"
+    unset XBPS_CURRENT_PKG
+
+    # If pkg options were set in config(s), merge them with command line
+    if [ -n "$XBPS_ARG_PKG_OPTIONS" ]; then
+        if [ -n "$pkgopts" ]; then
+            pkgopts+=",$XBPS_ARG_PKG_OPTIONS"
+        else
+            pkgopts="$XBPS_ARG_PKG_OPTIONS"
+        fi
+    fi
+    OIFS="$IFS"; IFS=','
+    for j in ${pkgopts}; do
+        PKG_BUILD_OPTIONS_GLOBAL+="$j "
+    done
+    IFS="$OIFS"
+    export PKG_BUILD_OPTIONS_GLOBAL
+}
+
 set_build_options() {
     local f j pkgopts _pkgname
     local -A options
@@ -186,32 +212,12 @@ set_build_options() {
         options[$f]=1
     done
 
-    # Select build options from conf
-    export XBPS_CURRENT_PKG=${pkgname}
-    pkgopts="$(
-        . $XBPS_CONFIG_FILE 2>/dev/null
-        var="XBPS_PKG_OPTIONS_${XBPS_CURRENT_PKG//[^A-Za-z0-9_]/_}"
-        echo ${!var:-${XBPS_PKG_OPTIONS}}
-    )"
-    unset XBPS_CURRENT_PKG
-
-    # If pkg options were set in config(s), merge them with command line
-    if [ -n "$XBPS_ARG_PKG_OPTIONS" ]; then
-        if [ -n "$pkgopts" ]; then
-            pkgopts+=",$XBPS_ARG_PKG_OPTIONS"
-        else
-            pkgopts="$XBPS_ARG_PKG_OPTIONS"
-        fi
-    fi
-
-    OIFS="$IFS"; IFS=','
-    for j in ${pkgopts}; do
+    for j in ${PKG_BUILD_OPTIONS_GLOBAL}; do
         case "$j" in
             "~"*) options[${j#\~}]=0 ;;
             *) options[$j]=1 ;;
         esac
     done
-    IFS="$OIFS"
 
     # Sort pkg build options alphabetically.
     export PKG_BUILD_OPTIONS=" $(
@@ -397,6 +403,8 @@ setup_pkg() {
     for f in ${XBPS_COMMONDIR}/environment/setup/*.sh; do
         source_file "$f"
     done
+
+    set_build_options_global
 
     if [ ! -f ${XBPS_SRCPKGDIR}/${basepkg}/template ]; then
         msg_error "xbps-src: nonexistent file: ${XBPS_SRCPKGDIR}/${basepkg}/template\n"
