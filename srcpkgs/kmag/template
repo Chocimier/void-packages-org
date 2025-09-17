@@ -1,6 +1,6 @@
 # Template file for 'kmag'
 pkgname=kmag
-version=24.08.0
+version=25.08.1
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF -DKF6_HOST_TOOLING=/usr/lib/cmake"
@@ -14,4 +14,4 @@ license="GPL-2.0-or-later"
 homepage="https://www.kde.org/applications/utilities/kmag/"
 changelog="https://kde.org/announcements/changelogs/gear/${version}/#kmag"
 distfiles="${KDE_SITE}/release-service/${version}/src/kmag-${version}.tar.xz"
-checksum=69fb4d3413eea31b9f845f1f6596780d929e66afcfbf1345adfa9b20ec64baa7
+checksum=281b1dd5ec1fbb2a1ea1c9d61ab706d277016209d906dda47f22beb679e77c4e
