@@ -1,6 +1,6 @@
 # Template file for 'keditbookmarks'
 pkgname=keditbookmarks
-version=24.08.0
+version=25.08.1
 revision=1
 build_style=cmake
 configure_args="-DBUILD_TESTING=OFF -DKF6_HOST_TOOLING=/usr/lib/cmake
@@ -18,4 +18,4 @@ license="GPL-2.0-or-later, GFDL-1.2-only"
 homepage="https://www.kde.org/"
 changelog="https://kde.org/announcements/changelogs/gear/${version}/#keditbookmarks"
 distfiles="${KDE_SITE}/release-service/${version}/src/keditbookmarks-${version}.tar.xz"
-checksum=ae640633a1e385f5709bdfc1ec349de6f537b0808aea7ccb837c0fc8b68bf15d
+checksum=e20ee35fbb6977a272e5010ce712ee3200ea2e42df51fcc717a4f817e078060a
